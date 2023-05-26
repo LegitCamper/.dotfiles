@@ -22,6 +22,14 @@
         decrypt: yes
         mode: 0600
 
+    - name: copy ssh pub key
+      become_user: sawyer
+      copy:
+        src: ssh_key
+        dest: ~/.ssh/id_ed25519.pub
+        decrypt: yes
+        mode: 0600
+
     - name: copy wakatime token
       become_user: sawyer
       copy:
