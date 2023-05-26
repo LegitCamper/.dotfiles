@@ -1,6 +1,6 @@
 #!/usr/bin/fish
 
-function search -d "Searches for project folders"
+function projects -d "Searches for project folders"
     set LANGUAGE_SELECTION $(bash ~/.config/fish/scripts/languageselection.sh)
     set SEARCH_PATH $(bash ~/.config/fish/scripts/projectselection.sh)
     set RANDOM $(shuf -i 1-1000000 -n 1)
