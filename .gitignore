@@ -1,0 +1,7 @@
+
+*gtk*
+editors/.config/lazygit/state.yml
+editors/.config/nvim/lazy-lock.json
+dotnet-install.sh
+editors/.config/helix/runtime/grammars
+files/editors/.config/helix/runtime/grammars

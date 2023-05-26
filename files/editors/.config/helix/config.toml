@@ -1,0 +1,39 @@
+theme = "catppuccin_macchiato"
+
+[editor]
+line-number = "relative"
+mouse = true
+scrolloff = 8
+scroll-lines = 3
+shell = ["fish", "-c"]
+gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
+auto-pairs = true
+true-color = true
+
+[editor.statusline]
+left = ["mode", "workspace-diagnostics", "spinner"]
+center = ["file-name"]
+right = ["total-line-numbers", "position", "position-percentage", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+#[editor.indent-guides] 
+#render = true
+#character = "|" # Some characters that work well: "▏", "┆", "┊", "⸽"
+#skip-levels = 1
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
+
+[editor.file-picker]
+hidden = true
+
+[editor.lsp]
+display-messages = true
+
+[editor.indent-guides]
+render = true

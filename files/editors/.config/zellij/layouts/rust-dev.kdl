@@ -1,0 +1,13 @@
+layout {
+    // tab name="Docs" {
+    //     pane name="lazygit" command="lazygit"
+    // }
+    tab name="Git" {
+        pane name="lazygit" command="lazygit"
+    }
+    tab name="Rust Development" split_direction="vertical" {
+        pane name="cargo watch" command="cargo" args="watch" size="35%"
+        pane name="helix" command="hx" args="./"
+        pane name="compiler" size="35%"
+    }
+}

@@ -1,0 +1,11 @@
+# Output configuration
+output 'AsusTek COMPUTER INC ASUS VG#$V MBLMTF199637' mode 3440x1440 position 3440,0
+
+# Default outputs for workspaces
+#workspace $ws1 output 'Dell Inc. DELL U2415 08DXD49E5DUL'
+#workspace $ws2 output 'Dell Inc. DELL U2415 08DXD49E5DHL'
+#workspace $wsF1 output 'Dell Inc. DELL U2415 08DXD49E5DHL'
+#workspace $wsF2 output 'Dell Inc. DELL U2415 08DXD49E5DHL'
+#workspace $wsF12 output 'Dell Inc. DELL U2415 08DXD49E5DHL'
+
+workspace $ws2

@@ -1,0 +1,50 @@
+# Beryllium
+
+spacing = 1
+padding = 1
+hide_ascii = false
+key_color = "#a6da95"
+separator = ""
+
+[box]
+border = "plain"
+visible = false
+
+[palette]
+glyph = "▆▆ "
+visible = true
+type = "Full"
+
+[bar]
+glyph = "#"
+hide_delimiters = false
+visible = true
+
+[box.inner_margin]
+x = 2
+y = 1
+
+[custom_ascii]
+#path            = "~/.config/macchina/themes/EndevourOS.txt"
+path = "~/.config/macchina/themes/OpenSuseTumbleweed.txt"
+color = "#c6a0f6"
+
+[keys]
+host = "Host"
+kernel = "Kernel"
+battery = "Battery"
+os = "OS"
+de = "DE"
+wm = "WM"
+distro = "Distro"
+terminal = "Terminal"
+shell = "Shell"
+packages = "Packages"
+uptime = "Uptime"
+memory = "Memory"
+machine = "Machine"
+local_ip = "Local IP"
+backlight = "Brightness"
+resolution = "Resolution"
+cpu_load = "CPU Load"
+cpu = "CPU"

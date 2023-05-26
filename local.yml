@@ -1,0 +1,154 @@
+---
+- hosts: localhost
+  connection: local
+  become: true
+
+  tasks:
+  - name: copy dotfiles
+    copy:
+      src: files/
+      dest: /home/sawyer/.dotfiles/
+      owner: sawyer
+      group: sawyer
+      force: true
+
+  # copy enxrypted vault files
+  - block:   
+    - name: copy ssh key
+      become_user: sawyer
+      copy:
+        src: ssh_key
+        dest: ~/.ssh/id_ed25519
+        decrypt: yes
+        mode: 0600
+
+    - name: copy wakatime token
+      become_user: sawyer
+      copy:
+        src: files/editors/.wakatime.cfg
+        dest: ~/.wakatime.cfg
+        decrypt: yes
+        owner: sawyer
+        group: sawyer
+  
+    - name: copy copilot token
+      become_user: sawyer
+      copy:
+        src: files/editors/.config/github-copilot/hosts.json
+        dest: ~/.config/github-copilot/hosts.json
+        decrypt: yes
+        owner: sawyer
+        group: sawyer
+
+  - name: copy stow script
+    copy:
+      src: .stow.sh
+      dest: /home/sawyer/.dotfiles/.stow.sh
+      owner: sawyer
+      group: sawyer
+      mode: 0777
+
+  - name: install stow
+    package:
+      name:
+        - stow
+    
+  - name: stow dotfiles
+    become_user: sawyer
+    shell: bash -c '/home/sawyer/.dotfiles/.stow.sh'
+
+  - name: install packages all
+    package:
+      name:
+        - alacritty
+        - solaar
+        - exa
+        - fd
+        - ripgrep
+        - fish
+        - htop
+        - git
+        - python3
+        - go
+        - npm
+        - ninja
+        - gcc
+        - gcc-c++
+        - docker
+        - neovim
+        - lazygit
+        - flameshot
+        - flatpak
+        - flatpak-xdg-utils
+        - swaylock
+        - swayidle
+        - swaybg
+        - wofi
+        - rofi
+        - dunst
+        - pipewire
+        - pipewire-alsa
+        - wireplumber
+        - jq
+        - playerctl
+        - hyprland
+        - waybar
+        - timeshift
+        - NetworkManager
+        - NetworkManager-applet
+        - fzf
+        - gcc
+        - cmake
+
+  - name: install packages arch
+    when: ansible_distribution == "Archlinux"
+    package:
+      name:
+        - pipewire-pulse
+        - mpc
+        - light
+        - catppuccin-gtk-theme-macchiato
+        - libqt5-wayland
+        - libqt6-wayland
+        - pzvucontrol
+        - xdg-desktip-portal-wlr
+
+  # - name: install packages suse
+  #   shell: ~/.dotfiles/packages/suse/packages.sh
+  #   when: ansible_distribution == "openSUSE Tumbleweed"
+    
+  # - name: install packages debian
+  #   shell: ~/.dotfiles/packages/debian/packages.sh
+  #   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+  - name: install cargo packages
+    become_user: sawyer
+    shell: |
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+      rustup toolchain install stable
+      rustup toolchain install nightly
+      # rustup default stable
+      # cargo install starship --locked
+      # cargo install macchina --locked
+      # cargo install zellij --locked
+      
+      # git clone https://github.com/helix-editor/helix /opt/helix
+      # cd /opt/helix
+      # git pull
+      # RUSTFLAGS="-C target-feature=-crt-static" cargo install --path helix-term --locked
+      # hx -g fetch
+      # hx -g build
+
+      exit 0
+      
+  - name: add ansible user
+    user:
+      name: velociraptor
+      system: yes
+
+  - name: add ansible-pull cron job
+    cron:
+      name: ansible auto-provision
+      user: velociraptor
+      minute: "*/10"
+      job: ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git
