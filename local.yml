@@ -116,8 +116,8 @@
         cargo install zellij --locked
         
         RUSTFLAGS="-C target-feature=-crt-static" cargo install --path /opt/helix/helix-term --locked
-        hx -g fetch
-        hx -g build
+        ~/.cargo/bin/hx -g fetch
+        ~/.cargo/bin/hx -g build
   
         # exit 0
 
