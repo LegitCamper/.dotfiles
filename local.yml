@@ -6,8 +6,8 @@
   tasks:
   - name: copy and decypt keys (if needed)
     copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
+      src: {{ item.src }}
+      dest: {{ item.dest }}
       become_user: sawyer
       decrypt: yes
       owner: sawyer
@@ -96,10 +96,10 @@
       curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
       rustup toolchain install stable
       rustup toolchain install nightly
-      # rustup default stable
-      # cargo install starship --locked
-      # cargo install macchina --locked
-      # cargo install zellij --locked
+      rustup default stable
+      cargo install starship --locked
+      cargo install macchina --locked
+      cargo install zellij --locked
       
       # git clone https://github.com/helix-editor/helix /opt/helix
       # cd /opt/helix
