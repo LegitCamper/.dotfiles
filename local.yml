@@ -59,7 +59,6 @@
         - playerctl
         - hyprland
         - waybar
-        - timeshift
         - NetworkManager
         - NetworkManager-applet
         - fzf
