@@ -71,7 +71,6 @@
         - pipewire-pulse
         - mpc
         - light
-        - xdg-desktip-portal-wlr
         - network-manager-applet
 
   - name: install packages suse
@@ -83,6 +82,7 @@
         - catppuccin-gtk-theme-macchiato
         - libqt5-wayland
         - libqt6-wayland
+        - xdg-desktip-portal-wlr
     
   # - name: install packages debian
   #   shell: ~/.dotfiles/packages/debian/packages.sh
