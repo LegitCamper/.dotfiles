@@ -70,7 +70,6 @@
         - pipewire-pulse
         - mpc
         - light
-        - catppuccin-gtk-theme-macchiato
         - libqt5-wayland
         - libqt6-wayland
         - pzvucontrol
@@ -83,6 +82,7 @@
       name:
         - NetworkManager
         - NetworkManager-applet
+        - catppuccin-gtk-theme-macchiato
     
   # - name: install packages debian
   #   shell: ~/.dotfiles/packages/debian/packages.sh
