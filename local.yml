@@ -40,7 +40,6 @@
         - npm
         - ninja
         - gcc
-        - gcc-c++
         - docker
         - neovim
         - lazygit
