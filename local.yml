@@ -5,25 +5,25 @@
 
   tasks:
   - name: copy and decypt keys (if needed)
-      copy:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        become_user: sawyer
-        decrypt: yes
-        owner: sawyer
-        group: sawyer
-        mode: 0600
-      loop:
-        - src: ssh_key
-          dest: ~/.ssh/id_ed25519
-        - src: ssh_key
-          dest: ~/.ssh/id_ed25519.pub
-        - src: files/editors/.wakatime.cfg        
-          dest: ~/.wakatime.cfg
-        - src: files/editors/.config/github-copilot/hosts.json
-          dest: ~/.config/github-copilot/hosts.json
-        # - src: .stow.sh
-        #   dest: /home/sawyer/.dotfiles/.stow.sh     
+    copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      become_user: sawyer
+      decrypt: yes
+      owner: sawyer
+      group: sawyer
+      mode: 0600
+    loop:
+      - src: ssh_key
+        dest: ~/.ssh/id_ed25519
+      - src: ssh_key
+        dest: ~/.ssh/id_ed25519.pub
+      - src: files/editors/.wakatime.cfg        
+        dest: ~/.wakatime.cfg
+      - src: files/editors/.config/github-copilot/hosts.json
+        dest: ~/.config/github-copilot/hosts.json
+      # - src: .stow.sh
+      #   dest: /home/sawyer/.dotfiles/.stow.sh     
 
   - name: install packages all
     package:
