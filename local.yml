@@ -108,6 +108,22 @@
 
       exit 0
 
+  - name: create projects folder (if not exist)
+    become_user: sawyer
+    file:
+      path: ~/projects
+      state: directory
+      owner: sawyer
+      group: sawyer
+      
+  - name: clone .dotfiles
+    become_user: sawyer
+    git:
+      repo: "https://github.com/LegitCamper/.dotfiles.git"
+      dest: ~/projects/.dotfiles
+      clone: yes
+      update: yes
+
   - name: stow dotfiles
     become_user: sawyer
     shell: bash -c '/home/sawyer/.dotfiles/.stow.sh'
