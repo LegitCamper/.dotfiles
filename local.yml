@@ -69,6 +69,22 @@
   # - name: install packages debian
   #   shell: ~/.dotfiles/packages/debian/packages.sh
   #   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+  
+  - name: create helix folder (if not exist)
+    become_user: sawyer
+    file:
+      path: /opt/helix
+      state: directory
+      owner: sawyer
+      group: sawyer
+
+  - name: clone helix
+    become_user: sawyer
+    git:
+      repo: "clone https://github.com/helix-editor/helix"
+      dest: /opt/helix
+      clone: yes
+      update: yes
 
   - name: install cargo packages
     become_user: sawyer
@@ -77,18 +93,16 @@
       rustup toolchain install stable
       rustup toolchain install nightly
       rustup default stable
+
       cargo install starship --locked
       cargo install macchina --locked
       cargo install zellij --locked
       
-      git clone https://github.com/helix-editor/helix /opt/helix
-      cd /opt/helix
-      git pull
-      RUSTFLAGS="-C target-feature=-crt-static" cargo install --path helix-term --locked
+      RUSTFLAGS="-C target-feature=-crt-static" cargo install --path /opt/helix/helix-term --locked
       hx -g fetch
       hx -g build
 
-      exit 0
+      # exit 0
 
   - name: create projects folder (if not exist)
     become_user: sawyer
