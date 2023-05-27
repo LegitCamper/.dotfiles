@@ -124,7 +124,7 @@
         dest: ~/.ssh/id_ed25519
       - src: ssh_key
         dest: ~/.ssh/id_ed25519.pub
-      - src: files/editors/.wakatime.cfg        
+      - src: editors/.wakatime.cfg        
         dest: ~/.wakatime.cfg
       - src: editors/.config/github-copilot/hosts.json
         dest: ~/.config/github-copilot/hosts.json
