@@ -126,7 +126,7 @@
 
   - name: stow dotfiles
     become_user: sawyer
-    shell: bash -c '/home/sawyer/.dotfiles/.stow.sh'
+    shell: bash -c '~/.dotfiles/.stow.sh'
      
   - name: add ansible user
     user:
