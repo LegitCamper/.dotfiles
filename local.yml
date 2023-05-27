@@ -22,8 +22,8 @@
           dest: ~/.wakatime.cfg
         - src: files/editors/.config/github-copilot/hosts.json
           dest: ~/.config/github-copilot/hosts.json
-        - src: .stow.sh
-          dest: /home/sawyer/.dotfiles/.stow.sh     
+        # - src: .stow.sh
+        #   dest: /home/sawyer/.dotfiles/.stow.sh     
 
   - name: install packages all
     package:
