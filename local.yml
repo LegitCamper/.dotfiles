@@ -78,8 +78,8 @@
           - NetworkManager
           - NetworkManager-applet
           # - catppuccin-gtk-theme-macchiato
-          - libqt5-wayland
-          - libqt6-wayland
+          # - libqt5-wayland
+          # - libqt6-wayland
           # - xdg-desktip-portal-wlr
       
     - name: install packages debian
