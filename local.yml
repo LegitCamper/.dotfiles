@@ -4,177 +4,193 @@
   become: true
 
   tasks:
-  - name: install packages all
-    package:
-      name:
-        - stow
-        - alacritty
-        - solaar
-        - exa
-        - fd
-        - ripgrep
-        - fish
-        - htop
-        - git
-        - python3
-        - go
-        - npm
-        - ninja
-        - gcc
-        - docker
-        - neovim
-        - lazygit
-        - flameshot
-        - flatpak
-        - flatpak-xdg-utils
-        - swaylock
-        - swayidle
-        - swaybg
-        - wofi
-        - rofi
-        - dunst
-        - pipewire
-        - pipewire-alsa
-        - wireplumber
-        - jq
-        - playerctl
-        - hyprland
-        - waybar
-        - fzf
-        - gcc
-        - cmake
-        - pavucontrol
-  
-  - name: install flatpak packages all
-    community.general.flatpak:
-      name:
-        - com.notepadqq.Notepadqq
-        - com.valvesoftware.Steam
-        - org.flameshot.Flameshot
-        - org.videolan.VLC
-        - net.lutris.Lutris
-        - com.heroicgameslauncher.hgl
-        - com.getpostman.Postman
-        - com.usebottles.bottles
-        - com.spotify.Client
-        - org.js.nuclear.Nuclear
-        - io.github.shiftey.Desktop
-        - com.github.sdv43.whaler
-        - net.davidotek.pupgui2
-        - re.sonny.Junction
-        - com.github.tchx84.Flatseal
-        - org.signal.Signal
-        - com.bitwarden.desktop
-        - com.mojang.Minecraft
-        - org.libreoffice.LibreOffice
-        - io.gitlab.librewolf-community
-        - io.github.prateekmedia.appimagepool
-
-  - name: install packages arch
-    when: ansible_distribution == "Archlinux"
-    package:
-      name:
-        - pipewire-pulse
-        - mpc
-        - light
-        - network-manager-applet
-        - cronie
-
-  - name: install packages suse
-    when: ansible_distribution == "openSUSE Tumbleweed"
-    package:
-      name:
-        - NetworkManager
-        - NetworkManager-applet
-        - catppuccin-gtk-theme-macchiato
-        - libqt5-wayland
-        - libqt6-wayland
-        - xdg-desktip-portal-wlr
+  - block: # packages
+    - name: install packages all
+      package:
+        name:
+          - stow
+          - alacritty
+          - solaar
+          - exa
+          - fd
+          - ripgrep
+          - fish
+          - htop
+          - git
+          - python3
+          - go
+          - npm
+          - ninja
+          - gcc
+          - docker
+          - neovim
+          - lazygit
+          - flameshot
+          - flatpak
+          - flatpak-xdg-utils
+          - swaylock
+          - swayidle
+          - swaybg
+          - wofi
+          - rofi
+          - dunst
+          - pipewire
+          - pipewire-alsa
+          - wireplumber
+          - jq
+          - playerctl
+          - hyprland
+          - waybar
+          - fzf
+          - gcc
+          - cmake
+          - pavucontrol
     
-  # - name: install packages debian
-  #   shell: ~/.dotfiles/packages/debian/packages.sh
-  #   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+    - name: install flatpak packages all
+      community.general.flatpak:
+        name:
+          - com.valvesoftware.Steam
+          - org.videolan.VLC
+          - net.lutris.Lutris
+          - com.heroicgameslauncher.hgl
+          - com.getpostman.Postman
+          - org.js.nuclear.Nuclear
+          - com.github.sdv43.whaler
+          - net.davidotek.pupgui2
+          - com.github.tchx84.Flatseal
+          - com.bitwarden.desktop
+          - org.libreoffice.LibreOffice
   
-  - name: create helix folder (if not exist)
-    file:
-      path: /opt/helix
-      state: directory
-      owner: sawyer
-      group: sawyer
-
-  - name: clone helix
-    become_user: sawyer
-    git:
-      repo: "https://github.com/helix-editor/helix"
-      dest: /opt/helix
-      clone: yes
-      update: yes
-
-  - name: install cargo packages
-    become_user: sawyer
-    shell: |
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-      rustup toolchain install stable
-      rustup toolchain install nightly
-      rustup default stable
-
-      cargo install starship --locked
-      cargo install macchina --locked
-      cargo install zellij --locked
+    - name: install packages arch
+      when: ansible_distribution == "Archlinux"
+      package:
+        name:
+          - pipewire-pulse
+          - mpc
+          - light
+          - network-manager-applet
+          - cronie
+  
+    - name: install packages suse
+      when: ansible_distribution == "openSUSE Tumbleweed"
+      package:
+        name:
+          - NetworkManager
+          - NetworkManager-applet
+          - catppuccin-gtk-theme-macchiato
+          - libqt5-wayland
+          - libqt6-wayland
+          - xdg-desktip-portal-wlr
       
-      RUSTFLAGS="-C target-feature=-crt-static" cargo install --path /opt/helix/helix-term --locked
-      hx -g fetch
-      hx -g build
+    - name: install packages debian
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+      package:
+        name:
+          - None
+    
+    - name: create helix folder (if not exist)
+      file:
+        path: /opt/helix
+        state: directory
+        owner: sawyer
+        group: sawyer
+  
+    - name: clone helix
+      become_user: sawyer
+      git:
+        repo: "https://github.com/helix-editor/helix"
+        dest: /opt/helix
+        clone: yes
+        update: yes
+  
+    - name: install cargo packages
+      become_user: sawyer
+      shell: |
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        rustup toolchain install stable
+        rustup toolchain install nightly
+        rustup default stable
+  
+        cargo install starship --locked
+        cargo install macchina --locked
+        cargo install zellij --locked
+        
+        RUSTFLAGS="-C target-feature=-crt-static" cargo install --path /opt/helix/helix-term --locked
+        hx -g fetch
+        hx -g build
+  
+        # exit 0
 
-      # exit 0
+  - block: # stow dotfiles
+    - name: create projects folder (if not exist)
+      become_user: sawyer
+      file:
+        path: ~/projects
+        state: directory
+        owner: sawyer
+        group: sawyer
+        
+    - name: clone .dotfiles
+      become_user: sawyer
+      git:
+        repo: "git@github.com:LegitCamper/.dotfiles.git"
+        dest: ~/projects/.dotfiles
+        clone: yes
+        update: yes
+  
+    - name: stow dotfiles
+      become_user: sawyer
+      shell: bash -c '~/projects/.dotfiles/.stow.sh'
+  
+    - name: copy and decrypt keys (if needed)
+      become_user: sawyer
+      copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        decrypt: yes
+        owner: sawyer
+        group: sawyer
+        mode: 0600
+      loop:
+        - src: ssh_key
+          dest: ~/.ssh/id_ed25519
+        - src: ssh_key
+          dest: ~/.ssh/id_ed25519.pub
+        - src: editors/.wakatime.cfg        
+          dest: ~/.wakatime.cfg
+        - src: editors/.config/github-copilot/hosts.json
+          dest: ~/.config/github-copilot/hosts.json
 
-  - name: create projects folder (if not exist)
-    become_user: sawyer
-    file:
-      path: ~/projects
-      state: directory
-      owner: sawyer
-      group: sawyer
-      
-  - name: clone .dotfiles
-    become_user: sawyer
-    git:
-      repo: "git@github.com:LegitCamper/.dotfiles.git"
-      dest: ~/projects/.dotfiles
-      clone: yes
-      update: yes
+  - block: # get nerdfonts
+    - name: create nerdfonts folder (if not exist)
+      become_user: sawyer
+      file:
+        path: /opt/nerdfonts
+        state: directory
+        owner: sawyer
+        group: sawyer
 
-  - name: stow dotfiles
-    become_user: sawyer
-    shell: bash -c '~/projects/.dotfiles/.stow.sh'
-
-  - name: copy and decrypt keys (if needed)
-    become_user: sawyer
-    copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
-      decrypt: yes
-      owner: sawyer
-      group: sawyer
-      mode: 0600
-    loop:
-      - src: ssh_key
-        dest: ~/.ssh/id_ed25519
-      - src: ssh_key
-        dest: ~/.ssh/id_ed25519.pub
-      - src: editors/.wakatime.cfg        
-        dest: ~/.wakatime.cfg
-      - src: editors/.config/github-copilot/hosts.json
-        dest: ~/.config/github-copilot/hosts.json
-     
-  - name: add ansible user
-    user:
-      name: velociraptor
-      system: yes
-
-  - name: add ansible-pull cron job
-    cron:
-      name: ansible auto-provision
-      user: velociraptor
-      minute: "*/10"
-      job: ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git
+    - name: clone nerdfonts
+      git:
+        repo: "https://github.com/ryanoasis/nerd-fonts.git"
+        dest: /opt/nerdfonts
+        clone: yes
+        update: yes
+    
+    - name: get nerdfonts
+      become_user: sawyer
+      shell: cd /opt/nerdfonts && ./install.sh JetBrainsMono
+          
+  - block: # setup auto updater
+    - name: add ansible user
+      user:
+        name: velociraptor
+        system: yes
+  
+    - name: add ansible-pull cron job
+      cron:
+        name: ansible auto-provision
+        user: velociraptor
+        minute: "*/10"
+        job: ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git
+  
