@@ -4,74 +4,31 @@
   become: true
 
   tasks:
-  - name: copy dotfiles
-    copy:
-      src: files/
-      dest: /home/sawyer/.dotfiles/
-      owner: sawyer
-      group: sawyer
-      force: true
-
-  # copy enxrypted vault files
-  - block:   
-    - name: copy ssh key
-      become_user: sawyer
+  - name: copy and decypt keys (if needed)
       copy:
-        src: ssh_key
-        dest: ~/.ssh/id_ed25519
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        become_user: sawyer
         decrypt: yes
         owner: sawyer
         group: sawyer
         mode: 0600
-
-    - name: copy ssh pub key
-      become_user: sawyer
-      copy:
-        src: ssh_key
-        dest: ~/.ssh/id_ed25519.pub
-        decrypt: yes
-        owner: sawyer
-        group: sawyer
-        mode: 0600
-
-    - name: copy wakatime token
-      become_user: sawyer
-      copy:
-        src: files/editors/.wakatime.cfg
-        dest: ~/.wakatime.cfg
-        decrypt: yes
-        owner: sawyer
-        group: sawyer
-  
-    - name: copy copilot token
-      become_user: sawyer
-      copy:
-        src: files/editors/.config/github-copilot/hosts.json
-        dest: ~/.config/github-copilot/hosts.json
-        decrypt: yes
-        owner: sawyer
-        group: sawyer
-
-  - name: copy stow script
-    copy:
-      src: .stow.sh
-      dest: /home/sawyer/.dotfiles/.stow.sh
-      owner: sawyer
-      group: sawyer
-      mode: 0777
-
-  - name: install stow
-    package:
-      name:
-        - stow
-    
-  - name: stow dotfiles
-    become_user: sawyer
-    shell: bash -c '/home/sawyer/.dotfiles/.stow.sh'
+      loop:
+        - src: ssh_key
+          dest: ~/.ssh/id_ed25519
+        - src: ssh_key
+          dest: ~/.ssh/id_ed25519.pub
+        - src: files/editors/.wakatime.cfg        
+          dest: ~/.wakatime.cfg
+        - src: files/editors/.config/github-copilot/hosts.json
+          dest: ~/.config/github-copilot/hosts.json
+        - src: .stow.sh
+          dest: /home/sawyer/.dotfiles/.stow.sh     
 
   - name: install packages all
     package:
       name:
+        - stow
         - alacritty
         - solaar
         - exa
@@ -152,7 +109,11 @@
       # hx -g build
 
       exit 0
-      
+
+  - name: stow dotfiles
+    become_user: sawyer
+    shell: bash -c '/home/sawyer/.dotfiles/.stow.sh'
+     
   - name: add ansible user
     user:
       name: velociraptor
