@@ -108,7 +108,7 @@
 
   - name: stow dotfiles
     become_user: sawyer
-    shell: bash -c '~/.dotfiles/.stow.sh'
+    shell: bash -c '~/projects/.dotfiles/.stow.sh'
 
   - name: copy and decrypt keys (if needed)
     become_user: sawyer
