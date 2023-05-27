@@ -119,7 +119,7 @@
   - name: clone .dotfiles
     become_user: sawyer
     git:
-      repo: "https://github.com/LegitCamper/.dotfiles.git"
+      repo: "git@github.com:LegitCamper/.dotfiles.git"
       dest: ~/projects/.dotfiles
       clone: yes
       update: yes
