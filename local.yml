@@ -59,8 +59,6 @@
         - playerctl
         - hyprland
         - waybar
-        - NetworkManager
-        - NetworkManager-applet
         - fzf
         - gcc
         - cmake
@@ -77,10 +75,14 @@
         - libqt6-wayland
         - pzvucontrol
         - xdg-desktip-portal-wlr
+        - network-manager-applet
 
-  # - name: install packages suse
-  #   shell: ~/.dotfiles/packages/suse/packages.sh
-  #   when: ansible_distribution == "openSUSE Tumbleweed"
+  - name: install packages suse
+    when: ansible_distribution == "openSUSE Tumbleweed"
+    package:
+      name:
+        - NetworkManager
+        - NetworkManager-applet
     
   # - name: install packages debian
   #   shell: ~/.dotfiles/packages/debian/packages.sh
