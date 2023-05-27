@@ -80,7 +80,7 @@
           # - catppuccin-gtk-theme-macchiato
           - libqt5-wayland
           - libqt6-wayland
-          - xdg-desktip-portal-wlr
+          # - xdg-desktip-portal-wlr
       
     - name: install packages debian
       when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
