@@ -62,6 +62,7 @@
         - fzf
         - gcc
         - cmake
+        - pavucontrol
 
   - name: install packages arch
     when: ansible_distribution == "Archlinux"
@@ -70,7 +71,6 @@
         - pipewire-pulse
         - mpc
         - light
-        - pzvucontrol
         - xdg-desktip-portal-wlr
         - network-manager-applet
 
