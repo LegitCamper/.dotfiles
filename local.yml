@@ -44,6 +44,31 @@
         - gcc
         - cmake
         - pavucontrol
+  
+  - name: install flatpak packages all
+    community.general.flatpak:
+      name:
+        - com.notepadqq.Notepadqq
+        - com.valvesoftware.Steam
+        - org.flameshot.Flameshot
+        - org.videolan.VLC
+        - net.lutris.Lutris
+        - com.heroicgameslauncher.hgl
+        - com.getpostman.Postman
+        - com.usebottles.bottles
+        - com.spotify.Client
+        - org.js.nuclear.Nuclear
+        - io.github.shiftey.Desktop
+        - com.github.sdv43.whaler
+        - net.davidotek.pupgui2
+        - re.sonny.Junction
+        - com.github.tchx84.Flatseal
+        - org.signal.Signal
+        - com.bitwarden.desktop
+        - com.mojang.Minecraft
+        - org.libreoffice.LibreOffice
+        - io.gitlab.librewolf-community
+        - io.github.prateekmedia.appimagepool
 
   - name: install packages arch
     when: ansible_distribution == "Archlinux"
