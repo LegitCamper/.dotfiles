@@ -80,7 +80,7 @@
   - name: clone helix
     become_user: sawyer
     git:
-      repo: "clone https://github.com/helix-editor/helix"
+      repo: "https://github.com/helix-editor/helix"
       dest: /opt/helix
       clone: yes
       update: yes
