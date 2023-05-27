@@ -1,28 +1,8 @@
----
-- hosts: localhost
+--- - hosts: localhost
   connection: local
   become: true
 
   tasks:
-  - name: copy and decrypt keys (if needed)
-    become_user: sawyer
-    copy:
-      src: "{{ item.src }}"
-      dest: "{{ item.dest }}"
-      decrypt: yes
-      owner: sawyer
-      group: sawyer
-      mode: 0600
-    loop:
-      - src: ssh_key
-        dest: ~/.ssh/id_ed25519
-      - src: ssh_key
-        dest: ~/.ssh/id_ed25519.pub
-      - src: files/editors/.wakatime.cfg        
-        dest: ~/.wakatime.cfg
-      - src: files/editors/.config/github-copilot/hosts.json
-        dest: ~/.config/github-copilot/hosts.json
-
   - name: install packages all
     package:
       name:
@@ -100,12 +80,12 @@
       cargo install macchina --locked
       cargo install zellij --locked
       
-      # git clone https://github.com/helix-editor/helix /opt/helix
-      # cd /opt/helix
-      # git pull
-      # RUSTFLAGS="-C target-feature=-crt-static" cargo install --path helix-term --locked
-      # hx -g fetch
-      # hx -g build
+      git clone https://github.com/helix-editor/helix /opt/helix
+      cd /opt/helix
+      git pull
+      RUSTFLAGS="-C target-feature=-crt-static" cargo install --path helix-term --locked
+      hx -g fetch
+      hx -g build
 
       exit 0
 
@@ -128,6 +108,25 @@
   - name: stow dotfiles
     become_user: sawyer
     shell: bash -c '~/.dotfiles/.stow.sh'
+
+  - name: copy and decrypt keys (if needed)
+    become_user: sawyer
+    copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      decrypt: yes
+      owner: sawyer
+      group: sawyer
+      mode: 0600
+    loop:
+      - src: ssh_key
+        dest: ~/.ssh/id_ed25519
+      - src: ssh_key
+        dest: ~/.ssh/id_ed25519.pub
+      - src: files/editors/.wakatime.cfg        
+        dest: ~/.wakatime.cfg
+      - src: files/editors/.config/github-copilot/hosts.json
+        dest: ~/.config/github-copilot/hosts.json
      
   - name: add ansible user
     user:
