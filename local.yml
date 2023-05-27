@@ -71,7 +71,6 @@
   #   when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
   
   - name: create helix folder (if not exist)
-    become_user: sawyer
     file:
       path: /opt/helix
       state: directory
