@@ -77,7 +77,7 @@
         name:
           - NetworkManager
           - NetworkManager-applet
-          - catppuccin-gtk-theme-macchiato
+          # - catppuccin-gtk-theme-macchiato
           - libqt5-wayland
           - libqt6-wayland
           - xdg-desktip-portal-wlr
@@ -163,7 +163,6 @@
 
   - block: # get nerdfonts
     - name: create nerdfonts folder (if not exist)
-      become_user: sawyer
       file:
         path: /opt/nerdfonts
         state: directory
