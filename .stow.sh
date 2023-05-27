@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /home/sawyer/.dotfiles
+cd ~/projects/.dotfiles
 
 rm -rf ~/.config/.bashrc ~/.config/fish ~/.wakatime*
 

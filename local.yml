@@ -72,6 +72,7 @@
         - mpc
         - light
         - network-manager-applet
+        - cronie
 
   - name: install packages suse
     when: ansible_distribution == "openSUSE Tumbleweed"
