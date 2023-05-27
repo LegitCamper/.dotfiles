@@ -70,8 +70,6 @@
         - pipewire-pulse
         - mpc
         - light
-        - libqt5-wayland
-        - libqt6-wayland
         - pzvucontrol
         - xdg-desktip-portal-wlr
         - network-manager-applet
@@ -83,6 +81,8 @@
         - NetworkManager
         - NetworkManager-applet
         - catppuccin-gtk-theme-macchiato
+        - libqt5-wayland
+        - libqt6-wayland
     
   # - name: install packages debian
   #   shell: ~/.dotfiles/packages/debian/packages.sh
