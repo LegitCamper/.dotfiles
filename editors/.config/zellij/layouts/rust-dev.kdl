@@ -6,8 +6,8 @@ layout {
         pane name="lazygit" command="lazygit"
     }
     tab name="Rust Development" split_direction="vertical" {
-        pane name="cargo watch" command="cargo" args="watch" size="35%"
+        pane name="cargo watch" command="cargo-watch" size="25%"
         pane name="helix" command="hx" args="./"
-        pane name="compiler" size="35%"
+        pane name="compiler" size="25%"
     }
 }
