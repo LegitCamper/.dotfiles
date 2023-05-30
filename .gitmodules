@@ -1,0 +1,3 @@
+[submodule "editors/.config/helix/runtime/helix"]
+	path = editors/.config/helix/runtime/helix
+	url = https://github.com/helix-editor/helix
