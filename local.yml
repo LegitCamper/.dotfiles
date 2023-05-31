@@ -192,5 +192,5 @@
         name: ansible auto-provision
         user: velociraptor
         minute: "*/10"
-        job: ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git
+        job: ansible-pull -U https://github.com/LegitCamper/.dotfiles.git
   
