@@ -155,7 +155,7 @@
       loop:
         - src: ssh_key
           dest: ~/.ssh/id_ed25519
-        - src: ssh_key
+        - src: ssh_key.pub
           dest: ~/.ssh/id_ed25519.pub
         - src: editors/.wakatime.cfg        
           dest: ~/.wakatime.cfg
