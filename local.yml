@@ -45,6 +45,7 @@
           - gcc
           - cmake
           - pavucontrol
+          - lxappearance
     
     - name: install flatpak packages all
       community.general.flatpak:
@@ -183,14 +184,9 @@
           
   - block: # setup auto updater
     - name: add ansible user
-      user:
-        name: velociraptor
-        system: yes
+      user: name=ansible uid=900
+
+    - name: install cron job (ansible-pull)
+      cron: user="ansible" name="ansible provision" minute="*/10" job="/usr/bin/ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git > /dev/null"
   
-    - name: add ansible-pull cron job
-      cron:
-        name: ansible auto-provision
-        user: velociraptor
-        minute: "*/10"
-        job: ansible-pull -U https://github.com/LegitCamper/.dotfiles.git
   
