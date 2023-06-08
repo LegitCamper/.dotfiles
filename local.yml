@@ -112,6 +112,7 @@
         rustup toolchain install nightly
         rustup default stable
   
+        cargo install nu --features starship-prompt
         cargo install starship --locked
         cargo install macchina --locked
         cargo install zellij --locked
