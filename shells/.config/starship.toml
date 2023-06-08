@@ -105,7 +105,7 @@ symbol = " "
 
 [rust]
 symbol = " "
-format = 'via [⚙️ $version](red bold)'
+format = 'via [  $version](red bold)'
 
 [swift]
 symbol = "ﯣ "
@@ -116,6 +116,7 @@ format = "[$user]($style)"
 
 [shell]
 fish_indicator = "🐟"
+nu_indicator = "nu"
 bash_indicator = "bash"
 zsh_indicator = "zsh"
 powershell_indicator = "_"
