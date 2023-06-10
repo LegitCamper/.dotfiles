@@ -42,8 +42,9 @@
           - playerctl
           - hyprland
           - waybar
+          - grim
+          - slurp
           - fzf
-          - gcc
           - cmake
           - pavucontrol
           - lxappearance
