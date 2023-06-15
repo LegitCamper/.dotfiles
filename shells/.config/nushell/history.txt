@@ -19,3 +19,5 @@ starship init nu
 cargo install nu --all-features
 nu
 nu
+cargo test get_shipyard
+exit
