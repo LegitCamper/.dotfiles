@@ -11,7 +11,6 @@
         path: ~/projects
         state: directory
         owner: sawyer
-        group: sawyer
         
     - name: clone .dotfiles
       become_user: sawyer
@@ -33,7 +32,6 @@
         dest: "{{ item.dest }}"
         decrypt: yes
         owner: sawyer
-        group: sawyer
         mode: 0600
       loop:
         - src: ssh_key
