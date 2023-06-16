@@ -23,7 +23,9 @@
   
     - name: stow dotfiles
       become_user: sawyer
-      shell: nix-env --install stow && bash -c '~/projects/.dotfiles/.stow.sh'
+      shell: 
+        executable: nix-env --install stow
+        cmd: ~/projects/.dotfiles/.stow.sh
   
     - name: copy and decrypt keys (if needed)
       become_user: sawyer
