@@ -4,6 +4,7 @@
   become: true
 
   tasks:
+  # TODO: install stow here
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
       become_user: sawyer
@@ -42,6 +43,15 @@
           dest: ~/.wakatime.cfg
         - src: editors/.config/github-copilot/hosts.json
           dest: ~/.config/github-copilot/hosts.json
+
+  - block: # configures nix
+    - name: congure nix
+      become_user: sawyer
+      shell: |
+        cd ~/projects/.dotfiles
+        cd system && nixos-rebuild --use-remote-sudo --flake . boot && cd - &&
+        cd home && home-manager --flake . switch && cd - &&
+        nix flake update
 
   - block: # setup auto updater
     - name: add ansible user
