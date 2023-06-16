@@ -6,6 +6,7 @@
   tasks:
   - block: # packages
     - name: install packages all
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       package:
         name:
           - stow
@@ -50,6 +51,7 @@
           - lxappearance
     
     - name: install flatpak packages all
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       community.general.flatpak:
         name:
           - com.valvesoftware.Steam
@@ -92,6 +94,7 @@
           - None
     
     - name: create helix folder (if not exist)
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       file:
         path: /opt/helix
         state: directory
@@ -99,6 +102,7 @@
         group: sawyer
   
     - name: clone helix
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       become_user: sawyer
       git:
         repo: "https://github.com/helix-editor/helix"
@@ -107,6 +111,7 @@
         update: yes
   
     - name: install cargo packages
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       become_user: sawyer
       shell: |
         curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -168,6 +173,7 @@
 
   - block: # get nerdfonts
     - name: create nerdfonts folder (if not exist)
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       file:
         path: /opt/nerdfonts
         state: directory
@@ -175,6 +181,7 @@
         group: sawyer
 
     - name: clone nerdfonts
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       git:
         repo: "https://github.com/ryanoasis/nerd-fonts.git"
         dest: /opt/nerdfonts
@@ -182,6 +189,7 @@
         update: yes
     
     - name: get nerdfonts
+      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
       become_user: sawyer
       shell: cd /opt/nerdfonts && ./install.sh JetBrainsMono
           
