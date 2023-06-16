@@ -5,9 +5,8 @@
 
   tasks:
   - name: install stow
-    package:
-      name:
-        - stow
+    shell: nix-env --install stow
+
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
       become_user: sawyer
