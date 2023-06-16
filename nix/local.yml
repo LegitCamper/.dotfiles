@@ -4,7 +4,10 @@
   become: true
 
   tasks:
-  # TODO: install stow here
+  - name: install stow
+    package:
+      name:
+        - stow
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
       become_user: sawyer
