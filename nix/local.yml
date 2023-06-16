@@ -4,9 +4,6 @@
   become: true
 
   tasks:
-  - name: install stow
-    shell: nix-env --install stow
-
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
       become_user: sawyer
@@ -26,7 +23,7 @@
   
     - name: stow dotfiles
       become_user: sawyer
-      shell: bash -c '~/projects/.dotfiles/.stow.sh'
+      shell: nix-env --install stow && bash -c '~/projects/.dotfiles/.stow.sh'
   
     - name: copy and decrypt keys (if needed)
       become_user: sawyer
