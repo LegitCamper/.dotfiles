@@ -119,7 +119,6 @@ services.xserver.displayManager.setupCommands = ''
     # apps
     bitwarden
     xfce.thunar
-    ala
     socat
     qemu
     libreoffice
