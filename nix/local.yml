@@ -52,18 +52,18 @@
         - src: editors/.config/github-copilot/hosts.json
           dest: ~/.config/github-copilot/hosts.json
 
-  - block: # configures nix
-    - name: congure nix system
-      become_user: sawyer
-      shell: 
-        chdir: ~/projects/.dotfiles/nix/system
-        cmd: rm -rf /etc/nixos/configuration.nix && ln -s configuration.nix /etc/nixos/configuration.nix && sudo nixos-rebuild switch 
+  # - block: # configures nix
+  #   - name: congure nix system
+  #     become_user: sawyer
+  #     shell: 
+  #       chdir: ~/projects/.dotfiles/nix/system
+  #       cmd: rm -rf /etc/nixos/configuration.nix && ln -s configuration.nix /etc/nixos/configuration.nix && sudo nixos-rebuild switch 
         
-    - name: congure home-manager
-      become_user: sawyer
-      shell: 
-        chdir: ~/projects/.dotfiles/nix/home
-        cmd: mkdir ~/.config/home-manager/ && ln -s default.nix ~/.conifg/home-manager/home.nix && home-manager build 
+  #   - name: congure home-manager
+  #     become_user: sawyer
+  #     shell: 
+  #       chdir: ~/projects/.dotfiles/nix/home
+  #       cmd: mkdir ~/.config/home-manager/ && ln -s default.nix ~/.conifg/home-manager/home.nix && home-manager build 
 
   - block: # setup auto updater
     - name: add ansible user

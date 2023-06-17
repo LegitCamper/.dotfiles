@@ -1,90 +1,81 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+
 { config, pkgs, lib, ...}: {
-  imports = [
-    ./modules/v4l2loopback.nix
-  ];
-  # Allow opening a shell during boot.
-  # systemd.additionalUpstreamSystemUnits = ["debug-shell.service"];
+  services.acpid.enable = true;
+  security.polkit.enable = true;
+  services.upower.enable = true;
+  services.tlp.enable = true;
 
-  time.timeZone = "America/Denver";
+  programs.adb.enable = true;
+  programs.hyprland.enable = true;
 
-  suites.single-user.enable = true;
-  suites.sway.enable = false;
-
-
-  boot.initrd.systemd.enable = true;
-
-  programs.nix-ld.enable = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.pulseaudio.support32Bit = true;
+  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
+  nix.settings = {
+    substituters = ["https://nix-gaming.cachix.org"];
+    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
   };
 
-  # Smartcard daemon for Yubikey
-  services.pcscd.enable = true;
+  imports =
+    [ # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
 
-  security.sudo.enable = true;
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  hardware.bluetooth = {
-    enable = true;
-    # hsphfpd.enable = true;
-    settings = {
-      General = {
-        # To enable BlueZ Battery Provider
-        Experimental = true;
-      };
-    };
-  };
+  networking.hostName = "nixos-studio"; # Define your hostname.
+  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+
+  # Set your time zone.
+  time.timeZone = "America/Chicago";
 
   hardware.logitech.wireless = {
     enable = true;
     enableGraphical = true;
   };
 
-  # Workaround: https://github.com/NixOS/nixpkgs/issues/114222
-  systemd.user.services.telephony_client.enable = false;
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    packages=[ pkgs.terminus_font ];
+    font="${pkgs.terminus_font}/share/consolefonts/ter-i22b.psf.gz";
+    useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  hardware.v4l2loopback.enable = true;
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+  services.xserver.windowManager.dwm.enable = true;
+  services.xserver.layout = "us";
 
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
+  services.xserver.displayManager = {
+	lightdm.enable = true;
+  	autoLogin = {
+		enable = true;
+		user = "titus";
+	};
+  };
+services.xserver.displayManager.setupCommands = ''
+    ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal
+'';
+  
+ services.picom.enable = true;
+  # Enable sound.
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.titus = {
+     isNormalUser = true;
+     extraGroups = [ "wheel" "kvm" "input" "disk" "libvirtd" ]; # Enable ‘sudo’ for the user.
   };
 
-  networking = {
-    hostName = "NVC3919";
-
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        3000 # Development
-        8080 # Development
-      ];
-      allowPing = true;
-    };
-
-    networkmanager = {
-      enable = true;
-      plugins = with pkgs; [ networkmanager-openvpn ];
-    };
-  };
-
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
-  ];
-
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
   environment.systemPackages = with pkgs; [
     bash
     fish
@@ -109,166 +100,79 @@
     usbutils # lsusb
   ];
 
-  # Use experimental nsncd. See https://flokli.de/posts/2022-11-18-nsncd/
-  # services.nscd.enableNsncd = true;
 
-  services.acpid.enable = true;
+  ## Gaming
+	programs.steam = {
+	  enable = true;
+	  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+	  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+	};
+
+  # List services that you want to enable:
+  virtualisation.libvirtd.enable = true; 
+  # enable flatpak support
+  services.flatpak.enable = true;
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # gtk portal needed to make gtk apps happy
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
   security.polkit.enable = true;
-  services.upower.enable = true;
-  services.tlp.enable = true;
-
-  # Set permissions for RTL2832 USB dongle to use with urh.
-  hardware.rtl-sdr.enable = true;
-
-  services.udev.extraRules = ''
-    # Thunderbolt
-    # Always authorize thunderbolt connections when they are plugged in.
-    # This is to make sure the USB hub of Thunderbolt is working.
-    ACTION=="add", SUBSYSTEM=="thunderbolt", ATTR{authorized}=="0", ATTR{authorized}="1"
-
-    # Saleae Logic Analyzer
-    SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="0925", ATTR{idProduct}=="3881", MODE="0666"
-    SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="21a9", ATTR{idProduct}=="1001", MODE="0666"
-
-    # Arduino
-    SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ATTR{idVendor}=="2341", ATTR{idProduct}=="0043", MODE="0666", SYMLINK+="arduino"
-    SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", MODE="0664", GROUP="uucp"
-    SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="0043", MODE="0660", SYMLINK+="ttyArduinoUno"
-    SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0660", SYMLINK+="ttyArduinoNano2"
-    SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0660", SYMLINK+="ttyArduinoNano"
-
-    # For OVR
-    KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="2833", TAG+="uaccess"
-
-    # For OpenHMD
-    SUBSYSTEM=="usb", ATTRS{idVendor}=="2833", TAG+="uaccess"
-  '';
-
-  services.locate = {
-    enable = true;
-    pruneNames = [ ];
-  };
-  services.openssh.enable = false;
-
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [ gutenprint splix cups-bjnp ];
-  };
-
-  services.avahi = {
-    enable = true;
-    browseDomains = [ ];
-
-    # Seems to be causing trouble/slowness when resolving hosts
-    #nssmdns = true;
-
-    publish.enable = false;
-  };
-
-  services.redshift.enable = false;
-  location.provider = "geoclue2";
-
-  # Enable the X11 windowing system.
-  services.greetd.enable = true;
-  services.xserver = {
-    enable = true;
-    displayManager.autoLogin.enable = true;
-    desktopManager.xterm.enable = false;
-    videoDrivers = [
-      # "nouveau"
-      "nvidia"
-      # "modesetting"
-      # "fbdev"
-    ];
-    xrandrHeads = [
-      {
-        output = "DP-0";
-        primary = true;
-      }
-      "HDMI-0"
-    ];
-
-    synaptics.enable = false;
-    # wacom.enable = true;
-    libinput = {
-      enable = true;
-      touchpad = {
-        clickMethod = "clickfinger";
-        disableWhileTyping = true;
-        accelProfile = "adaptive";
-        accelSpeed = "2, 5";
-      };
-      mouse = {
-        accelSpeed = "1";
+  
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
       };
     };
-  };
+    extraConfig = ''
+      DefaultTimeoutStopSec=10s
+    '';
+  }; 
 
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [ uniemoji ];
-  };
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  networking.firewall.enable = false;
+  networking.enableIPv6 = false;
 
-  programs.fish.enable = true;
-  programs.bash.enableCompletion = true;
-  programs.adb.enable = true;
-  programs.hyprland.enable = true;
-
-  # virtualisation.virtualbox.host.enable = true;
-  virtualisation.docker = {
-    enable = true;
-    # daemon.settings = {
-    #   ipv6 = true;
-    #   "fixed-cidr-v6" = "fd00::/80";
+  fonts = {
+    fonts = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      font-awesome
+      source-han-sans
+      (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
+    ];
+    # fontconfig = {
+      # enable = true;
+      # defaultFonts = {
+	      # monospace = [ "Meslo LG M Regular Nerd Font Complete Mono" ];
+	      # serif = [ "Noto Serif" "Source Han Serif" ];
+	      # sansSerif = [ "Noto Sans" "Source Han Sans" ];
+      # };
     # };
-    autoPrune.enable = true;
-  };
-  networking.firewall.trustedInterfaces = [ "docker0" ];
-
-  users.defaultUserShell = pkgs.fish;
-
-  nixpkgs.config.allowUnfree = true;
-
-  # This adds a lot of build time to the system.
-  specialisation = {
-    wayland.configuration = {
-      suites.sway.enable = pkgs.lib.mkForce false;
-      suites.hyprland.enable = pkgs.lib.mkForce false;
-    };
-    i3.configuration = {
-      suites.sway.enable = pkgs.lib.mkForce false;
-    };
-  };
-
-  documentation.enable = false;
-  documentation.nixos.enable = false;
-
-  nix = {
-    gc = {
-      dates = "weekly";
-      automatic = true;
-      options = "--delete-older-than 60d";
-    };
-    settings = {
-      sandbox = true;
-      extra-sandbox-paths = [ "/etc/nix/netrc" ];
-      trusted-users = [ "root" "${config.suites.single-user.user}" ];
-      substituters = [ "https://cachix.cachix.org" ];
-      experimental-features = [ "nix-command" "flakes" ];
-      netrc-file = "/etc/nix/netrc";
-      auto-optimise-store = true;
-      log-lines = 100;
-      warn-dirty = false;
-    };
-    package = pkgs.nixVersions.unstable;
-  };
-
-  system.autoUpgrade = {
-    enable = true;
-    flake = "/home/sawyer/projects/nixos-config";
-    flags = [ "--update-input" "nixpkgs" "--commit-lock-file" ];
-    dates = "17:30";
-  };
+};
+  # Copy the NixOS configuration file and link it from the resulting system
+  # (/run/current-system/configuration.nix). This is useful in case you
+  # accidentally delete configuration.nix.
+  system.copySystemConfiguration = true;
+  system.autoUpgrade.enable = true;  
+  system.autoUpgrade.allowReboot = true; 
+  system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
+  systemd.additionalUpstreamSystemUnits = ["debug-shell.service"];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -276,5 +180,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "21.03"; # Did you read the comment?
+  system.stateVersion = "22.11"; # Did you read the comment?
+
 }
