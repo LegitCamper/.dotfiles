@@ -152,7 +152,6 @@ services.xserver.displayManager.setupCommands = ''
     ninja
     git
     python311
-    python2
     go
     nodejs_20
     ninja
