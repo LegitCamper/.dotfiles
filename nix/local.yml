@@ -55,11 +55,12 @@
   - block: # configures nix
     - name: congure nix
       become_user: sawyer
-      shell: |
-        cd ~/projects/.dotfiles
-        cd system && nixos-rebuild --use-remote-sudo --flake . boot && cd - &&
-        cd home && home-manager --flake . switch && cd - &&
-        nix flake update
+      shell: 
+        chdir: ~/projects/.dotfiles
+        cmd: |
+          cd system && nixos-rebuild --use-remote-sudo --flake . boot && cd - &&
+          cd home && home-manager --flake . switch && cd - &&
+          nix flake update
 
   - block: # setup auto updater
     - name: add ansible user
