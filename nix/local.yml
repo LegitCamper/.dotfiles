@@ -53,21 +53,17 @@
           dest: ~/.config/github-copilot/hosts.json
 
   - block: # configures nix
-    - name: congure nix
+    - name: congure nix system
       become_user: sawyer
       shell: 
         chdir: ~/projects/.dotfiles/nix/system
-        cmd: nixos-rebuild --use-remote-sudo --flake . boot
-    - name: congure nix
+        cmd: rm -rf /etc/nixos/configuration.nix && ln -s configuration.nix /etc/nixos/configuration.nix && sudo nixos-rebuild switch 
+        
+    - name: congure home-manager
       become_user: sawyer
       shell: 
         chdir: ~/projects/.dotfiles/nix/home
-        cmd: home-manager --flake . switch
-    - name: congure nix
-      become_user: sawyer
-      shell: 
-        chdir: ~/projects/.dotfiles/nix/
-        cmd: nix flake update
+        cmd: mkdir ~/.config/home-manager/ && ln -s default.nix ~/.conifg/home-manager/home.nix && home-manager build 
 
   - block: # setup auto updater
     - name: add ansible user
