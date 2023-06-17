@@ -16,27 +16,17 @@
 
   home = {
     # hyprland
-    file."~/.config". = {
-      source = ../hyprlandwm;
-    };
+    file."~/.config".source = ../hyprlandwm;
 
     # editors
-    file."~/.gitconfig". = {
-      source = ../editors/.gitconfig;
-    };
-    home.file."~/.config". = {
-      source = ../editors;
-    };
+    file."~/.gitconfig" = source = ../editors/.gitconfig;
+    file."~/.config".source = ../editors;
 
     # shells
-    file."~/.config". = {
-      source = ../shells;
-    };
+    file."~/.config".source = ../shells;
 
     # terminals
-    file."~/.config". = {
-      source = ../terminals;
-    };
+    file."~/.config".source = ../terminals;
   };
 
   # decrypts files with ansible
