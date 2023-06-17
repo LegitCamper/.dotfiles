@@ -31,7 +31,7 @@
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
-  time.timeZone = "America/Chicago";
+  time.timeZone = "America/Denver";
 
   hardware.logitech.wireless = {
     enable = true;
@@ -55,7 +55,7 @@
 	lightdm.enable = true;
   	autoLogin = {
 		enable = true;
-		user = "titus";
+		user = "sawyer";
 	};
   };
 services.xserver.displayManager.setupCommands = ''
@@ -68,7 +68,7 @@ services.xserver.displayManager.setupCommands = ''
   hardware.pulseaudio.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.titus = {
+  users.users.sawyer = {
      isNormalUser = true;
      extraGroups = [ "wheel" "kvm" "input" "disk" "libvirtd" ]; # Enable ‘sudo’ for the user.
   };
