@@ -36,7 +36,7 @@
 
     # Official NixOS package source, using nixos's stable branch by default
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # home-manager, used for managing user configuration
     home-manager = {
