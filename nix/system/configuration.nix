@@ -10,8 +10,6 @@
   programs.adb.enable = true;
   programs.hyprland.enable = true;
 
-  hardware.opengl.driSupport32Bit = true;
-  hardware.pulseaudio.support32Bit = true;
   nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
   nix.settings = {
     substituters = ["https://nix-gaming.cachix.org"];
@@ -57,8 +55,9 @@
   };
   
   hardware = {
-      opengl.enable = true;
-      nvidia.modesetting.enable = false;
+    opengl.enable = true;
+    nvidia.modesetting.enable = false;
+    pulseaudio.support32Bit = true;
   };
   
   # hyprland
