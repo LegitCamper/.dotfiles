@@ -5,8 +5,6 @@
 { config, pkgs, lib, ...}: 
 
   {
-  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-  
   nixpkgs.config.allowUnfree = true;
   
   nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
