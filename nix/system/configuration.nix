@@ -76,103 +76,100 @@ services.xserver.displayManager.setupCommands = ''
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    bash
+    fish
+    moreutils # sponge...
+    unzip
+    git
+    wget
+    htop
+    efibootmgr
+    ansible
+    usbutils # lsusb
 
-  config = {
-    home.packages = with pkgs; [
-      bash
-      fish
-      moreutils # sponge...
-      unzip
-      git
-      wget
-      htop
-      efibootmgr
-      ansible
-      usbutils # lsusb
+    # Networking tools
+    inetutils # hostname ping ifconfig...
+    dnsutils # dig nslookup...
+    bridge-utils # brctl
+    iw
+    wirelesstools # iwconfig
 
-      # Networking tools
-      inetutils # hostname ping ifconfig...
-      dnsutils # dig nslookup...
-      bridge-utils # brctl
-      iw
-      wirelesstools # iwconfig
+    # nix
+    nixfmt
+    home-manager
+    nixpkgs-review
 
-      # nix
-      nixfmt
-      home-manager
-      nixpkgs-review
+    # window manager
+    networkmanagerapplet
+    lxappearance
+    # flameshot
+    pavucontrol
+    swaylock
+    swayidle
+    swaybg
+    wofi
+    rofi
+    dunst
+    playerctl
+    hyprland
+    waybar
+    grim
+    slurp
 
-      # window manager
-      networkmanagerapplet
-      lxappearance
-      # flameshot
-      pavucontrol
-      swaylock
-      swayidle
-      swaybg
-      wofi
-      rofi
-      dunst
-      playerctl
-      hyprland
-      waybar
-      grim
-      slurp
+    # apps
+    bitwarden
+    xfce.thunar
+    ala
+    socat
+    qemu
+    libreoffice
+    vlc
+    gnome.pomodoro
+    ffmpeg-full
+    procs
+    solaar
+    nuclear
 
-      # apps
-      bitwarden
-      xfce.thunar
-      ala
-      socat
-      qemu
-      libreoffice
-      vlc
-      gnome.pomodoro
-      ffmpeg-full
-      procs
-      solaar
-      nuclear
+    # gaming
+    steam
+    lutris
+    heroicgames
+    postman
 
-      # gaming
-      steam
-      lutris
-      heroicgames
-      postman
-
-      # cli
-      nmap
-      fd
-      bitwarden-cli
-      stow
-      alacritty
-      kitty
-      exa
-      fd
-      ripgrep
-      fish
-      htop
-      
-      # dev
-      ansible-core
-      ansible-language-server
-      clang
-      ninja
-      git
-      python
-      python3
-      go
-      npm
-      ninja
-      gcc
-      docker
-      docker-compose
-      neovim
-      lazygit
-      gitui
-      jq
-      fzf
-      cmake
-    ];
+    # cli
+    nmap
+    fd
+    bitwarden-cli
+    stow
+    alacritty
+    kitty
+    exa
+    fd
+    ripgrep
+    fish
+    htop
+    
+    # dev
+    ansible-core
+    ansible-language-server
+    clang
+    ninja
+    git
+    python
+    python3
+    go
+    npm
+    ninja
+    gcc
+    docker
+    docker-compose
+    neovim
+    lazygit
+    gitui
+    jq
+    fzf
+    cmake
+  ];
 
   # Gaming
 	programs.steam = {
