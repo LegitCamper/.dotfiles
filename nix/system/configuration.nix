@@ -147,7 +147,6 @@ services.xserver.displayManager.setupCommands = ''
     htop
     
     # dev
-    ansible-core
     ansible-language-server
     clang
     ninja
