@@ -65,7 +65,7 @@
   # parameters in `outputs` are defined in `inputs` and can be referenced by their names.
   # However, `self` is an exception, This special parameter points to the `outputs` itself (self-reference)
   # The `@` syntax here is used to alias the attribute set of the inputs's parameter, making it convenient to use inside the function.
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
       # By default, NixOS will try to refer the nixosConfiguration with its hostname.
       # so the system named `nixos-test` will use this configuration.
@@ -97,7 +97,6 @@
         # Only the parameters above can be passed by default.
         # If you need to pass other parameters, you must use `specialArgs` by uncomment the following line
         # specialArgs = {...}  # pass custom arguments into sub module.
-        specialArgs = inputs;
         modules = [
           # Import the configuration.nix we used before, so that the old configuration file can still take effect.
           # Note: /etc/nixos/configuration.nix itself is also a Nix Module, so you can import it directly here
