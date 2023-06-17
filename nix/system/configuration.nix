@@ -3,11 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ...}: {
-  services.acpid.enable = true;
-  security.polkit.enable = true;
-  services.upower.enable = true;
-  services.tlp.enable = true;
-
   programs.adb.enable = true;
   programs.hyprland.enable = true;
 
@@ -120,6 +115,9 @@ services.xserver.displayManager.setupCommands = ''
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
   security.polkit.enable = true;
+  services.acpid.enable = true;
+  services.upower.enable = true;
+  services.tlp.enable = true;
   
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
