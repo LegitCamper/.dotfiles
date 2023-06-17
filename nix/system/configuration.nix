@@ -10,6 +10,7 @@
   # programs.adb.enable = true;
 
   nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
+
   nix.settings = {
     substituters = ["https://nix-gaming.cachix.org"];
     trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
@@ -48,16 +49,12 @@
     enable = true;
     # videosDrivers = ["amd"]; #["nvidia"];
     displayManager.gdm = {
-      enable = true;
+      enable = false;
       wayland = true;
     };
 	  displayManager.lightdm = {
-      enable = false;
+      enable = true;
     };
-  	# autoLogin = {
-   #    enable = true;
-  	#   user = "sawyer";
-   #  };
   };
   
   hardware = {
@@ -143,6 +140,14 @@
     solaar
     nuclear
 
+    #fonts
+    noto-fonts
+    noto-fonts-cjk
+    noto-fonts-emoji
+    font-awesome
+    source-han-sans
+    (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
+    
     # gaming
     steam
     lutris
@@ -150,7 +155,6 @@
 
     # cli
     nmap
-    starship
     fd
     bitwarden-cli
     stow
@@ -185,6 +189,7 @@
     ripgrep
     helix
     zellij
+    starship
   ];
 
   # Gaming
@@ -205,10 +210,13 @@
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-  security.polkit.enable = true;
-  services.acpid.enable = true;
-  services.upower.enable = true;
-  services.tlp.enable = true;
+
+  security = {
+    polkit.enable = true;
+    acpid.enable = true;
+    upower.enable = true;
+    tlp.enable = true;
+  }
   
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -236,24 +244,6 @@
   networking.firewall.enable = false;
   networking.enableIPv6 = false;
 
-  # fonts = {
-  #   fonts = with pkgs; [
-  #     noto-fonts
-  #     noto-fonts-cjk
-  #     noto-fonts-emoji
-  #     font-awesome
-  #     source-han-sans
-  #     (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
-    # ];
-    # fontconfig = {
-      # enable = true;
-      # defaultFonts = {
-	      # monospace = [ "Meslo LG M Regular Nerd Font Complete Mono" ];
-	      # serif = [ "Noto Serif" "Source Han Serif" ];
-	      # sansSerif = [ "Noto Sans" "Source Han Sans" ];
-      # };
-    # };
-  # };
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
