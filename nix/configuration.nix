@@ -37,11 +37,8 @@
     enable = true;
     # videosDrivers = ["nvidia"];
     displayManager.gdm = {
-      enable = false;
-      wayland = true;
-    };
-	  displayManager.gdm = {
       enable = true;
+      wayland = true;
     };
   };
   
