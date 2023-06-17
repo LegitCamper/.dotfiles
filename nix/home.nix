@@ -14,7 +14,7 @@
   #   executable = true;  # make all files executable
   # };
 
-  home.file."" = {
+  home.file."." = {
     source = ../hyprlandwm;
     rucursive = true;
     executable = true;
