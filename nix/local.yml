@@ -54,6 +54,7 @@
 
   - block: # configures nix
     - name: congure nix system
+      become_user: root
       shell: 
         chdir: /home/sawyer/projects/.dotfiles/nix
         cmd: |
