@@ -102,6 +102,19 @@
           # Import the configuration.nix we used before, so that the old configuration file can still take effect.
           # Note: /etc/nixos/configuration.nix itself is also a Nix Module, so you can import it directly here
           ./configuration.nix
+
+          # make home-manager as a module of nixos
+          # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            # replace ryan with your own username
+            home-manager.users.sawyer = import ./home.nix;
+
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
         ];
       };
     };

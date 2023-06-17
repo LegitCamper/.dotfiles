@@ -40,7 +40,7 @@
       enable = false;
       wayland = true;
     };
-	  displayManager.lightdm = {
+	  displayManager.gdm = {
       enable = true;
     };
   };
