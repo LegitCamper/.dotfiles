@@ -54,10 +54,10 @@
 	  displayManager.lightdm = {
       enable = false;
     };
-  	autoLogin = {
-      enable = true;
-  	  user = "sawyer";
-    };
+  	# autoLogin = {
+   #    enable = true;
+  	#   user = "sawyer";
+   #  };
   };
   
   hardware = {
