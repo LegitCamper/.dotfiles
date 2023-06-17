@@ -45,12 +45,19 @@
 
   # Enable the X11 windowing system.
   services.xserver = {
+    enable = true;
+    # videosDrivers = ["amd"]; #["nvidia"];
+    displayManager.gdm = {
       enable = true;
-      # videosDrivers = ["amd"]; #["nvidia"];
-      displayManager.gdm = {
-          enable = true;
-          wayland = true;
-      };
+      wayland = true;
+    };
+	  displayManager.lightdm = {
+      enable = false;
+  	  autoLogin = {
+        enable = true;
+  	    user = "sawyer";
+    	};
+    };
   };
   
   hardware = {
@@ -67,11 +74,6 @@
   };
 
   services.xserver.displayManager = {
-	  lightdm.enable = true;
-  	  autoLogin = {
-  		enable = true;
-	  	user = "sawyer";
-  	};
   };
   
  services.picom.enable = true;
