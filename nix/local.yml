@@ -19,6 +19,7 @@
         dest: ~/projects/.dotfiles
         clone: yes
         update: yes
+        force: yes
   
     - name: create ssh folder (if not exist)
       become_user: sawyer
