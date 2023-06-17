@@ -132,19 +132,17 @@ services.xserver.displayManager.setupCommands = ''
     # gaming
     steam
     lutris
-    heroicgames
-    postman
+    heroic
 
     # cli
     nmap
+    starship
     fd
     bitwarden-cli
     stow
     alacritty
     kitty
-    exa
     fd
-    ripgrep
     fish
     htop
     
@@ -154,8 +152,8 @@ services.xserver.displayManager.setupCommands = ''
     clang
     ninja
     git
-    python
-    python3
+    python311
+    python2
     go
     npm
     ninja
@@ -168,6 +166,13 @@ services.xserver.displayManager.setupCommands = ''
     jq
     fzf
     cmake
+    postman
+
+    # rust tools
+    exa
+    ripgrep
+    helix
+    zellij
   ];
 
   # Gaming
@@ -252,6 +257,6 @@ services.xserver.displayManager.setupCommands = ''
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 
 }
