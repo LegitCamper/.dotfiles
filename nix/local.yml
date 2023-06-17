@@ -57,19 +57,17 @@
       become_user: sawyer
       shell: 
         chdir: ~/projects/.dotfiles/nix/system
-        cmd: nixos-rebuild --use-remote-sudo --flake . boot && cd - &&
+        cmd: nixos-rebuild --use-remote-sudo --flake . boot
     - name: congure nix
       become_user: sawyer
       shell: 
         chdir: ~/projects/.dotfiles/nix/home
-        cmd: |
-          cd home && home-manager --flake . switch && cd - &&
+        cmd: home-manager --flake . switch
     - name: congure nix
       become_user: sawyer
       shell: 
         chdir: ~/projects/.dotfiles/nix/
-        cmd: |
-          nix flake update
+        cmd: nix flake update
 
   - block: # setup auto updater
     - name: add ansible user
