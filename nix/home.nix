@@ -14,6 +14,7 @@
   #   executable = true;  # make all files executable
   # };
 
+  # symlinks dotfiles - like stow
   home = {
     file."~/.config".source = ./links/dotfiles;
     file."~/".source = ./links/homefiles;
@@ -27,7 +28,7 @@
   # '';
 
   # Packages that should be installed to the user profile.
-  home.packages = with pkgs [
+  home.packages = with pkgs; [
     # apps
     bitwarden
     xfce.thunar
@@ -86,11 +87,11 @@
   ];
 
   # Gaming
-	# programs.steam = {
-	#   enable = true;
-	#   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-	#   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-	# };
+	programs.steam = {
+	  enable = true;
+	  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+	  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+	};
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
