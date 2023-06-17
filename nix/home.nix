@@ -15,8 +15,8 @@
   # };
 
   home = {
-    file."~/.config".source = [ "../hyprlandwm", "../editors", "../shells", "../terminals" ];
-    file."~/.gitconfig".source = ../editors/.gitconfig;
+    file."~/.config".source = ./links/dotfiles;
+    file."~/".source = ./links/homefiles;
   };
 
   # decrypts files with ansible
