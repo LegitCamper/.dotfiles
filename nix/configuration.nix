@@ -7,25 +7,18 @@
   {
   nixpkgs.config.allowUnfree = true;
   
-  # programs.adb.enable = true;
-
   nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
-
-  nix.settings = {
-    substituters = ["https://nix-gaming.cachix.org"];
-    trusted-public-keys = ["nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="];
-  };
 
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos-studio"; # Define your hostname.
+  networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
@@ -38,16 +31,11 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    packages=[ pkgs.terminus_font ];
-    font="${pkgs.terminus_font}/share/consolefonts/ter-i22b.psf.gz";
-    useXkbConfig = true; # use xkbOptions in tty.
-  };
 
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
-    # videosDrivers = ["amd"]; #["nvidia"];
+    # videosDrivers = ["nvidia"];
     displayManager.gdm = {
       enable = false;
       wayland = true;
@@ -66,14 +54,10 @@
   # hyprland
   programs.hyprland = {
       enable = true;
-      xwayland.enable = true;
+      xwayland.enable = false;
       nvidiaPatches = false;
   };
-
-  services.xserver.displayManager = {
-  };
-  
- services.picom.enable = true;
+ 
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -127,19 +111,6 @@
     grim
     slurp
 
-    # apps
-    bitwarden
-    xfce.thunar
-    socat
-    qemu
-    libreoffice
-    vlc
-    gnome.pomodoro
-    ffmpeg-full
-    procs
-    solaar
-    nuclear
-
     #fonts
     noto-fonts
     noto-fonts-cjk
@@ -147,57 +118,7 @@
     font-awesome
     source-han-sans
     (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
-    
-    # gaming
-    steam
-    lutris
-    heroic
-
-    # cli
-    nmap
-    fd
-    bitwarden-cli
-    stow
-    alacritty
-    kitty
-    fd
-    fish
-    htop
-    
-    # dev
-    ansible-language-server
-    clang
-    ninja
-    git
-    python311
-    go
-    nodejs_20
-    ninja
-    gcc
-    docker
-    docker-compose
-    neovim
-    lazygit
-    gitui
-    jq
-    fzf
-    cmake
-    postman
-
-    # rust tools
-    exa
-    ripgrep
-    helix
-    zellij
-    starship
   ];
-
-  # Gaming
-	programs.steam = {
-	  enable = true;
-	  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-	  dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-	};
 
   # List services that you want to enable:
   virtualisation.libvirtd.enable = true; 
@@ -260,5 +181,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
-
 }
