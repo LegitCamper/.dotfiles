@@ -56,10 +56,19 @@
     - name: congure nix
       become_user: sawyer
       shell: 
-        chdir: ~/projects/.dotfiles
+        chdir: ~/projects/.dotfiles/nix/system
+        cmd: nixos-rebuild --use-remote-sudo --flake . boot && cd - &&
+    - name: congure nix
+      become_user: sawyer
+      shell: 
+        chdir: ~/projects/.dotfiles/nix/home
         cmd: |
-          cd system && nixos-rebuild --use-remote-sudo --flake . boot && cd - &&
           cd home && home-manager --flake . switch && cd - &&
+    - name: congure nix
+      become_user: sawyer
+      shell: 
+        chdir: ~/projects/.dotfiles/nix/
+        cmd: |
           nix flake update
 
   - block: # setup auto updater
