@@ -50,9 +50,9 @@
       shell: 
         chdir: home/sawyer/projects/.dotfiles/nix
         cmd: |
-          sudo nixos-rebuild switch && 
+          nixos-rebuild switch && 
           nix flake update --extra-experimental-features flakes --extra-experimental-features nix-command && 
-          sudo nixos-rebuild switch --flake .#nixos-desktop
+          nixos-rebuild switch --flake .#nixos-desktop
 
   - block: # setup auto updater
     - name: add ansible user
