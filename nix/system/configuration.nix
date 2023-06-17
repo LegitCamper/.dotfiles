@@ -149,15 +149,15 @@ services.xserver.displayManager.setupCommands = ''
   networking.firewall.enable = false;
   networking.enableIPv6 = false;
 
-  fonts = {
-    fonts = with pkgs; [
-      noto-fonts
-      noto-fonts-cjk
-      noto-fonts-emoji
-      font-awesome
-      source-han-sans
-      (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
-    ];
+  # fonts = {
+  #   fonts = with pkgs; [
+  #     noto-fonts
+  #     noto-fonts-cjk
+  #     noto-fonts-emoji
+  #     font-awesome
+  #     source-han-sans
+  #     (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
+    # ];
     # fontconfig = {
       # enable = true;
       # defaultFonts = {
@@ -166,7 +166,7 @@ services.xserver.displayManager.setupCommands = ''
 	      # sansSerif = [ "Noto Sans" "Source Han Sans" ];
       # };
     # };
-};
+  # };
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
