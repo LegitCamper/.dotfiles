@@ -23,7 +23,9 @@
   
     - name: stow dotfiles
       become_user: sawyer
-      shell: cd ~/projects/.dotfiles/ && nix-shell -p stow --run "stow -t ~ --adopt -S terminals editors shells hyprlandwm && git restore ."
+      shell:
+        chdir: ~/projects/.dotfiles
+        cmd: nix-shell -p stow --run "stow -t ~ --adopt -S terminals editors shells hyprlandwm && git restore ."
   
     - name: copy and decrypt keys (if needed)
       become_user: sawyer
