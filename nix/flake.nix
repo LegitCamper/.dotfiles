@@ -74,7 +74,7 @@
       # However, the configuration name can also be specified using `sudo nixos-rebuild switch --flake /path/to/flakes/directory#<name>`.
       # The `nixpkgs.lib.nixosSystem` function is used to build this configuration, the following attribute set is its parameter.
       # Run `sudo nixos-rebuild switch --flake .#nixos-test` in the flake's directory to deploy this configuration on any NixOS system
-      "nixos-destop" = nixpkgs.lib.nixosSystem {
+      "nixos-desktop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         # The Nix module system can modularize configuration, improving the maintainability of configuration.

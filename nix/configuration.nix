@@ -108,7 +108,7 @@
     rofi
     dunst
     playerctl
-    hyprland
+    # hyprland # manged by flake in flake.nix
     waybar
     grim
     slurp
