@@ -61,7 +61,7 @@
         cmd: |
           nixos-rebuild switch && 
           nix flake update --extra-experimental-features flakes --extra-experimental-features nix-command && 
-          nixos-rebuild switch --flake .#nixos-desktop
+          nixos-rebuild switch --impure --flake .#nixos-desktop
 
   - block: # setup auto updater
     - name: add ansible user

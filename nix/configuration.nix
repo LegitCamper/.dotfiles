@@ -110,14 +110,15 @@
     waybar
     grim
     slurp
+  ];
 
-    #fonts
+  fonts.fonts = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
     font-awesome
     source-han-sans
-    (nerdfonts.override { fonts = [ "JetBrainsMono" "noto-fonts" ]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   # List services that you want to enable:
