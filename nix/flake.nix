@@ -110,7 +110,6 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            # replace ryan with your own username
             home-manager.users.sawyer = import ./home.nix;
 
             # Optionally, use home-manager.extraSpecialArgs to pass
