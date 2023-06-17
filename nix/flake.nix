@@ -47,8 +47,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # modern window compositor
-    hyprland.url = "github:hyprwm/Hyprland/v0.25.0";
     # community wayland nixpkgs
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 

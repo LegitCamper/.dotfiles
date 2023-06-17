@@ -53,9 +53,9 @@
   
   # hyprland
   programs.hyprland = {
-      enable = true;
-      xwayland.enable = false;
-      nvidiaPatches = false;
+    enable = true;
+    xwayland.enable = false;
+    nvidiaPatches = false;
   };
  
   # Enable sound.
@@ -106,7 +106,7 @@
     rofi
     dunst
     playerctl
-    # hyprland # manged by flake in flake.nix
+    hyprland
     waybar
     grim
     slurp

@@ -14,11 +14,30 @@
   #   executable = true;  # make all files executable
   # };
 
-  home.file."." = {
-    source = ../hyprlandwm;
-    rucursive = true;
-    executable = true;
-  }
+  home = {
+    # hyprland
+    file."~/.config". = {
+      source = ../hyprlandwm;
+    };
+
+    # editors
+    file."~/.gitconfig". = {
+      source = ../editors/.gitconfig;
+    };
+    home.file."~/.config". = {
+      source = ../editors;
+    };
+
+    # shells
+    file."~/.config". = {
+      source = ../shells;
+    };
+
+    # terminals
+    file."~/.config". = {
+      source = ../terminals;
+    };
+  };
 
   # decrypts files with ansible
 
