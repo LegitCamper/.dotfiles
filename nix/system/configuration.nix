@@ -76,9 +76,11 @@ services.xserver.displayManager.setupCommands = ''
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
+  config = {
+    home.packages = with pkgs; [
     bash
     fish
-    helix
     moreutils # sponge...
     unzip
     git
@@ -86,6 +88,7 @@ services.xserver.displayManager.setupCommands = ''
     htop
     efibootmgr
     ansible
+    usbutils # lsusb
 
     # Networking tools
     inetutils # hostname ping ifconfig...
@@ -94,13 +97,84 @@ services.xserver.displayManager.setupCommands = ''
     iw
     wirelesstools # iwconfig
 
-    docker
+    # nix
+    nixfmt
+    home-manager
+    nixpkgs-review
 
-    usbutils # lsusb
+    # window manager
+    networkmanagerapplet
+    lxappearance
+    # flameshot
+    pavucontrol
+    swaylock
+    swayidle
+    swaybg
+    wofi
+    rofi
+    dunst
+    playerctl
+    hyprland
+    waybar
+    grim
+    slurp
+
+    # apps
+    bitwarden
+    xfce.thunar
+    ala
+    socat
+    qemu
+    libreoffice
+    vlc
+    gnome.pomodoro
+    ffmpeg-full
+    procs
+    solaar
+    nuclear
+
+    # gaming
+    steam
+    lutris
+    heroicgames
+    postman
+
+    # cli
+    nmap
+    fd
+    bitwarden-cli
+    stow
+    alacritty
+    kitty
+    exa
+    fd
+    ripgrep
+    fish
+    htop
+    
+    # dev
+    ansible-core
+    ansible-language-server
+    clang
+    ninja
+    git
+    python
+    python3
+    go
+    npm
+    ninja
+    gcc
+    docker
+    docker-compose
+    neovim
+    lazygit
+    gitui
+    jq
+    fzf
+    cmake
   ];
 
-
-  ## Gaming
+  # Gaming
 	programs.steam = {
 	  enable = true;
 	  remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
