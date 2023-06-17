@@ -23,9 +23,7 @@
   
     - name: stow dotfiles
       become_user: sawyer
-      shell: 
-        chdir: ~/projects/.dotfiles/
-        executable: nix-shell -p stow --run "stow -t --adopt -S hyprland && git restore ."
+      shell: cd ~/projects/.dotfiles/ && nix-shell -p stow --run "stow -t --adopt -S hyprland && git restore ."
   
     - name: copy and decrypt keys (if needed)
       become_user: sawyer
