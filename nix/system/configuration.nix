@@ -7,8 +7,7 @@
   {
   nixpkgs.config.allowUnfree = true;
   
-  programs.adb.enable = true;
-  programs.hyprland.enable = true;
+  # programs.adb.enable = true;
 
   nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
   nix.settings = {
