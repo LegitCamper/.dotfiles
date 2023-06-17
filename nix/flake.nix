@@ -74,7 +74,7 @@
       # However, the configuration name can also be specified using `sudo nixos-rebuild switch --flake /path/to/flakes/directory#<name>`.
       # The `nixpkgs.lib.nixosSystem` function is used to build this configuration, the following attribute set is its parameter.
       # Run `sudo nixos-rebuild switch --flake .#nixos-test` in the flake's directory to deploy this configuration on any NixOS system
-      "nixos-desktop" = nixpkgs.lib.nixosSystem {
+      nixos-desktop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         # The Nix module system can modularize configuration, improving the maintainability of configuration.
@@ -99,6 +99,7 @@
         # Only the parameters above can be passed by default.
         # If you need to pass other parameters, you must use `specialArgs` by uncomment the following line
         # specialArgs = {...}  # pass custom arguments into sub module.
+        specialArgs = inputs;
         modules = [
           # Import the configuration.nix we used before, so that the old configuration file can still take effect.
           # Note: /etc/nixos/configuration.nix itself is also a Nix Module, so you can import it directly here
