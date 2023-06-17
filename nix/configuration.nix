@@ -134,8 +134,6 @@
 
   security = {
     polkit.enable = true;
-    upower.enable = true;
-    tlp.enable = true;
   };
   
   # systemd = {
