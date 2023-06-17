@@ -139,7 +139,7 @@
     acpid.enable = true;
     upower.enable = true;
     tlp.enable = true;
-  }
+  };
   
   # systemd = {
   #   user.services.polkit-gnome-authentication-agent-1 = {

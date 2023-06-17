@@ -95,5 +95,3 @@ alias dev="projects"
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
-
-direnv hook fish | source
