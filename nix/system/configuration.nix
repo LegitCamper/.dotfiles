@@ -154,7 +154,7 @@ services.xserver.displayManager.setupCommands = ''
     python311
     python2
     go
-    npm
+    nodejs_20
     ninja
     gcc
     docker
