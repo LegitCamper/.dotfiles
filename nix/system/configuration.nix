@@ -47,20 +47,34 @@
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.windowManager.dwm.enable = true;
-  services.xserver.layout = "us";
+  services.xserver = {
+      enable = true;
+      # videosDrivers = ["amd"]; #["nvidia"];
+      displayManager.gdm = {
+          enable = true;
+          wayland = true;
+      };
+  };
+  
+  hardware = {
+      opengl.enable = true;
+      nvidia.modesetting.enable = false;
+  };
+  
+  # hyprland
+  programs.hyprland = {
+      enable = true;
+      xwayland.enable = true;
+      nvidiaPatches = false;
+  };
 
   services.xserver.displayManager = {
-	lightdm.enable = true;
-  	autoLogin = {
-		enable = true;
-		user = "sawyer";
-	};
+	  lightdm.enable = true;
+  	  autoLogin = {
+  		enable = true;
+	  	user = "sawyer";
+  	};
   };
-services.xserver.displayManager.setupCommands = ''
-    ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --off --output DP-2 --off --output DP-3 --off --output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal
-'';
   
  services.picom.enable = true;
   # Enable sound.
