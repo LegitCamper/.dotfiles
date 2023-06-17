@@ -19,7 +19,7 @@
     file."~/.config".source = ../hyprlandwm;
 
     # editors
-    file."~/.gitconfig".source = ../editors/.gitconfig;
+    # file."~/.gitconfig".source = ../editors/.gitconfig;
     file."~/.config".source = ../editors;
 
     # shells
