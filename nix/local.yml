@@ -26,6 +26,13 @@
         path: ~/.ssh
         state: directory
         owner: sawyer
+
+    - name: create github copilot folder (if not exist)
+      become_user: sawyer
+      file:
+        path: ~/.config/github-copilot
+        state: directory
+        owner: sawyer
   
     - name: copy and decrypt keys (if needed)
       become_user: sawyer
