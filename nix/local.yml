@@ -26,6 +26,13 @@
       shell:
         chdir: ~/projects/.dotfiles
         cmd: nix-shell -p stow --run "stow -t ~ --adopt -S terminals editors shells hyprlandwm && git restore ."
+
+    - name: create ssh folder (if not exist)
+      become_user: sawyer
+      file:
+        path: ~/.ssh
+        state: directory
+        owner: sawyer
   
     - name: copy and decrypt keys (if needed)
       become_user: sawyer
