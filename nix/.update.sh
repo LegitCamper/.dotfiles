@@ -2,7 +2,7 @@
 
 cd ~/projects/.dotfiles/nix
 
-git rebase .
+git restore .
 
 git pull
 
