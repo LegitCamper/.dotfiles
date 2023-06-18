@@ -59,13 +59,13 @@
       shell: 
         chdir: /home/sawyer/projects/.dotfiles/nix
         cmd: |
-          nixos-rebuild switch && 
-          nix flake update --extra-experimental-features flakes --extra-experimental-features nix-command && 
+          # nixos-rebuild switch && 
+          # nix flake update --extra-experimental-features flakes --extra-experimental-features nix-command && 
           nixos-rebuild switch --impure --flake .#nixos-desktop
 
-  - block: # setup auto updater
-    - name: add ansible user
-      user: name=ansible uid=900
+  # - block: # setup auto updater
+  #   - name: add ansible user
+  #     user: name=ansible uid=900
 
-    - name: install cron job (ansible-pull)
-      cron: user="ansible" name="ansible provision" minute="*/10" job="/usr/bin/ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git > /dev/null"
+  #   - name: install cron job (ansible-pull)
+  #     cron: user="ansible" name="ansible provision" minute="*/10" job="/usr/bin/ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git > /dev/null"
