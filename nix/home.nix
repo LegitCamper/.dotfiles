@@ -79,6 +79,11 @@
     zellij
     starship
   ];
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
