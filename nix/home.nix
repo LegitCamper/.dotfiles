@@ -34,7 +34,7 @@
     solaar
     vivaldi
     nuclear
-    
+
     # gaming
     steam
     lutris
@@ -51,7 +51,7 @@
     fish
     upower
     htop
-    
+
     # dev
     ansible-language-server
     clang

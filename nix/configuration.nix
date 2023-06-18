@@ -2,24 +2,25 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ...}: 
+{ config, pkgs, lib, ... }:
 
-  {
+{
   nixpkgs.config.allowUnfree = true;
 
-  nixpkgs.config.allowUnfreePredicate = (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
+  nixpkgs.config.allowUnfreePredicate =
+    (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
 
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -41,34 +42,37 @@
       wayland = true;
     };
   };
-  
+
   hardware = {
     opengl.enable = true;
     nvidia.modesetting.enable = false;
     pulseaudio.support32Bit = true;
   };
-  
+
   # hyprland
   programs.hyprland = {
     enable = true;
     xwayland.enable = false;
     nvidiaPatches = false;
   };
- 
+
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" "kvm" "input" "disk" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    isNormalUser = true;
+    extraGroups =
+      [ "wheel" "kvm" "input" "disk" "libvirtd" ]; # Enable ‘sudo’ for the user.
   };
-  
+
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # List packages installed in system profile. To search, run:
@@ -93,7 +97,8 @@
     wirelesstools # iwconfig
 
     # nix
-    nixfmt
+    nixfmt # nix formatter
+    nil # nix lsp
     home-manager
     nixpkgs-review
 
@@ -125,7 +130,7 @@
   ];
 
   # List services that you want to enable:
-  virtualisation.libvirtd.enable = true; 
+  virtualisation.libvirtd.enable = true;
   # enable flatpak support
   services.flatpak.enable = true;
   services.dbus.enable = true;
@@ -136,10 +141,8 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  security = {
-    polkit.enable = true;
-  };
-  
+  security = { polkit.enable = true; };
+
   # systemd = {
   #   user.services.polkit-gnome-authentication-agent-1 = {
   #     description = "polkit-gnome-authentication-agent-1";
@@ -170,10 +173,10 @@
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   system.copySystemConfiguration = true;
-  system.autoUpgrade.enable = true;  
-  system.autoUpgrade.allowReboot = true; 
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
   system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
-  systemd.additionalUpstreamSystemUnits = ["debug-shell.service"];
+  systemd.additionalUpstreamSystemUnits = [ "debug-shell.service" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
