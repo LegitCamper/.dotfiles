@@ -47,9 +47,13 @@
   sound.enable = true;
 
   hardware = {
-    opengl.enable = true;
-    opengl.extraPackages = [ pkgs.amdvlk ]; # rocm-opencl-icd
-    opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+    opengl = {
+      enable = true;
+      extraPackages =
+        [ pkgs.amdvlk pkgs.vaapiVdpau pkgs.libvdpau-va-gl ]; # rocm-opencl-icd
+      extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+    };
+
     nvidia.modesetting.enable = false;
     pulseaudio = {
       support32Bit = true;
