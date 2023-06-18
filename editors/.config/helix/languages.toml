@@ -19,4 +19,5 @@ name = "nix"
 formatter = { command = "nixfmt"}
 file-types = ["nix", "flake"]
 roots = ["flake.lock"]
+comment-token = "#"
 auto-format = true
