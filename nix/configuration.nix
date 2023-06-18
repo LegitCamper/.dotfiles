@@ -44,7 +44,7 @@
   };
 
   # Enable sound.
-  sound.enable = false;
+  sound.enable = true;
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
@@ -62,9 +62,9 @@
     };
     nvidia.modesetting.enable = false;
     pulseaudio = {
-      support32Bit = true;
+      # support32Bit = true;
       # package = pulseaudioFull;
-      enable = false;
+      enable = true;
     };
   };
 
@@ -156,7 +156,7 @@
   # enable flatpak support
   services.flatpak.enable = true;
   services.pipewire = {
-    enable = true;
+    enable = false;
     alsa.enable = true;
     alsa.support32Bit = true;
     # audio.enable = true;
