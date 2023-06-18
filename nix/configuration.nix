@@ -133,6 +133,7 @@
   virtualisation.libvirtd.enable = true;
   # enable flatpak support
   services.flatpak.enable = true;
+  services.upower.enable = true;
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
