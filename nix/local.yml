@@ -20,6 +20,10 @@
         clone: yes
         update: yes
         force: yes
+
+    - name: stow dotfiles
+      become_user: sawyer
+      shell: bash -c '~/projects/.dotfiles/.stow.sh'
   
     - name: create ssh folder (if not exist)
       become_user: sawyer
