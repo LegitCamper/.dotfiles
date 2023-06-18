@@ -45,6 +45,8 @@
 
   hardware = {
     opengl.enable = true;
+    opengl.extraPackages = [ rocm-opencl-icd pkgs.amdvlk ];
+    opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
     nvidia.modesetting.enable = false;
     pulseaudio.support32Bit = true;
   };
@@ -133,6 +135,13 @@
   virtualisation.libvirtd.enable = true;
   # enable flatpak support
   services.flatpak.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    audio.enable = true;
+    pulse.enable = true;
+  };
   services.upower.enable = true;
   services.dbus.enable = true;
   xdg.portal = {
