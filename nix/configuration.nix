@@ -44,21 +44,27 @@
   };
 
   # Enable sound.
-  sound.enable = true;
+  sound.enable = false;
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
 
   hardware = {
     opengl = {
       enable = true;
-      extraPackages =
-        [ pkgs.amdvlk pkgs.vaapiVdpau pkgs.libvdpau-va-gl ]; # rocm-opencl-icd
+      extraPackages = [
+        pkgs.amdvlk
+        pkgs.vaapiIntel
+        pkgs.vaapiVdpau
+        pkgs.libvdpau-va-gl
+      ]; # rocm-opencl-icd
       extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
     };
-
     nvidia.modesetting.enable = false;
     pulseaudio = {
       support32Bit = true;
       # package = pulseaudioFull;
-      enable = true;
+      enable = false;
     };
   };
 
@@ -123,7 +129,7 @@
     lxappearance
     # flameshot
     pavucontrol
-    swaylock
+    # swaylock
     swayidle
     swaybg
     wofi
@@ -149,13 +155,14 @@
   virtualisation.libvirtd.enable = true;
   # enable flatpak support
   services.flatpak.enable = true;
-  # services.pipewire = {
-  #   enable = true;
-  #   alsa.enable = true;
-  #   alsa.support32Bit = true;
-  #   audio.enable = true;
-  #   pulse.enable = true;
-  # };
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    # audio.enable = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
   services.upower.enable = true;
   services.dbus.enable = true;
   xdg.portal = {
@@ -165,7 +172,10 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  security = { polkit.enable = true; };
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
 
   # systemd = {
   #   user.services.polkit-gnome-authentication-agent-1 = {
