@@ -2,4 +2,3 @@ files/editors/.config/lazygit/state.yml
 files/editors/.config/nvim/lazy-lock.json
 files/editors/.config/helix/runtime/grammars
 editors/.config/lazygit/state.yml
-flake.lock

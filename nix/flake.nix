@@ -19,7 +19,7 @@
     # nix community's cache server
     extra-substituters = [
       "https://nix-community.cachix.org"
-      "https://nixpkgs-wayland.cachix.org"
+      # "https://nixpkgs-wayland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -36,7 +36,7 @@
 
     # Official NixOS package source, using nixos's stable branch by default
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # home-manager, used for managing user configuration
     home-manager = {
@@ -48,7 +48,7 @@
     };
 
     # community wayland nixpkgs
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     # generate iso/qcow2/docker/... image from nixos configuration
     nixos-generators = {
