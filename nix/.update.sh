@@ -3,7 +3,7 @@
 
 cd ~/projects/.dotfiles/nix
 
-git restore .
+# git restore .
 
 git pull
 
