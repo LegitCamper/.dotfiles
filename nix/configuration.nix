@@ -40,6 +40,7 @@
   services.xserver = {
     enable = true;
     # videosDrivers = ["nvidia"];
+    # videosDrivers = [ "amdgpu" ];
     displayManager.gdm = {
       enable = true;
       wayland = true;
@@ -54,14 +55,17 @@
   hardware = {
     opengl = {
       enable = true;
-      extraPackages = [
-        pkgs.amdvlk
-        pkgs.vaapiIntel
-        pkgs.vaapiVdpau
-        pkgs.libvdpau-va-gl
-      ]; # rocm-opencl-icd
+      extraPackages = with pkgs; [
+        amdvlk
+        vaapiIntel
+        vaapiVdpau
+        libvdpau-va-gl
+        rocm-opencl-icd
+        rocm-opencl-runtime
+      ];
       extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
       driSupport32Bit = true;
+      driSupport = true;
     };
     nvidia.modesetting.enable = false;
   };
