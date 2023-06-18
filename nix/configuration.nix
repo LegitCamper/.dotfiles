@@ -68,8 +68,14 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "kvm" "input" "disk" "libvirtd" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "kvm"
+      "input"
+      "disk"
+      "libvirtd"
+      "audio"
+    ]; # Enable ‘sudo’ for the user.
   };
 
   programs.steam = {

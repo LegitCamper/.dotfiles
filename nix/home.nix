@@ -32,6 +32,7 @@
     ffmpeg-full
     procs
     solaar
+    discord
     vivaldi
     vivaldi-ffmpeg-codecs
     nuclear
