@@ -15,10 +15,10 @@
   # };
 
   # symlinks dotfiles - like stow
-  home = {
-    file.".config".source = ./links/dotfiles;
+  # home = {
+    # file.".config".source = ./links/dotfiles;
     # file.source = ./links/homefiles;
-  };
+  # };
 
   # decrypts files with ansible
 
@@ -94,7 +94,7 @@
   # You can update home Manager without changing this value. See
   # the home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.05";
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
