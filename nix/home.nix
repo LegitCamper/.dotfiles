@@ -67,7 +67,7 @@
     go
     nodejs_20
     ninja
-    gcc
+    # gcc has collison errors
     docker
     docker-compose
     neovim
