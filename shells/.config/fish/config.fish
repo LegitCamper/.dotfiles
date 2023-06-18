@@ -22,9 +22,6 @@ set fish_color_command "#a6da95"
 set fish_color_error '#ed8796'
 set fish_color_param "#a6da95"
 
-# NIX packages
-set NIX_PATH
-
 ### ALIASES ###
 alias clear="clear && fish"
 
