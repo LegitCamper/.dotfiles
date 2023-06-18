@@ -32,6 +32,7 @@
     ffmpeg-full
     procs
     solaar
+    vivaldi
     nuclear
     
     # gaming
