@@ -15,12 +15,48 @@
   # };
 
   # symlinks dotfiles - like stow
-  home.file.".config/" = {
-    source = ./.links/dotfiles;
-    recursive = true;   # link recursively
-    executable = true;  # make all files executable
+  home.file.".config/fish" = {
+    recursive = true;
+    source = ../shells/.config/fish;
   };
-  # home.file."".source = ./links/homefiles;
+  home.file.".config/starship.toml" = ../shells/.config/starship.toml;
+  home.file.".gitconfig" = ../editors/.gitconfig;
+  home.file.".config/helix" = {
+    recursive = true;
+    source = ../editors/.config/helix;
+  };
+  home.file.".config/zellij" = {
+    recursive = true;
+    source = ../editors/.config/zellij;
+  };
+  home.file.".config/lazygit" = {
+    recursive = true;
+    source = ../editors/.config/lazygit;
+  };
+  home.file.".config/kitty" = {
+    recursive = true;
+    source = ../terminals/.config/kitty;
+  };
+  home.file.".config/alacritty" = {
+    recursive = true;
+    source = ../terminals/.config/alacritty;
+  };
+  home.file.".config/dunst" = {
+    recursive = true;
+    source = ../hyprlandwm/.config/dunst;
+  };
+  home.file.".config/hypr" = {
+    recursive = true;
+    source = ../hyprlandwm/.config/hypr;
+  };
+  home.file.".config/rofi" = {
+    recursive = true;
+    source = ../hyprlandwm/.config/rofi;
+  };
+  home.file.".config/waybar" = {
+    recursive = true;
+    source = ../hyprlandwm/.config/waybar;
+  };
 
   # decrypts files with ansible
 
