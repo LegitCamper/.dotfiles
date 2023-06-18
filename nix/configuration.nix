@@ -7,6 +7,13 @@
 {
   nixpkgs.config.allowUnfree = true;
 
+  nix.settings = {
+    substituters = [ "https://nix-gaming.cachix.org" ];
+    trusted-public-keys = [
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+    ];
+  };
+
   nixpkgs.config.allowUnfreePredicate =
     (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
 
@@ -59,10 +66,11 @@
         pkgs.libvdpau-va-gl
       ]; # rocm-opencl-icd
       extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+      driSupport32Bit = true;
     };
     nvidia.modesetting.enable = false;
     pulseaudio = {
-      # support32Bit = true;
+      support32Bit = true;
       # package = pulseaudioFull;
       enable = true;
     };
@@ -84,7 +92,7 @@
       "input"
       "disk"
       "libvirtd"
-      "audio"
+      # "audio"
     ]; # Enable ‘sudo’ for the user.
   };
 
@@ -177,24 +185,25 @@
     rtkit.enable = true;
   };
 
-  # systemd = {
-  #   user.services.polkit-gnome-authentication-agent-1 = {
-  #     description = "polkit-gnome-authentication-agent-1";
-  #     wantedBy = [ "graphical-session.target" ];
-  #     wants = [ "graphical-session.target" ];
-  #     after = [ "graphical-session.target" ];
-  #     serviceConfig = {
-  #       Type = "simple";
-  #       ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  #       Restart = "on-failure";
-  #       RestartSec = 1;
-  #       TimeoutStopSec = 10;
-  #     };
-  #   };
-  #   extraConfig = ''
-  #     DefaultTimeoutStopSec=10s
-  #   '';
-  # }; 
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart =
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+    extraConfig = ''
+      DefaultTimeoutStopSec=10s
+    '';
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

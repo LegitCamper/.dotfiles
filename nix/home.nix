@@ -53,10 +53,12 @@
     fish
     upower
     htop
+    tldr
 
     # dev
     ansible-language-server
-    clang
+    # clang
+    clang-tools_9
     ninja
     git
     python311
@@ -64,6 +66,7 @@
     nodejs_20
     ninja
     # gcc has collison errors
+    gcc
     docker
     docker-compose
     neovim
