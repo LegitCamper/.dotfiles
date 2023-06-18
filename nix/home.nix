@@ -33,6 +33,7 @@
     procs
     solaar
     vivaldi
+    vivaldi-ffmpeg-codecs
     nuclear
 
     # gaming

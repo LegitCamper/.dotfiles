@@ -43,12 +43,19 @@
     };
   };
 
+  # Enable sound.
+  sound.enable = true;
+
   hardware = {
     opengl.enable = true;
     opengl.extraPackages = [ pkgs.amdvlk ]; # rocm-opencl-icd
     opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
     nvidia.modesetting.enable = false;
-    pulseaudio.support32Bit = false;
+    pulseaudio = {
+      support32Bit = true;
+      # package = pulseaudioFull;
+      enable = true;
+    };
   };
 
   # hyprland
@@ -57,10 +64,6 @@
     xwayland.enable = false;
     nvidiaPatches = false;
   };
-
-  # Enable sound.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
@@ -106,6 +109,7 @@
 
     # window manager
     networkmanagerapplet
+    pulseaudioFull
     lxappearance
     # flameshot
     pavucontrol
