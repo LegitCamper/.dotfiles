@@ -2,10 +2,9 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }: {
 
-{
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = { allowUnfree = true; };
 
   nix.settings = {
     substituters = [ "https://nix-gaming.cachix.org" ];
@@ -13,9 +12,6 @@
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
-
-  nixpkgs.config.allowUnfreePredicate =
-    (pkg: builtins.elem (builtins.parseDrvName pkg.name).name [ "steam" ]);
 
   imports = [ # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
@@ -50,8 +46,7 @@
     };
   };
 
-  # Enable sound.
-  sound.enable = true;
+  sound.enable = false;
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
   };
@@ -69,11 +64,20 @@
       driSupport32Bit = true;
     };
     nvidia.modesetting.enable = false;
-    pulseaudio = {
-      support32Bit = true;
-      # package = pulseaudioFull;
-      enable = true;
-    };
+  };
+
+  ## audio fixes
+  # disable pulseaudio
+  hardware.pulseaudio.enable = false;
+  # enable realtime processing
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    wireplumber.enable = true;
+    # support alsa and pulseaudio
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
   };
 
   # hyprland
@@ -92,7 +96,7 @@
       "input"
       "disk"
       "libvirtd"
-      # "audio"
+      "audio"
     ]; # Enable ‘sudo’ for the user.
   };
 
@@ -133,7 +137,6 @@
 
     # window manager
     networkmanagerapplet
-    pulseaudioFull
     lxappearance
     # flameshot
     pavucontrol
@@ -163,14 +166,6 @@
   virtualisation.libvirtd.enable = true;
   # enable flatpak support
   services.flatpak.enable = true;
-  services.pipewire = {
-    enable = false;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    # audio.enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-  };
   services.upower.enable = true;
   services.dbus.enable = true;
   xdg.portal = {
@@ -180,10 +175,7 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  security = {
-    polkit.enable = true;
-    rtkit.enable = true;
-  };
+  security = { polkit.enable = true; };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {

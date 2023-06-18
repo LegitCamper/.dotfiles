@@ -46,7 +46,7 @@
     };
 
     # community wayland nixpkgs
-    # nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     # generate iso/qcow2/docker/... image from nixos configuration
     nixos-generators = {
