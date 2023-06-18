@@ -15,7 +15,11 @@
   # };
 
   # symlinks dotfiles - like stow
-  home.file.".config".source = ./links/dotfiles;
+  home.file.".config".source = {
+    enabled = true;
+    source = ./links/dotfiles;
+    recursive = true;
+  }
   # home.file."".source = ./links/homefiles;
 
   # decrypts files with ansible
