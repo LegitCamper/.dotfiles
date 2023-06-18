@@ -48,7 +48,7 @@
     opengl.extraPackages = [ pkgs.amdvlk ]; # rocm-opencl-icd
     opengl.extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
     nvidia.modesetting.enable = false;
-    pulseaudio.support32Bit = true;
+    pulseaudio.support32Bit = false;
   };
 
   # hyprland
@@ -60,7 +60,7 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = false;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
