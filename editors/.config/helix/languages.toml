@@ -2,19 +2,21 @@
 name = "python"
 # roots = ["pyproject.toml"]
 language-server = { command = "ruff-lsp" }
-config = {} # <- this is the important line
+# config = {} # <- this is the important line
 formatter = { command = "black", args = ["--quiet", "-"] }
 auto-format = true
-grammar = "python"
 
 [[language]]
 name = "rust"
 language-server = { command = "rustup", args = ["run", "stable", "rust-analyzer"] }
-grammar = "rust"
 
 [language.config]
 checkOnSave = { command = "clippy" }
 
-# [[grammar]]
-# name = "mylang"
-# source = { git = "https://github.com/example/mylang", rev = "a250c4582510ff34767ec3b7dcdd3c24e8c8aa68" }
+[[language]]
+name = "nix"
+# language-server = { command = "nixfmt" }
+formatter = { command = "nixfmt"}
+file-types = ["nix", "flake"]
+roots = ["flake.lock"]
+auto-format = true
