@@ -15,9 +15,10 @@
   # };
 
   # symlinks dotfiles - like stow
-  home.file.".config".source = {
+  home.file = {
     enabled = true;
     source = ./links/dotfiles;
+    text = .config;
     recursive = true;
   };
   # home.file."".source = ./links/homefiles;
