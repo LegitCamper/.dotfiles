@@ -6,6 +6,6 @@ function projects -d "Searches for project folders"
     set RANDOM $(shuf -i 1-1000000 -n 1)
 
     cd $SEARCH_PATH
-    zellij -s develoment-enviroment-$RANDOM -l $LANGUAGE_SELECTION options --on-force-close detach --simplified-ui false
+    nix-shell --command "zellij -s develoment-enviroment-$RANDOM -l $LANGUAGE_SELECTION options --on-force-close detach --simplified-ui false"
     
 end
