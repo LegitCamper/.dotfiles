@@ -152,7 +152,7 @@
     rofi
     dunst
     playerctl
-    # hyprland
+    hyprland
     waybar
     grim
     slurp

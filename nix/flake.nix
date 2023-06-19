@@ -55,7 +55,7 @@
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     # hyprland flake
-    nicpkgs-hyprland.url = "github:hyprwm/Hyprland";
+    # nixpkgs-hyprland.url = "github:hyprwm/Hyprland";
 
     # nix language server, used by vscode & neovim
     nil.url = "github:oxalica/nil/2023-05-09";
