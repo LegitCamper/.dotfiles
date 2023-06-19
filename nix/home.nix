@@ -78,6 +78,7 @@
     postman
 
     # rust tools
+    rustup
     exa
     ripgrep
     helix
