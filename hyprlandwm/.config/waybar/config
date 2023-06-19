@@ -108,7 +108,7 @@
         "on-click-right": "python ~/.config/hypr/scripts/wireplumber.py"
     },
     "custom/launcher":{
-        "format": " ",
+        "format": " ",
         "on-click": "rofi -show drun",
         "on-click-right": "killall rofi"
     },
