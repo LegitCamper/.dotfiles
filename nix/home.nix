@@ -57,26 +57,15 @@
 
     # dev
     ansible-language-server
-    # clang
-    clang-tools_9
-    openssl
-    pkg-config
-    ninja
     git
     python311
     go
     nodejs_20
-    ninja
-    # gcc has collison errors
-    gcc
-    docker
-    docker-compose
     neovim
     lazygit
     gitui
     jq
     fzf
-    cmake
     postman
 
     # rust tools

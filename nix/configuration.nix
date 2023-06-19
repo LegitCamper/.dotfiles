@@ -155,6 +155,16 @@
     waybar
     grim
     slurp
+
+    # build tools
+    gcc
+    docker
+    docker-compose
+    clang-tools_9
+    openssl
+    pkg-config
+    ninja
+    cmake
   ];
 
   fonts.fonts = with pkgs; [
