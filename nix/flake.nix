@@ -45,14 +45,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # community wayland nixpkgs
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-
     # generate iso/qcow2/docker/... image from nixos configuration
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # community wayland nixpkgs
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+
+    # hyprland flake
+    nicpkgs-hyprland.url = "github:hyprwm/Hyprland";
 
     # nix language server, used by vscode & neovim
     nil.url = "github:oxalica/nil/2023-05-09";

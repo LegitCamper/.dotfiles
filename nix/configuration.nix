@@ -142,7 +142,8 @@
     # window manager
     networkmanagerapplet
     lxappearance
-    # flameshot
+    # pipewire
+    pipewire_0_2
     pavucontrol
     # swaylock
     swayidle
@@ -151,7 +152,7 @@
     rofi
     dunst
     playerctl
-    hyprland
+    # hyprland
     waybar
     grim
     slurp
