@@ -60,6 +60,7 @@
     # clang
     clang-tools_9
     openssl
+    pkg-config
     ninja
     git
     python311
