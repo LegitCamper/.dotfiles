@@ -70,7 +70,7 @@
     postman
 
     # rust tools
-    rustup
+    # rustup
     exa
     ripgrep
     helix

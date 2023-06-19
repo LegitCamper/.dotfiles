@@ -59,12 +59,6 @@
 
     # nix language server, used by vscode & neovim
     nil.url = "github:oxalica/nil/2023-05-09";
-
-    # rust toolchain - nightly and stable
-    rust = {
-      url = "github:nix-community/fenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   # `outputs` are all the build result of the flake.
