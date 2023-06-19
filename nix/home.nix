@@ -59,6 +59,7 @@
     ansible-language-server
     # clang
     clang-tools_9
+    openssl
     ninja
     git
     python311

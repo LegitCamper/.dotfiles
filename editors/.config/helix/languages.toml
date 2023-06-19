@@ -1,6 +1,6 @@
 [[language]]
 name = "python"
-# roots = ["pyproject.toml"]
+roots = ["pyproject.toml"]
 language-server = { command = "ruff-lsp" }
 # config = {} # <- this is the important line
 formatter = { command = "black", args = ["--quiet", "-"] }
@@ -9,9 +9,8 @@ auto-format = true
 [[language]]
 name = "rust"
 language-server = { command = "rustup", args = ["run", "stable", "rust-analyzer"] }
-
-[language.config]
-checkOnSave = { command = "clippy" }
+formatter = { command = "cargo", args = ["clippy"]}
+auto-format = true
 
 [[language]]
 name = "nix"
