@@ -47,17 +47,16 @@
     };
   };
 
-  sound.enable = false;
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  };
+  # nixpkgs.config.packageOverrides = pkgs: {
+  #   vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  # };
 
   hardware = {
     opengl = {
       enable = true;
       extraPackages = with pkgs; [
         amdvlk
-        vaapiIntel
+        # vaapiIntel
         vaapiVdpau
         libvdpau-va-gl
         rocm-opencl-icd
@@ -71,6 +70,7 @@
   };
 
   ## audio fixes
+  sound.enable = false;
   # disable pulseaudio
   hardware.pulseaudio.enable = false;
   # enable realtime processing
@@ -140,6 +140,7 @@
     nixpkgs-review
 
     # window manager
+    xdg-desktop-portal-gtk
     networkmanagerapplet
     lxappearance
     pipewire

@@ -58,9 +58,10 @@
     # dev
     ansible-language-server
     git
-    python311
+    # python3Full
+    # python.pkgs.pip
     go
-    nodejs_20
+    nodejs
     neovim
     lazygit
     gitui
