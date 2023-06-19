@@ -142,8 +142,8 @@
     # window manager
     networkmanagerapplet
     lxappearance
-    # pipewire
-    pipewire_0_2
+    pipewire
+    pulseaudioFull
     pavucontrol
     # swaylock
     swayidle
