@@ -14,6 +14,9 @@ set TERM screen-256color # Sets the terminal type
 set EDITOR /usr/bin/helix
 set VISUAL kate
 
+# nix open ssl path
+set OPENSSL_DIR $(which openssl)
+set PKG_CONFIG_PATH $(which openssl)
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal "#8bd5ca"
@@ -86,6 +89,10 @@ alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/mas
 # Helix rename
 # alias hx='helix'
 set HELIX_RUNTIME ~/.config/helix/runtime
+
+# nix shell aliases
+alias update="bash ~/projects/.dotfiles/nix/.update.sh"
+alias rust="nix-shell -p openssl pkg-config clippy rustup cargo"
 
 # Runs Project scitpt
 alias dev="projects"
