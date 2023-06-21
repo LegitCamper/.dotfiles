@@ -71,13 +71,13 @@
   };
 
   ## audio fixes
-  sound.enable = false;
+  sound.enable = true;
   # disable pulseaudio
-  hardware.pulseaudio.enable = false;
+  hardware.pulseaudio.enable = true;
   # enable realtime processing
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
+    enable = false;
     wireplumber.enable = true;
     # support alsa and pulseaudio
     alsa.enable = true;
