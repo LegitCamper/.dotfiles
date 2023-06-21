@@ -35,6 +35,7 @@
     # Official NixOS package source, using nixos's stable branch by default
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    rust-overlay.url = "github:oxalica/rust-overlay";
 
     # home-manager, used for managing user configuration
     home-manager = {
@@ -115,6 +116,15 @@
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
           }
+
+          # # rust overlay installation
+          # ({ pkgs, ... }: {
+          #   nixpkgs.overlays = [ rust-overlay.overlays.default ];
+          #   environment.systemPackages = [
+          #     pkgs.rust-bin.stable.latest.default
+          #     pkgs.rust-bin.nightly.latest.default
+          #   ];
+          # })
         ];
       };
     };
