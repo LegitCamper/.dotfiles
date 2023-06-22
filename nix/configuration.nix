@@ -71,11 +71,13 @@
   };
 
   ## audio fixes
-  sound.enable = true;
-  # disable pulseaudio
-  hardware.pulseaudio = {
+  services.pipewire = {
     enable = true;
-    support32Bit = true;
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
   };
 
   # hyprland
@@ -137,6 +139,7 @@
     xdg-desktop-portal-gtk
     networkmanagerapplet
     lxappearance
+    rtkit
     # pipewire
     # pulseaudioFull
     pavucontrol
@@ -177,7 +180,10 @@
   # enable flatpak support
   services.flatpak.enable = true;
   services.upower.enable = true;
-  services.dbus.enable = true;
+  services.dbus = {
+    enable = true;
+    packages = [ pkgs.rtkit ];
+  };
   xdg.portal = {
     enable = true;
     wlr.enable = true;
@@ -185,7 +191,10 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  security = { polkit.enable = true; };
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -202,6 +211,7 @@
         TimeoutStopSec = 10;
       };
     };
+    packages = [ pkgs.rtkit ];
     extraConfig = ''
       DefaultTimeoutStopSec=10s
     '';
