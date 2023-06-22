@@ -73,16 +73,9 @@
   ## audio fixes
   sound.enable = true;
   # disable pulseaudio
-  hardware.pulseaudio.enable = true;
-  # enable realtime processing
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = false;
-    wireplumber.enable = true;
-    # support alsa and pulseaudio
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
   };
 
   # hyprland
@@ -144,8 +137,8 @@
     xdg-desktop-portal-gtk
     networkmanagerapplet
     lxappearance
-    pipewire
-    pulseaudioFull
+    # pipewire
+    # pulseaudioFull
     pavucontrol
     # swaylock
     swayidle
@@ -225,8 +218,8 @@
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   system.copySystemConfiguration = true;
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.enable = false;
+  system.autoUpgrade.allowReboot = false;
   system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
   systemd.additionalUpstreamSystemUnits = [ "debug-shell.service" ];
 
