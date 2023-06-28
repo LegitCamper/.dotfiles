@@ -25,3 +25,6 @@ physical_cores = true
 
 # My Themes
 theme = "Oxygen"
+
+# Displays only the specified readouts.
+show = ["Host", "Kernel", "Distribution", "WindowManager", "Resolution", "Terminal", "Shell", "Uptime", "Processor", "ProcessorLoad", "Memory"] #"GPU"

@@ -99,3 +99,6 @@ alias dev="projects"
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
+
+# runs macchina
+macchina

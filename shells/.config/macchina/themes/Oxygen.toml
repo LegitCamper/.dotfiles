@@ -25,8 +25,9 @@ x = 2
 y = 1
 
 [custom_ascii]
-#path            = "~/.config/macchina/themes/EndevourOS.txt"
-path = "~/.config/macchina/themes/OpenSuseTumbleweed.txt"
+# path = "~/.config/macchina/themes/EndevourOS.txt"
+# path = "~/.config/macchina/themes/OpenSuseTumbleweed.txt"
+path = "~/.config/macchina/themes/Nixos.txt"
 color = "#c6a0f6"
 
 [keys]
