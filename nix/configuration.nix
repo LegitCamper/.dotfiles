@@ -78,6 +78,13 @@
       support32Bit = true;
     };
     pulse.enable = true;
+    # lowLatency = {
+    #   # enable this module      
+    #   enable = true;
+    #   # defaults (no need to be set unless modified)
+    #   quantum = 64;
+    #   rate = 48000;
+    # };
   };
 
   # hyprland
@@ -97,6 +104,7 @@
       "disk"
       "libvirtd"
       "audio"
+      "wireshark"
     ]; # Enable ‘sudo’ for the user.
   };
 
@@ -139,7 +147,6 @@
     xdg-desktop-portal-gtk
     networkmanagerapplet
     lxappearance
-    rtkit
     # pipewire
     # pulseaudioFull
     pavucontrol

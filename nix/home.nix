@@ -68,6 +68,7 @@
     jq
     fzf
     postman
+    wireshark-qt
 
     # rust tools
     # rustup
@@ -75,6 +76,7 @@
     ripgrep
     helix
     zellij
+    macchina
     starship
   ];
 
