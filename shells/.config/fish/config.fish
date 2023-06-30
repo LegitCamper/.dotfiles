@@ -92,7 +92,7 @@ set HELIX_RUNTIME ~/.config/helix/runtime
 
 # nix shell aliases
 alias update="bash ~/projects/.dotfiles/nix/.update.sh"
-alias rust="nix-shell -p openssl pkg-config clippy rustup cargo"
+alias rust='nix-shell -p openssl pkg-config clippy rustup cargo --run "fish -c dev"'
 
 # Runs Project scitpt
 alias dev="projects"
