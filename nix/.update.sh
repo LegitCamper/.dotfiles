@@ -3,15 +3,11 @@
 
 cd ~/projects/.dotfiles/nix
 
-# git restore .
-
 git pull
 
-# rm -rm flake.lock
+nix flake update
 
-# sudo nixos-rebuild switch  
-# nix flake update --extra-experimental-features flakes --extra-experimental-features nix-command  
-sudo nixos-rebuild switch --upgrade-all --impure --use-substitutes --flake .#nixos-desktop
+sudo nixos-rebuild switch --upgrade-all --install-bootloader --impure --use-substitutes --flake .#nixos-desktop
 
 nix-env --delete-generations 14d
 

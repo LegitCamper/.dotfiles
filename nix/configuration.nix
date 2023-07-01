@@ -19,24 +19,24 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  # boot.loader = {
-  #   systemd-boot = {
-  #     enable = true;
-  #     configurationLimit = 30;
-  #   };
-  #   efi.canTouchEfiVariables = true;
-  # };
-
-  # Use the grub EFI boot loader.
   boot.loader = {
-    grub = {
+    systemd-boot = {
       enable = true;
       configurationLimit = 30;
-      backgroundColor = "#3F2847";
-      useOSProber = true;
-      theme = pkgs.nixos-grub2-theme;
     };
+    efi.canTouchEfiVariables = true;
   };
+
+  # Use the grub EFI boot loader.
+  # boot.loader = {
+  #   grub = {
+  #     enable = true;
+  #     configurationLimit = 30;
+  #     backgroundColor = "#3F2847";
+  #     useOSProber = true;
+  #     theme = pkgs.nixos-grub2-theme;
+  #   };
+  # };
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.networkmanager.enable =
@@ -48,20 +48,22 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the X11 windowing system.
-  services.xserver = {
+  # configures login manager
+  services.greetd = {
     enable = true;
-    # videosDrivers = ["nvidia"];
-    # videosDrivers = [ "amdgpu" ];
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
+    settings = {
+      default_session.command = ''
+        ${pkgs.greetd.tuigreet}/bin/tuigreet \
+          --time \
+          --asterisks \
+          --user-menu \
+          --cmd Hyprland
+      '';
     };
   };
-
-  nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  };
+  environment.etc."greetd/environments".text = ''
+    Hyprland
+  '';
 
   hardware = {
     logitech.wireless = {
@@ -78,21 +80,21 @@
         rocm-opencl-icd
         rocm-opencl-runtime
       ];
-      extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+      # extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
       driSupport32Bit = true;
       driSupport = true;
     };
-    pulseaudio.package = pkgs.pulseaudioFull;
-    pulseaudio.support32Bit = true;
-    pulseaudio.enable = true;
   };
+
+  # audio
   sound.enable = true;
+  nixpkgs.config.pulseaudio = true;
+  hardware.pulseaudio.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
     isNormalUser = true;
-    extraGroups =
-      [ "wheel" "kvm" "input" "disk" "libvirtd" "audio" "wireshark" ];
+    extraGroups = [ "wheel" "input" "disk" "wireshark" ];
   };
 
   programs.steam = {
@@ -145,6 +147,7 @@
     waybar
     grim
     slurp
+    wl-clipboard
 
     # build tools
     gcc
@@ -171,37 +174,14 @@
     flatpak.enable = true;
     upower.enable = true;
     dbus.enable = true;
-    ## audio fixes
-    pipewire = {
-      enable = false;
-      package = pkgs.pipewire;
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      audio.enable = true;
-      pulse.enable = true;
-      # lowLatency = {
-      #   # enable this module      
-      #   enable = true;
-      #   # defaults (no need to be set unless modified)
-      #   quantum = 64;
-      #   rate = 48000;
-      # };
-    };
-
   };
   xdg.portal = {
     enable = true;
-    wlr.enable = false; # hyprland flake manages this
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  security = {
-    polkit.enable = true;
-    # rtkit.enable = true;
-  };
+  security = { polkit.enable = true; };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
