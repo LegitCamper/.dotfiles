@@ -19,8 +19,24 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader = {
+  #   systemd-boot = {
+  #     enable = true;
+  #     configurationLimit = 30;
+  #   };
+  #   efi.canTouchEfiVariables = true;
+  # };
+
+  # Use the grub EFI boot loader.
+  boot.loader = {
+    grub = {
+      enable = true;
+      configurationLimit = 30;
+      backgroundColor = "#3F2847";
+      useOSProber = true;
+      theme = pkgs.nixos-grub2-theme;
+    };
+  };
 
   networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.networkmanager.enable =
@@ -28,11 +44,6 @@
 
   # Set your time zone.
   time.timeZone = "America/Denver";
-
-  hardware.logitech.wireless = {
-    enable = true;
-    enableGraphical = true;
-  };
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -53,6 +64,10 @@
   };
 
   hardware = {
+    logitech.wireless = {
+      enable = true;
+      enableGraphical = true;
+    };
     opengl = {
       enable = true;
       extraPackages = with pkgs; [
@@ -67,24 +82,7 @@
       driSupport32Bit = true;
       driSupport = true;
     };
-    # nvidia.modesetting.enable = false;
-  };
-
-  ## audio fixes
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-    # lowLatency = {
-    #   # enable this module      
-    #   enable = true;
-    #   # defaults (no need to be set unless modified)
-    #   quantum = 64;
-    #   rate = 48000;
-    # };
+    pulseaudio.package = pkgs.pulseaudioFull;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -166,9 +164,30 @@
   ];
 
   # List services that you want to enable:
-  services.flatpak.enable = true;
-  services.upower.enable = true;
-  services.dbus.enable = true;
+  services = {
+    flatpak.enable = true;
+    upower.enable = true;
+    dbus.enable = true;
+    ## audio fixes
+    pipewire = {
+      enable = true;
+      package = pkgs.pipewire;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      audio.enable = true;
+      pulse.enable = true;
+      # lowLatency = {
+      #   # enable this module      
+      #   enable = true;
+      #   # defaults (no need to be set unless modified)
+      #   quantum = 64;
+      #   rate = 48000;
+      # };
+    };
+
+  };
   xdg.portal = {
     enable = true;
     wlr.enable = false; # hyprland flake manages this

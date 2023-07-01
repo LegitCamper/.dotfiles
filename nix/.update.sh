@@ -11,7 +11,7 @@ git pull
 
 # sudo nixos-rebuild switch  
 # nix flake update --extra-experimental-features flakes --extra-experimental-features nix-command  
-nixos-rebuild switch --upgrade-all --impure --use-remote-sudo --use-substitutes --flake .#nixos-desktop
+sudo nixos-rebuild switch --upgrade-all --impure --use-substitutes --flake .#nixos-desktop
 
 nix-env --delete-generations 14d
 
