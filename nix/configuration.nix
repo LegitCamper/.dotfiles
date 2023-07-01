@@ -48,9 +48,9 @@
     };
   };
 
-  # nixpkgs.config.packageOverrides = pkgs: {
-  #   vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-  # };
+  nixpkgs.config.packageOverrides = pkgs: {
+    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
 
   hardware = {
     opengl = {
@@ -67,7 +67,7 @@
       driSupport32Bit = true;
       driSupport = true;
     };
-    nvidia.modesetting.enable = false;
+    # nvidia.modesetting.enable = false;
   };
 
   ## audio fixes
@@ -87,25 +87,11 @@
     # };
   };
 
-  # hyprland
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = false;
-    nvidiaPatches = false;
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
     isNormalUser = true;
-    extraGroups = [
-      "wheel"
-      "kvm"
-      "input"
-      "disk"
-      "libvirtd"
-      "audio"
-      "wireshark"
-    ]; # Enable ‘sudo’ for the user.
+    extraGroups =
+      [ "wheel" "kvm" "input" "disk" "libvirtd" "audio" "wireshark" ];
   };
 
   programs.steam = {
@@ -144,20 +130,17 @@
     nixpkgs-review
 
     # window manager
-    xdg-desktop-portal-gtk
     networkmanagerapplet
     lxappearance
-    # pipewire
-    # pulseaudioFull
     pavucontrol
-    # swaylock
+    # swaylock # borked - cannot login
     swayidle
     swaybg
-    wofi
     rofi
+    wofi
     dunst
     playerctl
-    hyprland
+    # hyprland # being managed as a flake
     waybar
     grim
     slurp
@@ -183,17 +166,12 @@
   ];
 
   # List services that you want to enable:
-  virtualisation.libvirtd.enable = true;
-  # enable flatpak support
   services.flatpak.enable = true;
   services.upower.enable = true;
-  services.dbus = {
-    enable = true;
-    packages = [ pkgs.rtkit ];
-  };
+  services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    wlr.enable = false; # hyprland flake manages this
     # gtk portal needed to make gtk apps happy
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
@@ -218,7 +196,6 @@
         TimeoutStopSec = 10;
       };
     };
-    packages = [ pkgs.rtkit ];
     extraConfig = ''
       DefaultTimeoutStopSec=10s
     '';
@@ -238,7 +215,7 @@
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = false;
   system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
-  systemd.additionalUpstreamSystemUnits = [ "debug-shell.service" ];
+  # systemd.additionalUpstreamSystemUnits = [ "debug-shell.service" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
