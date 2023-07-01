@@ -83,7 +83,10 @@
       driSupport = true;
     };
     pulseaudio.package = pkgs.pulseaudioFull;
+    pulseaudio.support32Bit = true;
+    pulseaudio.enable = true;
   };
+  sound.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
@@ -170,7 +173,7 @@
     dbus.enable = true;
     ## audio fixes
     pipewire = {
-      enable = true;
+      enable = false;
       package = pkgs.pipewire;
       alsa = {
         enable = true;
@@ -197,7 +200,7 @@
 
   security = {
     polkit.enable = true;
-    rtkit.enable = true;
+    # rtkit.enable = true;
   };
 
   systemd = {
