@@ -88,15 +88,17 @@
         '';
       };
     };
-    environment.etc."greetd/environments".text = ''
-      Hyprland
-    '';
 
+    # sets up gdm while bug gets resolved
     xserver.displayManager.gdm = {
       enable = true;
       wayland = true;
     };
   };
+  # the rest of greetd settings
+  environment.etc."greetd/environments".text = ''
+    Hyprland
+  '';
 
   # audio
   sound.enable = true;
@@ -216,6 +218,19 @@
   networking.firewall.enable = false;
   networking.enableIPv6 = false;
 
+  # do garbage collection weekly to keep disk usage low
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
+
+  # Optimise storage
+  # you can alse optimise the store manually via:
+  #    nix-store --optimise
+  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
+  nix.settings.auto-optimise-store = true;
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
@@ -223,7 +238,7 @@
   system.autoUpgrade.enable = false;
   system.autoUpgrade.allowReboot = false;
   system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
-  # systemd.additionalUpstreamSystemUnits = [ "debug-shell.service" ];
+  systemd.additionalUpstreamSystemUnits = [ "debug-shell.service" ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
