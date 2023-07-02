@@ -75,6 +75,23 @@
     upower.enable = true;
     dbus.enable = true;
 
+    # audio
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+      # lowLatency = {
+      #   # enable this module      
+      #   enable = true;
+      #   # defaults (no need to be set unless modified)
+      #   quantum = 64;
+      #   rate = 48000;
+      # };
+    };
+
     # sets up gdm while bug gets resolved
     xserver.displayManager.gdm = {
       enable = true;
@@ -101,15 +118,10 @@
     Hyprland
   '';
 
-  # audio
-  sound.enable = true;
-  nixpkgs.config.pulseaudio = true;
-  hardware.pulseaudio.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "disk" "wireshark" ];
+    extraGroups = [ "wheel" "input" "disk" "audio" "wireshark" ];
   };
 
   programs.steam = {
@@ -190,7 +202,10 @@
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
-  security = { polkit.enable = true; };
+  security = {
+    polkit.enable = true;
+    rtkit.enable = true;
+  };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
