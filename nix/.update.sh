@@ -5,7 +5,7 @@ cd ~/projects/.dotfiles/nix
 
 git pull
 
-nix flake update
+sudo nix flake update
 
 sudo nixos-rebuild switch --upgrade-all --install-bootloader --impure --use-substitutes --flake .#nixos-desktop
 
