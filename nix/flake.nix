@@ -1,13 +1,6 @@
 {
   description = "Sawyer's NixOS Flake";
 
-  ##################################################################################################################
-  # 
-  # Want to know Nix in details? Looking for a beginner-friendly tutorial?
-  # Check out [NixOS & Nix Flakes - A Guide for Beginners](https://thiscute.world/en/posts/nixos-and-flake-basics/)!
-  # 
-  ##################################################################################################################
-
   # the nixConfig here only affects the flake itself, not the system configuration!
   nixConfig = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -66,19 +59,9 @@
     nil.url = "github:oxalica/nil/2023-05-09";
   };
 
-  # `outputs` are all the build result of the flake.
-  # A flake can have many use cases and different types of outputs.
-  # parameters in `outputs` are defined in `inputs` and can be referenced by their names.
-  # However, `self` is an exception, This special parameter points to the `outputs` itself (self-reference)
-  # The `@` syntax here is used to alias the attribute set of the inputs's parameter, making it convenient to use inside the function.
   outputs =
     { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }@inputs: {
       nixosConfigurations = {
-        # By default, NixOS will try to refer the nixosConfiguration with its hostname.
-        # so the system named `nixos-test` will use this configuration.
-        # However, the configuration name can also be specified using `sudo nixos-rebuild switch --flake /path/to/flakes/directory#<name>`.
-        # The `nixpkgs.lib.nixosSystem` function is used to build this configuration, the following attribute set is its parameter.
-        # Run `sudo nixos-rebuild switch --flake .#nixos-test` in the flake's directory to deploy this configuration on any NixOS system
         nixos-desktop = nixpkgs-unstable.lib.nixosSystem {
           system = "x86_64-linux";
 

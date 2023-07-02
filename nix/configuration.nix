@@ -56,6 +56,7 @@
     opengl = {
       enable = true;
       extraPackages = with pkgs; [
+        mesa
         amdvlk
         # vaapiIntel
         vaapiVdpau
@@ -63,11 +64,12 @@
         rocm-opencl-icd
         rocm-opencl-runtime
       ];
-      # extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
+      extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
       driSupport32Bit = true;
       driSupport = true;
     };
   };
+  environment.variables.AMD_VULKAN_ICD = "RADV";
 
   # List services that you want to enable:
   services = {
@@ -93,9 +95,15 @@
     };
 
     # sets up gdm while bug gets resolved
-    xserver.displayManager.gdm = {
+    xserver = {
       enable = true;
-      wayland = true;
+      displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
+      libinput.enable = true;
+
+      videoDrivers = [ "amdgpu" ];
     };
 
     # configures login manager
@@ -225,6 +233,8 @@
     extraConfig = ''
       DefaultTimeoutStopSec=10s
     '';
+    tmpfiles.rules =
+      [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}" ];
   };
 
   # Open ports in the firewall.
