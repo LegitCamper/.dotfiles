@@ -11,6 +11,6 @@ sudo nixos-rebuild switch --upgrade-all --install-bootloader --impure --use-subs
 
 nix-env --delete-generations 14d
 
-nix-store --gc
+# nix-store --gc
 
 cd -
