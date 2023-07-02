@@ -75,6 +75,12 @@
     upower.enable = true;
     dbus.enable = true;
 
+    # sets up gdm while bug gets resolved
+    xserver.displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+
     # configures login manager
     greetd = {
       enable = false; # right now there is a bug that makes this laggy :/
@@ -89,11 +95,6 @@
       };
     };
 
-    # sets up gdm while bug gets resolved
-    xserver.displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
   };
   # the rest of greetd settings
   environment.etc."greetd/environments".text = ''
