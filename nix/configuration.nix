@@ -48,23 +48,6 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
-  # configures login manager
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session.command = ''
-        ${pkgs.greetd.tuigreet}/bin/tuigreet \
-          --time \
-          --asterisks \
-          --user-menu \
-          --cmd Hyprland
-      '';
-    };
-  };
-  environment.etc."greetd/environments".text = ''
-    Hyprland
-  '';
-
   hardware = {
     logitech.wireless = {
       enable = true;
@@ -83,6 +66,35 @@
       # extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
       driSupport32Bit = true;
       driSupport = true;
+    };
+  };
+
+  # List services that you want to enable:
+  services = {
+    flatpak.enable = true;
+    upower.enable = true;
+    dbus.enable = true;
+
+    # configures login manager
+    greetd = {
+      enable = false; # right now there is a bug that makes this laggy :/
+      settings = {
+        default_session.command = ''
+          ${pkgs.greetd.tuigreet}/bin/tuigreet \
+            --time \
+            --asterisks \
+            --user-menu \
+            --cmd Hyprland
+        '';
+      };
+    };
+    environment.etc."greetd/environments".text = ''
+      Hyprland
+    '';
+
+    xserver.displayManager.gdm = {
+      enable = true;
+      wayland = true;
     };
   };
 
@@ -169,12 +181,6 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  # List services that you want to enable:
-  services = {
-    flatpak.enable = true;
-    upower.enable = true;
-    dbus.enable = true;
-  };
   xdg.portal = {
     enable = true;
     # gtk portal needed to make gtk apps happy
