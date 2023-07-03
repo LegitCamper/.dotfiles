@@ -33,29 +33,8 @@
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    hyprland.url = "github:hyprwm/Hyprland";
-
-    nixos-generators.url = "github:nix-community/nixos-generators";
-
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-
-    nil.url = "github:oxalica/nil/2023-05-09";
-
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
-    fu.url = "github:numtide/flake-utils";
-
-    helix = {
-      url = "github:SoraTenshi/helix/new-daily-driver";
-      inputs.parts.follows = "flake-parts";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -64,13 +43,44 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nil = {
+      url = "github:oxalica/nil/2023-05-09";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    fu = {
+      url = "github:numtide/flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helix = {
+      url = "github:SoraTenshi/helix/new-daily-driver";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        flake-utils.follows = "fu";
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-db = {
@@ -80,7 +90,7 @@
 
     nix-gaming = {
       url = "github:fufexan/nix-gaming";
-      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
