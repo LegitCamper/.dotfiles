@@ -6,13 +6,7 @@
 
   nixpkgs.config = { allowUnfree = true; };
 
-  nix.settings = {
-    substituters = [ "https://nix-gaming.cachix.org" ];
-    trusted-public-keys = [
-      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
-    ];
-    experimental-features = [ "nix-command" "flakes" ];
-  };
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   imports = [ # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
@@ -57,8 +51,9 @@
       enable = true;
       extraPackages = with pkgs; [
         mesa
-        amdvlk
+        # amdvlk # outdated?
         # vaapiIntel
+        libvdpau-va-gl
         vaapiVdpau
         libvdpau-va-gl
         rocm-opencl-icd
@@ -81,7 +76,7 @@
     pipewire = {
       enable = true;
       alsa = {
-        enable = true;
+        enable = false;
         support32Bit = true;
       };
       pulse.enable = true;
@@ -98,12 +93,14 @@
     xserver = {
       enable = true;
       displayManager.gdm = {
-        enable = true;
+        enable = true; # just while sddm is enabled
         wayland = true;
       };
       libinput.enable = true;
 
       videoDrivers = [ "amdgpu" ];
+
+      desktopManager.plasma5.enable = false;
     };
 
     # configures login manager
@@ -130,14 +127,6 @@
   users.users.sawyer = {
     isNormalUser = true;
     extraGroups = [ "wheel" "input" "disk" "audio" "wireshark" ];
-  };
-
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
   };
 
   # List packages installed in system profile. To search, run:
@@ -237,12 +226,16 @@
       [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}" ];
   };
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
   networking.firewall.enable = false;
   networking.enableIPv6 = false;
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
+  };
 
   # do garbage collection weekly to keep disk usage low
   nix.gc = {

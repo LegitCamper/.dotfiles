@@ -23,7 +23,6 @@
     nuclear
 
     # gaming
-    steam
     lutris
     heroic
 
