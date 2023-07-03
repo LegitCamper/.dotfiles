@@ -97,6 +97,7 @@
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
+      pulse.enable = true;
     };
 
     # sets up gdm while bug gets resolved
@@ -161,6 +162,7 @@
     nixpkgs-review
 
     # window manager
+    pulseaudio
     networkmanagerapplet
     lxappearance
     pavucontrol
