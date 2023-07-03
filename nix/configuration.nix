@@ -6,7 +6,13 @@
 
   nixpkgs.config = { allowUnfree = true; };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    allowed-users = [ "sawyer" "@wheel" ];
+    trusted-users = [ "sawyer" "@wheel" ];
+    warn-dirty = false;
+    accept-flake-config = true;
+  };
 
   imports = [ # Include the results of the hardware scan.
     /etc/nixos/hardware-configuration.nix
