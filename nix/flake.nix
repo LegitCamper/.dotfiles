@@ -35,13 +35,13 @@
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    # hyprland-contrib = {
-    # url = "github:hyprwm/contrib";
-    # inputs.nixpkgs.follows = "nixpkgs-unstable";
-    # };
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
