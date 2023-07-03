@@ -38,10 +38,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # hyprland-contrib = {
+    # url = "github:hyprwm/contrib";
+    # inputs.nixpkgs.follows = "nixpkgs-unstable";
+    # };
 
     nixos-generators = {
       url = "github:nix-community/nixos-generators";
@@ -69,7 +69,7 @@
 
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     lanzaboote = {
@@ -88,31 +88,32 @@
     };
   };
 
-  outputs = { self, nixpkgs-unstable, home-manager, hyprland, ... }@inputs: {
-    nixosConfigurations = {
-      nixos-desktop = nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
+  outputs =
+    { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }@inputs: {
+      nixosConfigurations = {
+        nixos-desktop = nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
 
-        modules = [
-          ./configuration.nix # system configuration
+          modules = [
+            ./configuration.nix # system configuration
 
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.sawyer = import ./home.nix;
-          }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sawyer = import ./home.nix;
+            }
 
-          # Hyprland flake configuration
-          hyprland.nixosModules.default
-          {
-            programs.hyprland = {
-              enable = true;
-              nvidiaPatches = false;
-            };
-          }
-        ];
+            # Hyprland flake configuration
+            hyprland.nixosModules.default
+            {
+              programs.hyprland = {
+                enable = true;
+                nvidiaPatches = false;
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }

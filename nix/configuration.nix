@@ -48,7 +48,9 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  sound.enable = true;
   hardware = {
+    pulseaudio.enable = false;
     logitech.wireless = {
       enable = true;
       enableGraphical = true;
@@ -74,44 +76,30 @@
 
   # List services that you want to enable:
   services = {
+    printing.enable = true;
     flatpak.enable = true;
     upower.enable = true;
     dbus.enable = true;
 
-    # audio
+    # enable sound with pipewire
     pipewire = {
       enable = true;
-      alsa = {
-        enable = false;
-        support32Bit = true;
-      };
-      pulse.enable = true;
-      # lowLatency = {
-      #   # enable this module      
-      #   enable = true;
-      #   # defaults (no need to be set unless modified)
-      #   quantum = 64;
-      #   rate = 48000;
-      # };
+      alsa.enable = true;
+      alsa.support32Bit = true;
     };
 
     # sets up gdm while bug gets resolved
     xserver = {
       enable = true;
-      displayManager.gdm = {
-        enable = true; # just while sddm is enabled
-        wayland = true;
-      };
       libinput.enable = true;
-
       videoDrivers = [ "amdgpu" ];
-
-      desktopManager.plasma5.enable = false;
+      layout = "us";
+      xkbVariant = "";
     };
 
     # configures login manager
     greetd = {
-      enable = false; # right now there is a bug that makes this laggy :/
+      enable = true;
       settings = {
         default_session.command = ''
           ${pkgs.greetd.tuigreet}/bin/tuigreet \
@@ -122,7 +110,6 @@
         '';
       };
     };
-
   };
   # the rest of greetd settings
   environment.etc."greetd/environments".text = ''
@@ -132,7 +119,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.sawyer = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "input" "disk" "audio" "wireshark" ];
+    extraGroups = [ "wheel" "input" "disk" "wireshark" ];
   };
 
   # List packages installed in system profile. To search, run:
