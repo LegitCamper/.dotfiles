@@ -16,7 +16,4 @@ nix-env --delete-generations 14d
 
 nix-store --gc
 
-# decrypt nix.conf github token
-ansible-vault encrypt ~/.config/nix/nix.conf
-
 cd -
