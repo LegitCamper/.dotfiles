@@ -60,6 +60,8 @@
     zellij
     macchina
     starship
+    zoxide
+    wezterm
   ];
 
   # gtk configuration
