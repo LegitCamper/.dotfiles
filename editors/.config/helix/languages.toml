@@ -7,15 +7,45 @@ auto-format = true
 
 [[language]]
 name = "rust"
-language-server = { command = "rustup", args = ["run", "stable", "rust-analyzer"] }
-formatter = { command = "clippy"} #, args = ["clippy"]}
+language-server = { command = "rustup", args = [
+  "run",
+  "stable",
+  "rust-analyzer",
+] }
+formatter = { command = "clippy" }
+file-types = ["rs"]
+auto-format = true
+
+[[language]]
+name = "toml"
+language-server = { command = "taplo", args = ["lsp", "stdio"] }
+# formatter = { command = "taplo", args = ["format"] }
+file-types = ["toml"]
+scope = "text.toml"
+comment-token = "#"
 auto-format = true
 
 [[language]]
 name = "nix"
-# language-server = { command = "nixfmt" }
-formatter = { command = "nixfmt"}
+formatter = { command = "nixfmt" }
 file-types = ["nix", "flake"]
 roots = ["flake.lock"]
+comment-token = "#"
+auto-format = true
+
+[[language]]
+name = "ansible"
+language-server = { command = "ansible-language-server", args = ["--stdio"] }
+file-types = ["yml", "yaml"]
+roots = ["local.yml"]
+scope = "source.toml"
+comment-token = "#"
+auto-format = true
+
+[[language]]
+name = "lua"
+language-server = { command = "lua-language-server" }
+formatter = { command = "lua-format" }
+file-types = ["lua"]
 comment-token = "#"
 auto-format = true

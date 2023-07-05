@@ -42,20 +42,18 @@
     # dev
     ansible-language-server
     git
-    # python3Full
-    # python.pkgs.pip
-    go
-    nodejs
     neovim
     lazygit
     gitui
+    lua-language-server
+    luaformatter # lua formatter
+    taplo # toml lsp
     jq
     fzf
     postman
     wireshark-qt
 
     # rust tools
-    # rustup
     exa
     ripgrep
     helix
