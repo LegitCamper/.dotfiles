@@ -97,8 +97,10 @@ alias rust='nix-shell -p openssl pkg-config clippy rustup cargo --run "fish -c d
 # Runs Project scitpt
 alias dev="projects"
 
-### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
+
+zoxide init fish | source
+alias cd="z"
 
 # runs macchina
 macchina
