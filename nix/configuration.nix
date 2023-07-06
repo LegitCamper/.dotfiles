@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }: {
+{ pkgs, ... }: {
 
   nixpkgs.config = { allowUnfree = true; };
 
@@ -14,31 +14,6 @@
     accept-flake-config = true;
   };
 
-  imports = [ # Include the results of the hardware scan.
-    /etc/nixos/hardware-configuration.nix
-  ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 30;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-
-  # Use the grub EFI boot loader.
-  # boot.loader = {
-  #   grub = {
-  #     enable = true;
-  #     configurationLimit = 30;
-  #     backgroundColor = "#3F2847";
-  #     useOSProber = true;
-  #     theme = pkgs.nixos-grub2-theme;
-  #   };
-  # };
-
-  networking.hostName = "nixos-desktop"; # Define your hostname.
   networking.networkmanager.enable =
     true; # Easiest to use and most distros use this by default.
 
@@ -66,24 +41,7 @@
       enable = true;
       enableGraphical = true;
     };
-    opengl = {
-      enable = true;
-      extraPackages = with pkgs; [
-        mesa
-        # amdvlk # outdated?
-        # vaapiIntel
-        libvdpau-va-gl
-        vaapiVdpau
-        libvdpau-va-gl
-        rocm-opencl-icd
-        rocm-opencl-runtime
-      ];
-      extraPackages32 = [ pkgs.driversi686Linux.amdvlk ];
-      driSupport32Bit = true;
-      driSupport = true;
-    };
   };
-  environment.variables.AMD_VULKAN_ICD = "RADV";
 
   # List services that you want to enable:
   services = {
@@ -100,11 +58,9 @@
       pulse.enable = true;
     };
 
-    # sets up gdm while bug gets resolved
     xserver = {
       enable = true;
       libinput.enable = true;
-      videoDrivers = [ "amdgpu" ];
       layout = "us";
       xkbVariant = "";
     };
@@ -134,8 +90,6 @@
     extraGroups = [ "networkmanager" "wheel" "input" "disk" "wireshark" ];
   };
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     bash
     fish
@@ -147,6 +101,8 @@
     efibootmgr
     ansible
     usbutils # lsusb
+    docker
+    docker-compose
 
     # Networking tools
     inetutils # hostname ping ifconfig...
@@ -178,16 +134,6 @@
     grim
     slurp
     wl-clipboard
-
-    # build tools
-    gcc
-    docker
-    docker-compose
-    clang-tools_9
-    openssl
-    pkg-config
-    ninja
-    cmake
   ];
 
   fonts.fonts = with pkgs; [
