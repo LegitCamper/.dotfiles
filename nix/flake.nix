@@ -200,16 +200,16 @@
       };
 
       # deploy-rs configurations
-      deploy.nodes.nixos-desktop.profiles.system = {
-        user = "root";
-        path = deploy-rs.lib.x86_64-linux.activate.nixos
-          self.nixosConfigurations.nixos-desktop;
-        autoRollback = true;
-        magicRollback = true;
-      };
+      #   deploy.nodes.nixos-desktop.profiles.system = {
+      #     user = "root";
+      #     path = deploy-rs.lib.x86_64-linux.activate.nixos
+      #       self.nixosConfigurations.nixos-desktop;
+      #     autoRollback = true;
+      #     magicRollback = true;
+      #   };
 
-      # This is highly advised, and will prevent many possible mistakes
-      checks = builtins.mapAttrs
-        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      #   # This is highly advised, and will prevent many possible mistakes
+      #   checks = builtins.mapAttrs
+      #     (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }

@@ -12,7 +12,7 @@ nix flake check
 
 nix flake update --accept-flake-config
 
-nixos-rebuild switch --upgrade-all --flake .# #--install-bootloader --use-remote-sudo --impure --use-substitutes
+sudo nixos-rebuild switch --upgrade-all --flake .# #--install-bootloader --use-remote-sudo --impure --use-substitutes
 
 nix-env --delete-generations 14d
 
