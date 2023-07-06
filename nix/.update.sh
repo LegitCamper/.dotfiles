@@ -10,7 +10,7 @@ ansible-vault decrypt ~/.config/nix/nix.conf
 
 nix flake update --accept-flake-config
 
-nixos-rebuild switch --upgrade-all --use-remote-sudo --impure --use-substitutes --flake .# #--install-bootloader
+nixos-rebuild switch --upgrade-all --use-substitutes --flake .# #--install-bootloader --use-remote-sudo --impure 
 
 nix-env --delete-generations 14d
 
