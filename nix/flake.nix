@@ -33,6 +33,8 @@
 
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    deploy-rs.url = "github:serokell/deploy-rs";
+
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -88,8 +90,89 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }: {
-    nixosConfigurations = {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, deploy-rs, hyprland
+    , ... }: {
+      nixosConfigurations = {
+        # Configuration for Gaming Desktop
+        nixos-desktop = nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          modules = [
+            ./configuration.nix # system configuration
+            ./hosts/nixos-desktop.nix # system specific configuration
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sawyer = import ./home.nix;
+            }
+
+            # Hyprland flake configuration
+            hyprland.nixosModules.default
+            {
+              programs.hyprland = {
+                enable = true;
+                nvidiaPatches = false;
+              };
+            }
+          ];
+        };
+
+        # Configuration for HP laptop
+        nixos-laptop = nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          modules = [
+            ./configuration.nix # system configuration
+            ./hosts/nixos-laptop.nix # system specific configuration
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sawyer = import ./home.nix;
+            }
+
+            # Hyprland flake configuration
+            hyprland.nixosModules.default
+            {
+              programs.hyprland = {
+                enable = true;
+                nvidiaPatches = false;
+              };
+            }
+          ];
+        };
+
+        # Configuration for Dell laptop
+        nixos-dell-laptop = nixpkgs-unstable.lib.nixosSystem {
+          system = "x86_64-linux";
+
+          modules = [
+            ./configuration.nix # system configuration
+            ./hosts/nixos-dell-laptop.nix # system specific configuration
+
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sawyer = import ./home.nix;
+            }
+
+            # Hyprland flake configuration
+            hyprland.nixosModules.default
+            {
+              programs.hyprland = {
+                enable = true;
+                nvidiaPatches = true;
+                # hidpi = true;
+              };
+            }
+          ];
+        };
+      };
+
       # Configuration for Gaming Desktop
       nixos-desktop = nixpkgs-unstable.lib.nixosSystem {
         system = "x86_64-linux";
@@ -116,59 +199,17 @@
         ];
       };
 
-      # Configuration for HP laptop
-      nixos-laptop = nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./configuration.nix # system configuration
-          ./hosts/nixos-laptop.nix # system specific configuration
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.sawyer = import ./home.nix;
-          }
-
-          # Hyprland flake configuration
-          hyprland.nixosModules.default
-          {
-            programs.hyprland = {
-              enable = true;
-              nvidiaPatches = false;
-            };
-          }
-        ];
+      # deploy-rs configurations
+      deploy.nodes.nixos-desktop.profiles.system = {
+        user = "root";
+        path = deploy-rs.lib.x86_64-linux.activate.nixos
+          self.nixosConfigurations.nixos-desktop;
+        autoRollback = true;
+        magicRollback = true;
       };
 
-      # Configuration for Dell laptop
-      nixos-dell-laptop = nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./configuration.nix # system configuration
-          ./hosts/nixos-dell-laptop.nix # system specific configuration
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.sawyer = import ./home.nix;
-          }
-
-          # Hyprland flake configuration
-          hyprland.nixosModules.default
-          {
-            programs.hyprland = {
-              enable = true;
-              nvidiaPatches = true;
-              hidpi = true;
-              enableXWayland = true;
-            };
-          }
-        ];
-      };
+      # This is highly advised, and will prevent many possible mistakes
+      checks = builtins.mapAttrs
+        (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
-  };
 }

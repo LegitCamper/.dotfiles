@@ -12,6 +12,8 @@
     trusted-users = [ "sawyer" "@wheel" ];
     warn-dirty = false;
     accept-flake-config = true;
+    binary-caches-parallel-connections = 5;
+    connect-timeout = 5;
   };
 
   networking.networkmanager.enable =
@@ -69,13 +71,11 @@
     greetd = {
       enable = true;
       settings = {
-        default_session.command = ''
-          ${pkgs.greetd.tuigreet}/bin/tuigreet \
-            --time \
-            --asterisks \
-            --user-menu \
-            --cmd Hyprland
-        '';
+        default_session = {
+          command =
+            "${pkgs.greetd.tuigreet}/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland ";
+          user = "sawyer";
+        };
       };
     };
   };
@@ -119,6 +119,7 @@
 
     # window manager
     pulseaudio
+    libsForQt5.qtstyleplugin-kvantum
     networkmanagerapplet
     lxappearance
     pavucontrol

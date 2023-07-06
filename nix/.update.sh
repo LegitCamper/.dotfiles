@@ -8,9 +8,11 @@ git pull
 # decrypt nix.conf github token
 ansible-vault decrypt ~/.config/nix/nix.conf
 
+nix flake check
+
 nix flake update --accept-flake-config
 
-nixos-rebuild switch --upgrade-all --use-substitutes --flake .# #--install-bootloader --use-remote-sudo --impure 
+nixos-rebuild switch --upgrade-all --flake .# #--install-bootloader --use-remote-sudo --impure --use-substitutes
 
 nix-env --delete-generations 14d
 
