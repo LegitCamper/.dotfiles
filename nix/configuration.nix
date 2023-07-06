@@ -205,8 +205,8 @@
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
-  system.autoUpgrade.enable = false;
+  system.copySystemConfiguration = false;
+  system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = false;
   system.autoUpgrade.channel = "https://channels.nixos.org/nixos-23.05";
   systemd.additionalUpstreamSystemUnits = [ "debug-shell.service" ];
