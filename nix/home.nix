@@ -64,7 +64,7 @@
     wezterm
   ];
 
-  # gtk configuration
+  # theme configuration
   gtk = {
     enable = true;
     theme = {
@@ -72,10 +72,16 @@
       package = pkgs.catppuccin-gtk.override {
         accents = [ "mauve" ];
         size = "compact";
-        tweaks = [ "rimless" "black" ];
+        tweaks = [ "rimless" ]; # "black"
         variant = "macchiato";
       };
     };
+  };
+  qt = {
+    enable = true;
+    style.package = pkgs.catppuccin-kvantum;
+    style.name = "Catpuccin-Macchiato-Compact-Mauve-Dark";
+    platformTheme = "gtk";
   };
 
   # This value determines the home Manager release that your
