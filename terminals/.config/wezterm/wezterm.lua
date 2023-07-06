@@ -16,6 +16,8 @@ config.color_scheme = "Catppuccin Mocha"
 
 config.font = wezterm.font 'JetBrains Mono'
 
+config.window_background_opacity = 0.85
+
 config.default_prog = {'fish'}
 
 config.hide_mouse_cursor_when_typing = false
