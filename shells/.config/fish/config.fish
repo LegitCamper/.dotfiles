@@ -9,9 +9,7 @@ set -U fish_user_paths $HOME/.local/bin $HOME/Applications $HOME/.cargo/bin $fis
 ### EXPORT ###
 set fish_greeting # Supresses fish's intro message
 set TERM screen-256color # Sets the terminal type
-#set EDITOR "emacsclient -t -a ''"                 # $EDITOR use Emacs in terminal
-#set VISUAL "emacsclient -c -a emacs"              # $VISUAL use Emacs in GUI mode
-set EDITOR /usr/bin/helix
+set EDITOR hx
 set VISUAL kate
 
 # nix open ssl path
@@ -37,14 +35,8 @@ alias .5='cd ../../../../..'
 
 # vim and emacs
 alias vim='nvim'
-alias em='/usr/bin/emacs -nw'
-alias emacs="emacsclient -c -a 'emacs'"
-alias doomsync="~/.emacs.d/bin/doom sync"
-alias doomdoctor="~/.emacs.d/bin/doom doctor"
-alias doomupgrade="~/.emacs.d/bin/doom upgrade"
-alias doompurge="~/.emacs.d/bin/doom purge"
 
-# Lazy git alias
+# Lazygit alias
 alias lg='lazygit'
 
 # Changing "ls" to "exa"
@@ -52,7 +44,6 @@ alias ls='exa -al --color=always --group-directories-first' # my preferred listi
 alias la='exa -a --color=always --group-directories-first' # all files and dirs
 alias ll='exa -l --color=always --group-directories-first' # long format
 alias lt='exa -aT --color=always --group-directories-first' # tree listing
-alias l.='exa -a | egrep "^\."'
 
 # Changing find and grep applications
 alias find="fd"
@@ -86,11 +77,9 @@ alias tb="nc termbin.com 9999"
 # the terminal rickroll
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
-# Helix rename
-# alias hx='helix'
 set HELIX_RUNTIME ~/.config/helix/runtime
 
-# nix shell aliases
+# nix aliases
 alias update="bash ~/projects/.dotfiles/nix/.update.sh"
 alias rust='nix-shell -p openssl pkg-config clippy rustup cargo --run "fish -c dev"'
 
