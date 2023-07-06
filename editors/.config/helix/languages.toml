@@ -47,5 +47,5 @@ name = "lua"
 language-server = { command = "lua-language-server" }
 formatter = { command = "lua-format" }
 file-types = ["lua"]
-comment-token = "#"
+comment-token = "--"
 auto-format = true
