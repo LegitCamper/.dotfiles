@@ -12,10 +12,6 @@ set TERM screen-256color # Sets the terminal type
 set EDITOR hx
 set VISUAL kate
 
-# nix open ssl path
-set OPENSSL_DIR $(which openssl)
-set PKG_CONFIG_PATH $(which openssl)
-
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal "#8bd5ca"
 set fish_color_autosuggestion '#8aadf4'
