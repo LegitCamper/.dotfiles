@@ -21,6 +21,7 @@
     vivaldi
     vivaldi-ffmpeg-codecs
     nuclear
+    obsidian
 
     # gaming
     lutris
