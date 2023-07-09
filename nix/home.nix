@@ -8,7 +8,12 @@
   home.packages = with pkgs; [
     # apps
     bitwarden
-    xfce.thunar
+    libsForQt5.dolphin
+    libsForQt5.ark
+    libsForQt5.kate
+    libsForQt5.gwenview
+    libsForQt5.kcalc
+    emote
     socat
     qemu
     libreoffice
