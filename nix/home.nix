@@ -82,6 +82,14 @@
         variant = "macchiato";
       };
     };
+    cursorTheme = {
+      package = pkgs.catppuccin-cursors.macchiatoMauve;
+      name = "Catppuccin-Macchiato-Mauve-Cursors";
+    };
+    iconTheme = {
+      package = pkgs.papirus-icon-theme;
+      name = "Catppuccin-Macchiato-Mauve-Cursors";
+    };
   };
   qt = {
     enable = true;

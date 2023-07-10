@@ -120,6 +120,8 @@
     # window manager
     pulseaudio
     libsForQt5.qtstyleplugin-kvantum
+    lxqt.lxqt-qtplugin
+    papirus-icon-theme
     networkmanagerapplet
     lxappearance
     pavucontrol
