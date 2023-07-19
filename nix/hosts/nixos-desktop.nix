@@ -1,24 +1,23 @@
 { config, lib, pkgs, modulesPath, ... }: {
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader = {
-    systemd-boot = {
-      enable = true;
-      configurationLimit = 30;
-    };
-    efi.canTouchEfiVariables = true;
-  };
-
-  # Use the grub EFI boot loader.
   # boot.loader = {
-  #   grub = {
+  #   systemd-boot = {
   #     enable = true;
   #     configurationLimit = 30;
-  #     backgroundColor = "#3F2847";
-  #     useOSProber = true;
-  #     theme = pkgs.nixos-grub2-theme;
   #   };
+  #   efi.canTouchEfiVariables = true;
   # };
+
+  # Use the grub EFI boot loader.
+  boot.loader = {
+    grub = {
+      enable = true;
+      configurationLimit = 30;
+      backgroundColor = "#3F2847";
+      theme = pkgs.nixos-grub2-theme;
+    };
+  };
 
   networking.hostName = "nixos-desktop";
 

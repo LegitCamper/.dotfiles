@@ -3,7 +3,7 @@ theme = "catppuccin_macchiato"
 [editor]
 line-number = "relative"
 mouse = true
-scrolloff = 8
+scrolloff = 20
 scroll-lines = 3
 shell = ["fish", "-c"]
 gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
