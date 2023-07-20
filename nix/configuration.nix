@@ -134,6 +134,9 @@
     playerctl
     # hyprland # being managed as a flake
     waybar
+    (pkgs.waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    }))
     grim
     slurp
     wl-clipboard
