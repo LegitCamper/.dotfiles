@@ -85,9 +85,13 @@
   '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.sawyer = {
-    isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" "input" "disk" "wireshark" ];
+  users = {
+    users.sawyer = {
+      isNormalUser = true;
+      extraGroups =
+        [ "networkmanager" "wheel" "input" "disk" "wireshark" "docker" ];
+    };
+    extraGroups.docker.members = [ "sawyer" ];
   };
 
   environment.systemPackages = with pkgs; [
