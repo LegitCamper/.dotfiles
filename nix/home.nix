@@ -56,6 +56,10 @@
     taplo # toml lsp
     jq
     fzf
+    docker
+    docker-ls
+    docker-compose
+    lazydocker
     postman
     wireshark-qt
 
