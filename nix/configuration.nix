@@ -188,6 +188,15 @@
       [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.hip}" ];
   };
 
+  virtualisation.docker = {
+    enable = true;
+    # storageDriver = "btrfs";
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
+
   networking.firewall.enable = false;
   networking.enableIPv6 = false;
 
