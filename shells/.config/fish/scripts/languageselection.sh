@@ -1,7 +1,7 @@
 #!/bin/bash
 
-zellij_paths=$(echo ~/.config/zellij/layouts/*)
-selected=$(echo $zellij_paths | tr " " "\n" |
+devshells=$(echo ~/projects/.dotfiles/nix/devshells/*)
+selected=$(echo $devshells| tr " " "\n" |
 	fzf -i --header-first \
 		--header="Select your language layout above.")
 

@@ -17,6 +17,13 @@ file-types = ["rs"]
 auto-format = true
 
 [[language]]
+name = "go"
+language-server = { command = "go" }
+formatter = { command = "gofumpt" }
+file-types = ["go"]
+auto-format = true
+
+[[language]]
 name = "toml"
 language-server = { command = "taplo", args = ["lsp", "stdio"] }
 # formatter = { command = "taplo", args = ["format"] }

@@ -1,0 +1,10 @@
+layout {
+    tab name="Git" {
+        pane name="lazygit" command="lazygit"
+    }
+    tab name="Development" split_direction="vertical" {
+        pane name="" command="cargo-watch" size="25%"
+        pane name="helix" command="hx" args="./"
+        pane name="compiler" size="25%"
+    }
+}
