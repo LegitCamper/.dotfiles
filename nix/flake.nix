@@ -12,6 +12,7 @@
       "https://fufexan.cachix.org"
       "https://hyprland.cachix.org"
       "https://cache.privatevoid.net"
+      "https://anyrun.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -25,6 +26,7 @@
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "cache.privatevoid.net:SErQ8bvNWANeAvtsOESUwVYr2VJynfuc9JRwlzTTkVg="
+      "anyrun.cachix.org-1:pqBobmOjI7nKlsUMV25u9QHa9btJK65/C8vnO3p346s="
     ];
   };
 
@@ -88,14 +90,22 @@
       url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    anyrun = {
+      url = "github:Kirottu/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, deploy-rs, hyprland
-    , ... }: {
+    , anyrun, ... }:
+    let
+    in {
       nixosConfigurations = {
         # Configuration for Gaming Desktop
         nixos-desktop = nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
+          system.packages =
+            [ anyrun.packages.${nixpkgs-unstable}.anyrun-with-all-plugins ];
 
           modules = [
             ./configuration.nix # system configuration
@@ -121,7 +131,8 @@
 
         # Configuration for HP laptop
         nixos-laptop = nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
+          system.packages =
+            [ anyrun.packages.${nixpkgs-unstable}.anyrun-with-all-plugins ];
 
           modules = [
             ./configuration.nix # system configuration
@@ -147,7 +158,8 @@
 
         # Configuration for Dell laptop
         nixos-dell-laptop = nixpkgs-unstable.lib.nixosSystem {
-          system = "x86_64-linux";
+          system.packages =
+            [ anyrun.packages.${nixpkgs-unstable}.anyrun-with-all-plugins ];
 
           modules = [
             ./configuration.nix # system configuration
@@ -171,32 +183,6 @@
             }
           ];
         };
-      };
-
-      # Configuration for Gaming Desktop
-      nixos-desktop = nixpkgs-unstable.lib.nixosSystem {
-        system = "x86_64-linux";
-
-        modules = [
-          ./configuration.nix # system configuration
-          ./hosts/nixos-desktop.nix # system specific configuration
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.sawyer = import ./home.nix;
-          }
-
-          # Hyprland flake configuration
-          hyprland.nixosModules.default
-          {
-            programs.hyprland = {
-              enable = true;
-              nvidiaPatches = false;
-            };
-          }
-        ];
       };
 
       # deploy-rs configurations
