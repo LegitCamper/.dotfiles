@@ -18,8 +18,8 @@ auto-format = true
 
 [[language]]
 name = "go"
-language-server = { command = "go" }
-formatter = { command = "gofumpt" }
+language-server = { command = "gopls" }
+formatter = { command = "gofmt" }
 file-types = ["go"]
 auto-format = true
 
