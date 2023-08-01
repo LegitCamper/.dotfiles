@@ -133,9 +133,6 @@
     playerctl
     # hyprland # being managed as a flake
     waybar
-    (waybar.overrideAttrs (oldAttrs: {
-      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-    }))
     grim
     slurp
     wl-clipboard
@@ -195,12 +192,27 @@
   networking.firewall.enable = false;
   networking.enableIPv6 = false;
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
+  programs = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall =
+        true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall =
+        true; # Open ports in the firewall for Source Dedicated Server
+    };
+
+    # patches waybar for Hyprland
+    waybar.package = pkgs.waybar.overrideAttrs (oa: {
+      mesonFlags = (oa.mesonFlags or [ ]) ++ [ "-Dexperimental=true" ];
+      patches = (oa.patches or [ ]) ++ [
+        (pkgs.fetchpatch {
+          name = "fix waybar hyprctl";
+          url =
+            "https://aur.archlinux.org/cgit/aur.git/plain/hyprctl.patch?h=waybar-hyprland-git";
+          sha256 = "sha256-pY3+9Dhi61Jo2cPnBdmn3NUTSA8bAbtgsk2ooj4y7aQ=";
+        })
+      ];
+    });
   };
 
   # do garbage collection weekly to keep disk usage low
