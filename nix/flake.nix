@@ -1,7 +1,7 @@
 {
   description = "Sawyer's NixOS Flake";
 
-  outputs = inputs@{ flake-parts, nixpkgs-unstable, home-manager, ... }:
+  outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems =
         [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
@@ -14,75 +14,23 @@
     };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
-
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs-wayland = {
-      url = "github:nix-community/nixpkgs-wayland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nil = {
-      url = "github:oxalica/nil/2023-05-09";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
-    };
-
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-contrib.url = "github:hyprwm/contrib";
+    nixos-generators.url = "github:nix-community/nixos-generators";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nil.url = "github:oxalica/nil/2023-05-09";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     fu.url = "github:numtide/flake-utils";
-
     fup.url = "github:gytis-ivaskevicius/flake-utils-plus";
-
-    helix = {
-      url = "github:SoraTenshi/helix/new-daily-driver";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-index-db = {
-      url = "github:Mic92/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    anyrun = {
-      url = "github:Kirottu/anyrun";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    helix.url = "github:SoraTenshi/helix/new-daily-driver";
+    home-manager.url = "github:nix-community/home-manager";
+    lanzaboote.url = "github:nix-community/lanzaboote";
+    nix-index-db.url = "github:Mic92/nix-index-database";
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    anyrun.url = "github:Kirottu/anyrun";
   };
 
   nixConfig = {

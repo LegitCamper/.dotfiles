@@ -2,15 +2,15 @@
   flake.nixosConfigurations = withSystem "x86_64-linux"
     ({ system, self', inputs', pkgs, ... }:
       let
-        sharedModules = withSystem "x86_64-linux" ({ inputs', self', ... }:
-          [
-            # ../configuration.nix
-            # inputs.home-manager.nixosModules.home-manager
-            # {
-            #   home-manager.useGlobalPkgs = true;
-            #   home-manager.useUserPackages = true;
-            #   home-manager.users.jdoe = import ./home.nix;
-            # }
+        sharedModules = withSystem "x86_64-linux"
+          ({ inputs', self', pkgs, ... }: [
+            ../configuration.nix
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.sawyer = import ../home.nix;
+            }
 
           ]);
 
@@ -22,14 +22,6 @@
 
           modules = [
             ./nixos-desktop.nix
-            ../configuration.nix
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.sawyer = import ../home.nix;
-            }
-
             inputs.hyprland.nixosModules.default
             {
               programs.hyprland = {
@@ -47,14 +39,6 @@
 
           modules = [
             ./nixos-laptop.nix
-            ../configuration.nix
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.sawyer = import ../home.nix;
-            }
-
             inputs.hyprland.nixosModules.default
             {
               programs.hyprland = {
