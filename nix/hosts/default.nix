@@ -2,17 +2,15 @@
   flake.nixosConfigurations = withSystem "x86_64-linux"
     ({ system, self', inputs', pkgs, ... }:
       let
-        sharedModules = withSystem "x86_64-linux"
-          ({ inputs', self', pkgs, ... }: [
-            ../configuration.nix
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.sawyer = import ../home.nix;
-            }
-
-          ]);
+        sharedModules = withSystem "x86_64-linux" ({ ... }: [
+          ../configuration.nix
+          inputs.home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.sawyer = import ../home.nix;
+          }
+        ]);
 
         systemInputs = { _module.args = { inherit self' inputs'; }; };
         inherit (inputs.nixpkgs.lib) nixosSystem;
