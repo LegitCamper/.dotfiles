@@ -1,10 +1,9 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.username = "sawyer";
   home.homeDirectory = "/home/sawyer";
 
-  # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     # apps
     bitwarden
@@ -92,7 +91,7 @@
     };
     iconTheme = {
       package = pkgs.papirus-icon-theme;
-      name = "Catppuccin-Macchiato-Mauve-Cursors";
+      name = "Catppuccin-Macchiato-Mauve-Icons";
     };
   };
   qt = {
