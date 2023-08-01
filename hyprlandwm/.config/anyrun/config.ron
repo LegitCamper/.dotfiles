@@ -1,0 +1,18 @@
+Config(
+    position: Center,
+    hide_icons: false,
+    hide_plugin_info: true,
+    ignore_exclusive_zones: false,
+    width: Absolute(800),
+    vertical_offset: Fraction(-0.28),
+    layer: Top,
+    close_on_click: false,
+    plugins: [
+        "libapplications.so",
+    //     // "libsymbols.so",
+    //     // "librink.so",
+    //     // "libshell.so",
+    //     // "libtranslate.so",
+    //     // "libkidex.so",
+    ]
+)
