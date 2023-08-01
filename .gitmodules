@@ -1,7 +1,6 @@
 [submodule "editors/.config/helix/runtime/helix"]
 	path = editors/.config/helix/runtime/helix
 	url = https://github.com/helix-editor/helix
-
 [submodule "hyprlandwm/.config/anyrun/anyrun"]
 	path = hyprlandwm/.config/anyrun/anyrun
 	url = https://github.com/Kirottu/anyrun
