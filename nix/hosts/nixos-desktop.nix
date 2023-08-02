@@ -38,6 +38,8 @@
       driSupport32Bit = true;
       driSupport = true;
     };
+    xpadneo.enable = true;
+    bluetooth.enable = true;
   };
   environment.variables.AMD_VULKAN_ICD = "RADV";
 
