@@ -136,6 +136,7 @@
     networkmanagerapplet
     lxappearance
     pavucontrol
+    blueman
     # swaylock # borked - cannot login
     swayidle
     swaybg
@@ -150,7 +151,7 @@
     wl-clipboard
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk
     noto-fonts-emoji
