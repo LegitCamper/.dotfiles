@@ -39,6 +39,7 @@
       enableGraphical = true;
     };
   };
+  nixpkgs.config.pulseaudio = true;
 
   # List services that you want to enable:
   services = {
@@ -50,9 +51,13 @@
     # enable sound with pipewire
     pipewire = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
       pulse.enable = true;
+      package = pkgs.pipewire;
+      jack.enable = true;
     };
 
     xserver = {
@@ -83,8 +88,15 @@
   users = {
     users.sawyer = {
       isNormalUser = true;
-      extraGroups =
-        [ "networkmanager" "wheel" "input" "disk" "wireshark" "docker" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "input"
+        "disk"
+        "wireshark"
+        "docker"
+        "audio"
+      ];
     };
     extraGroups.docker.members = [ "sawyer" ];
   };
