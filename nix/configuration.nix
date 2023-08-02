@@ -41,12 +41,15 @@
   };
   nixpkgs.config.pulseaudio = true;
 
+  boot.extraModprobeConfig = "options bluetooth disable_ertm=1 ";
+
   # List services that you want to enable:
   services = {
     printing.enable = true;
     flatpak.enable = true;
     upower.enable = true;
     dbus.enable = true;
+    blueman.enable = true;
 
     # enable sound with pipewire
     pipewire = {
