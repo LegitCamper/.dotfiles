@@ -31,6 +31,7 @@
     lutris
     heroic
     gamescope
+    steamtinkerlaunch
 
     # cli
     nmap
