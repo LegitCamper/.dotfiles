@@ -6,7 +6,7 @@
       systems =
         [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
-      imports = [ ./hosts ];
+      imports = [ ./hosts ./flake-configs.nix ];
 
       perSystem = { config, pkgs, ... }: {
         devShells.default = pkgs.mkShell { imports = [ ./devshells ]; };
