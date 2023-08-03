@@ -30,6 +30,7 @@
     # gaming
     lutris
     heroic
+    gamescope
 
     # cli
     nmap
