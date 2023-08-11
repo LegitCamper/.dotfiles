@@ -31,6 +31,8 @@
     nix-index-db.url = "github:Mic92/nix-index-database";
     nix-gaming.url = "github:fufexan/nix-gaming";
     anyrun.url = "github:Kirottu/anyrun";
+    nixgl.url = "github:guibou/nixGL";
+    ags.url = "github:Aylur/ags";	
   };
 
   nixConfig = {

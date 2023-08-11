@@ -12,11 +12,10 @@
 
             inputs.nix-gaming.packages.${pkgs.system}.proton-ge
             inputs.nix-gaming.packages.${pkgs.system}.wine-ge
-
             inputs.nix-gaming.modules.pipewireLowLatency
           ];
         in {
-          nixpkgs.overlays = [ ];
+          nixpkgs.overlays = [ inputs.nixgl.overlay ];
 
           enviroment.systemPackages = [ ] ++ my-packages;
           home.packages = [ ] ++ my-packages;

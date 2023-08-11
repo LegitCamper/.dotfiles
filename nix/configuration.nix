@@ -152,6 +152,8 @@
     grim
     slurp
     wl-clipboard
+    socat
+    gnome.gnome-bluetooth
   ];
 
   fonts.packages = with pkgs; [
