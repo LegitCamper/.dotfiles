@@ -140,7 +140,6 @@
     lxappearance
     pavucontrol
     blueman
-    # swaylock # borked - cannot login
     swayidle
     swaybg
     rofi
@@ -154,6 +153,9 @@
     wl-clipboard
     socat
     gnome.gnome-bluetooth
+    brightnessctl
+    glib
+    sassc
   ];
 
   fonts.packages = with pkgs; [
