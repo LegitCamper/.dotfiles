@@ -14,7 +14,7 @@
     };
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
     hyprland.url = "github:hyprwm/Hyprland";
@@ -25,7 +25,10 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
     fu.url = "github:numtide/flake-utils";
     fup.url = "github:gytis-ivaskevicius/flake-utils-plus";
-    helix.url = "github:SoraTenshi/helix/new-daily-driver";
+    helix = {
+	url = "github:/helix-editor/helix";
+	follows = "nixpkgs-stable";
+    };
     home-manager.url = "github:nix-community/home-manager";
     lanzaboote.url = "github:nix-community/lanzaboote";
     nix-index-db.url = "github:Mic92/nix-index-database";

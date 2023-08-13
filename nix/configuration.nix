@@ -164,7 +164,8 @@
     noto-fonts-emoji
     font-awesome
     source-han-sans
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerdfonts
+    # (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   xdg.portal = {
