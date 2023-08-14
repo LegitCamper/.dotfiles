@@ -1,21 +1,26 @@
-{ inputs, withSystem, ... }: {
+{ inputs, inputs', withSystem, ... }: {
   flake.nixosConfigurations = withSystem "x86_64-linux"
-    ({ system, self', inputs', pkgs, ... }:
+    ({ system, config, self', inputs', pkgs, ... }:
       let
         sharedModules = withSystem "x86_64-linux" ({ ... }: [
+          ../flake-configs.nix
           ../configuration.nix
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.sawyer = import ../home.nix;
-          }
+          } 
         ]);
 
         systemInputs = { _module.args = { inherit self' inputs'; }; };
         inherit (inputs.nixpkgs.lib) nixosSystem;
       in {
         nixos-desktop = nixosSystem {
+          specialArgs = {
+            packages = config.packages;
+            inherit inputs inputs';
+          };
           inherit system;
 
           modules = [
@@ -24,7 +29,7 @@
             {
               programs.hyprland = {
                 enable = true;
-                nvidiaPatches = false;
+                enableNvidiaPatches = false;
               };
             }
             systemInputs
@@ -33,6 +38,10 @@
         };
 
         nixos-laptop = nixosSystem {
+          specialArgs = {
+            packages = config.packages;
+            inherit inputs inputs';
+          };
           inherit system;
 
           modules = [
@@ -41,7 +50,7 @@
             {
               programs.hyprland = {
                 enable = true;
-                nvidiaPatches = false;
+                enableNvidiaPatches = false;
               };
             }
             systemInputs

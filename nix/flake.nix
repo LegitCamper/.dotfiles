@@ -1,12 +1,12 @@
 {
   description = "Sawyer's NixOS Flake";
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs = inputs@{ flake-parts, ags, anyrun, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems =
         [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
 
-      imports = [ ./hosts ./flake-configs.nix ];
+      imports = [ ./hosts ];
 
       perSystem = { config, pkgs, ... }: {
         devShells.default = pkgs.mkShell { imports = [ ./devshells ]; };
