@@ -73,6 +73,7 @@
     starship
     zoxide
     wezterm
+    helix
   ];
 
   # theme configuration
