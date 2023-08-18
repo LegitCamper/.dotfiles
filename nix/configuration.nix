@@ -50,6 +50,10 @@
     upower.enable = true;
     dbus.enable = true;
     blueman.enable = true;
+    tailscale = {
+      enable = true;
+      package = pkgs.tailscale;
+    };
 
     # enable sound with pipewire
     pipewire = {
