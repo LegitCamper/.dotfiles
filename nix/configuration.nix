@@ -11,8 +11,7 @@
     connect-timeout = 5;
   };
 
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Denver";
@@ -142,15 +141,14 @@
     papirus-icon-theme
     networkmanagerapplet
     lxappearance
+    dolphin
     pavucontrol
     blueman
     swayidle
     swaybg
-    rofi
     wofi
     dunst
     playerctl
-    # hyprland # being managed as a flake
     waybar
     grim
     slurp
@@ -158,8 +156,6 @@
     socat
     gnome.gnome-bluetooth
     brightnessctl
-    glib
-    sassc
   ];
 
   fonts.packages = with pkgs; [

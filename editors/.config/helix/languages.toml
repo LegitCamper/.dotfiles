@@ -44,8 +44,8 @@ auto-format = true
 name = "ansible"
 language-server = { command = "ansible-language-server", args = ["--stdio"] }
 file-types = ["yml", "yaml"]
-roots = ["local.yml"]
-scope = "source.toml"
+roots = ["local.yml", "local.yaml"]
+scope = "text.ansible"
 comment-token = "#"
 auto-format = true
 
