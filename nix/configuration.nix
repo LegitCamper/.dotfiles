@@ -176,6 +176,10 @@
   security = {
     polkit.enable = true;
     rtkit.enable = true;
+    pam.services.kwallet = {
+      name = "kwallet";
+      enableKwallet = true;
+    };
   };
 
   systemd = {
