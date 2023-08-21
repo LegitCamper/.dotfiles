@@ -57,6 +57,8 @@
     # enable sound with pipewire
     pipewire = {
       enable = true;
+      audio.enable = true;
+      socketActivation = true;
       alsa = {
         enable = true;
         support32Bit = true;
