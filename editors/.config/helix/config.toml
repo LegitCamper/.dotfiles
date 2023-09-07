@@ -9,6 +9,7 @@ shell = ["fish", "-c"]
 gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 auto-pairs = true
 true-color = true
+cursorline = true
 
 [editor.statusline]
 left = ["mode", "workspace-diagnostics", "spinner"]
