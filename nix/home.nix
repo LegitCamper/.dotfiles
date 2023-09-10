@@ -67,7 +67,7 @@
     wireshark-qt
 
     # rust tools
-    # exa # replaced by eza as a flake
+    eza
     ripgrep
     helix
     zellij
