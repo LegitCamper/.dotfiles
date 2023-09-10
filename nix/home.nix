@@ -32,6 +32,8 @@
     heroic
     gamescope
     steamtinkerlaunch
+    minecraft
+    jre8 # for minecrfaft
 
     # cli
     nmap
@@ -65,7 +67,7 @@
     wireshark-qt
 
     # rust tools
-    exa
+    # exa # replaced by eza as a flake
     ripgrep
     helix
     zellij
@@ -73,7 +75,7 @@
     starship
     zoxide
     wezterm
-    helix
+    # helix # replaced by flake
   ];
 
   # theme configuration

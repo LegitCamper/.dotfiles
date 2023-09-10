@@ -111,6 +111,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    cachix
     bash
     fish
     moreutils # sponge...

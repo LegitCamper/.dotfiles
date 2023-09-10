@@ -17,6 +17,8 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     deploy-rs.url = "github:serokell/deploy-rs";
+    eza.url = "github:eza-community/eza";
+    helix.url = "github:helix-editor/helix";
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-contrib.url = "github:hyprwm/contrib";
     nixos-generators.url = "github:nix-community/nixos-generators";
