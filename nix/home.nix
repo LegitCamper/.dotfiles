@@ -5,6 +5,53 @@
   home.homeDirectory = "/home/sawyer";
 
   home.packages = with pkgs; [
+    # Networking tools
+    inetutils # hostname ping ifconfig...
+    dnsutils # dig nslookup...
+    bridge-utils # brctl
+    iw
+    wirelesstools # iwconfig
+
+    # nix
+    nixfmt # nix formatter
+    nil # nix lsp
+    home-manager
+    nixpkgs-review
+    cachix
+
+    # window manager
+    pulseaudio
+    libsForQt5.qtstyleplugin-kvantum
+    lxqt.lxqt-qtplugin
+    papirus-icon-theme
+    networkmanagerapplet
+    lxappearance
+    dolphin
+    pavucontrol
+    blueman
+    xboxdrv
+    swayidle
+    swaybg
+    wofi
+    dunst
+    playerctl
+    waybar
+    grim
+    slurp
+    wl-clipboard
+    socat
+    brightnessctl
+    bash
+    fish
+    moreutils # sponge...
+    unzip
+    git
+    wget
+    htop
+    efibootmgr
+    ansible
+    usbutils # lsusb
+
     # apps
     bitwarden
     libsForQt5.dolphin
@@ -65,6 +112,8 @@
     lazydocker
     postman
     wireshark-qt
+    docker
+    docker-compose
 
     # rust tools
     eza

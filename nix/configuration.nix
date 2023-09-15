@@ -41,6 +41,7 @@
   };
   nixpkgs.config.pulseaudio = true;
 
+  # fixes bluetooh issues
   boot.extraModprobeConfig = "options bluetooth disable_ertm=1 ";
 
   # List services that you want to enable:
@@ -109,58 +110,6 @@
     };
     extraGroups.docker.members = [ "sawyer" ];
   };
-
-  environment.systemPackages = with pkgs; [
-    cachix
-    bash
-    fish
-    moreutils # sponge...
-    unzip
-    git
-    wget
-    htop
-    efibootmgr
-    ansible
-    usbutils # lsusb
-    docker
-    docker-compose
-
-    # Networking tools
-    inetutils # hostname ping ifconfig...
-    dnsutils # dig nslookup...
-    bridge-utils # brctl
-    iw
-    wirelesstools # iwconfig
-
-    # nix
-    nixfmt # nix formatter
-    nil # nix lsp
-    home-manager
-    nixpkgs-review
-
-    # window manager
-    pulseaudio
-    libsForQt5.qtstyleplugin-kvantum
-    lxqt.lxqt-qtplugin
-    papirus-icon-theme
-    networkmanagerapplet
-    lxappearance
-    dolphin
-    pavucontrol
-    blueman
-    swayidle
-    swaybg
-    wofi
-    dunst
-    playerctl
-    waybar
-    grim
-    slurp
-    wl-clipboard
-    socat
-    gnome.gnome-bluetooth
-    brightnessctl
-  ];
 
   fonts.packages = with pkgs; [
     noto-fonts
