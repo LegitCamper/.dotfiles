@@ -38,6 +38,10 @@
       enable = true;
       enableGraphical = true;
     };
+    opengl = {
+      extraPackages = with pkgs; [ mangohud ];
+      extraPackages32 = with pkgs; [ mangohud ];
+    };
   };
   nixpkgs.config.pulseaudio = true;
 

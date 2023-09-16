@@ -155,6 +155,16 @@
     platformTheme = "gtk";
   };
 
+  # home-manager program configs
+  programs.mangohud = {
+    enable = true;
+    enableSessionWide = true;
+    settings = {
+      full = false;
+      no_display = true;
+    };
+  };
+
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
