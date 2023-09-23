@@ -1,8 +1,8 @@
 {
 	"layer": "top",
-	"modules-left": ["custom/launcher","cpu","memory","tray","hyprland/window"],
-	"modules-center": ["wlr/workspaces"],
-	"modules-right": ["backlight","pulseaudio","clock","battery","custom/power"],
+	"modules-left": [], # "custom/launcher","cpu","memory","hyprland/window" 
+	"modules-center": [], # "wlr/workspaces" 
+	"modules-right": ["tray","backlight","pulseaudio","clock","battery","custom/power"],
 	
 	"pulseaudio": {
 		"tooltip": true,
@@ -81,7 +81,7 @@
 		"spacing": 10
 	},
     "clock": {
-        "format": "{: %I:%M %p   %m/%d/%Y}"
+        "format": "{: %I:%M %p   %m-%d}" # /%Y
     },
     "cpu": {
         "interval": 10,

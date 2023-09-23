@@ -88,3 +88,6 @@ alias cd="z"
 
 # runs macchina
 macchina
+
+# minecraft
+alias minecraft="cd ~/minecraft-ni/ && nix run github:Ninlives/minecraft.nix#v1_20_1.vanilla.client"
