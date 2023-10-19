@@ -24,6 +24,19 @@
     - name: stow dotfiles
       become_user: sawyer
       shell: bash ~/projects/.dotfiles/.stow.sh
+
+    - name: clone nix dotfiles
+      become_user: sawyer
+      git:
+        repo: "https://github.com/LegitCamper/.nix-config.git"
+        dest: ~/projects/.nix-config
+        clone: yes
+        update: yes
+        force: yes
+
+    - name: stow dotfiles
+      become_user: sawyer
+      shell: bash ~/projects/.dotfiles/.stow.sh
   
     - name: create ssh folder (if not exist)
       become_user: sawyer
@@ -61,7 +74,7 @@
     - name: congure nix system
       become_user: root
       shell: 
-        chdir: /home/sawyer/projects/.dotfiles/nix
+        chdir: /home/sawyer/projects/.nix-config
         cmd: |
           # nixos-rebuild switch && 
           # nix flake update --extra-experimental-features flakes --extra-experimental-features nix-command && 
