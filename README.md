@@ -5,4 +5,4 @@ Depoy on Ubuntu, Debian, Arch, and OpenSuse:
 
 deploy on NixOs:
 `nix-env --install ansible-core git stow` then
-`sudo ansible-pull -U https://github.com/LegitCamper/.dotfiles.git nix/local.yml`
+`sudo ansible-pull -U https://github.com/LegitCamper/.dotfiles.git nix/nix-local.yml`
