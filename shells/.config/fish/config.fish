@@ -76,7 +76,7 @@ alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/mas
 set HELIX_RUNTIME ~/.config/helix/runtime
 
 # nix aliases
-alias update="bash ~/projects/.dotfiles/nix/.update.sh"
+alias update="bash ~/projects/.nix-config/.update.sh"
 
 # Runs Project scitpt
 alias dev="projects"
@@ -90,4 +90,4 @@ alias cd="z"
 macchina
 
 # minecraft
-alias minecraft="cd ~/minecraft-ni/ && nix run github:Ninlives/minecraft.nix#v1_20_1.vanilla.client"
+alias minecraft="mkdir ~/minecraft-nix/ && cd ~/minecraft-nix/ && nix run github:Ninlives/minecraft.nix#v1_20_1.vanilla.client"
