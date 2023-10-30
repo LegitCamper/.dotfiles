@@ -41,6 +41,11 @@ alias la='eza -a --color=always --group-directories-first' # all files and dirs
 alias ll='eza -l --color=always --group-directories-first' # long format
 alias lt='eza -aT --color=always --group-directories-first' # tree listing
 
+# Power settings
+alias sleep="echo deep | sudo tee /sys/power/mem_sleep && echo mem | sudo tee /sys/power/state"
+alias hibernate="echo disk | sudo tee /sys/power/state" # Requires sufficient swap space
+#poweroff
+
 # Changing find and grep applications
 alias find="fd"
 alias grep="rg"
