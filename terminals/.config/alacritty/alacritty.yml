@@ -22,6 +22,7 @@ window:
   dimensions:
     columns: 90
     lines: 27
+  opacity: 0.85
 
   # Window decorations
   #

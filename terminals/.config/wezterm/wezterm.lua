@@ -10,6 +10,8 @@ if wezterm.config_builder then config = wezterm.config_builder() end
 -- This is where you actually apply your config choices
 config.default_cwd = "/home/sawyer/"
 
+config.enable_wayland = true
+
 config.hide_tab_bar_if_only_one_tab = true
 
 config.color_scheme = "Catppuccin Mocha"
