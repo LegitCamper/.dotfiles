@@ -83,9 +83,6 @@ set HELIX_RUNTIME ~/.config/helix/runtime
 # nix aliases
 alias update="bash ~/projects/.nix-config/.update.sh"
 
-# Runs Project scitpt
-alias dev="projects"
-
 starship init fish | source
 
 zoxide init fish | source
