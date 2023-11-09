@@ -1,44 +1,33 @@
 [[language]]
   name = "python"
-  roots = ["pyproject.toml"]
-  [language-server.ruff]
-    command = "ruff-lsp"
+  roots = [ "pyproject.toml" ]
   scope = "source.py"
-  formatter = { command = "black", args = ["--quiet", "-"] }
+  formatter = { command = "black", args = [ "--quiet", "-" ] }
   indent = { tab-width = 4, unit = "    " }
+  language-servers = [ "ruff" ]
   auto-format = true
 
 [[language]]
   name = "rust"
-  [language-server.rustup] 
-    command = "rustup"
-    args = [
-      "run",
-      "stable",
-      "rust-analyzer",
-    ]
   formatter = { command = "clippy" }
+  language-servers = [ "rust-analyzer" ]
   injection-regex = "rust"
   indent = { tab-width = 4, unit = "    " }
-  roots = "Cargo.lock"
+  roots = [ "Cargo.lock" ]
   scope = "source.rs"
   file-types = ["rs"]
   auto-format = true
 
 [[language]]
   name = "go"
-  [language-server.gopls] 
-    command = "gopls" 
   formatter = { command = "gofmt" }
+  language-servers = [ "go-pls" ]
   scope = "source.go"
   file-types = ["go"]
   auto-format = true
 
 [[language]]
   name = "toml"
-  [language-server.taplo] 
-    command = "taplo"
-    args = ["lsp", "stdio"] 
   # formatter = { command = "taplo", args = ["format"] }
   file-types = ["toml"]
   scope = "text.toml"
@@ -56,10 +45,8 @@
 
 [[language]]
   name = "ansible"
-  [language-server.ansible] 
-    command = "ansible-language-server"
-    args = ["--stdio"]
   file-types = ["yml", "yaml"]
+  language-servers = [ "ansible" ]
   roots = ["local.yml", "local.yaml"]
   scope = "text.ansible"
   comment-token = "#"
@@ -67,10 +54,49 @@
 
 [[language]]
   name = "lua"
-  [language-servers.lua] 
-    command = "lua-language-server" 
   formatter = { command = "lua-format" }
+  language-servers = [ "lua" ]
   file-types = ["lua"]
   scope = "source.lua"
   comment-token = "--"
   auto-format = true
+
+[language-server.rust-analyzer] 
+  command = "rustup"
+  args = [
+    "run",
+    "stable",
+    "rust-analyzer",
+  ]
+[language-server.rust-analyzer.config]
+  inlayHints.bindingModeHints.enable = false
+  inlayHints.closingBraceHints.minLines = 10
+  inlayHints.closureReturnTypeHints.enable = "with_block"
+  inlayHints.discriminantHints.enable = "fieldless"
+  inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+  inlayHints.typeHints.hideClosureInitialization = false
+
+[language-servers.lua] 
+  command = "lua-language-server" 
+
+[language-server.ansible] 
+  command = "ansible-language-server"
+  args = ["--stdio"]
+
+[language-server.taplo] 
+  command = "taplo"
+  args = ["lsp", "stdio"] 
+
+[language-server.ruff]
+  command = "ruff-lsp"
+
+[language-server.gopls] 
+  command = "gopls" 
+[language-server.gopls.config.hints]
+  assignVariableTypes = true
+  compositeLiteralFields = true
+  constantValues = true
+  functionTypeParameters = true
+  parameterNames = true
+  rangeVariableTypes = true
+
