@@ -1,58 +1,76 @@
 [[language]]
-name = "python"
-roots = ["pyproject.toml"]
-language-server = { command = "ruff-lsp" }
-formatter = { command = "black", args = ["--quiet", "-"] }
-auto-format = true
+  name = "python"
+  roots = ["pyproject.toml"]
+  [language-server.ruff]
+    command = "ruff-lsp"
+  scope = "source.py"
+  formatter = { command = "black", args = ["--quiet", "-"] }
+  indent = { tab-width = 4, unit = "    " }
+  auto-format = true
 
 [[language]]
-name = "rust"
-language-server = { command = "rustup", args = [
-  "run",
-  "stable",
-  "rust-analyzer",
-] }
-formatter = { command = "clippy" }
-file-types = ["rs"]
-auto-format = true
+  name = "rust"
+  [language-server.rustup] 
+    command = "rustup"
+    args = [
+      "run",
+      "stable",
+      "rust-analyzer",
+    ]
+  formatter = { command = "clippy" }
+  injection-regex = "rust"
+  indent = { tab-width = 4, unit = "    " }
+  roots = "Cargo.lock"
+  scope = "source.rs"
+  file-types = ["rs"]
+  auto-format = true
 
 [[language]]
-name = "go"
-language-server = { command = "gopls" }
-formatter = { command = "gofmt" }
-file-types = ["go"]
-auto-format = true
+  name = "go"
+  [language-server.gopls] 
+    command = "gopls" 
+  formatter = { command = "gofmt" }
+  scope = "source.go"
+  file-types = ["go"]
+  auto-format = true
 
 [[language]]
-name = "toml"
-language-server = { command = "taplo", args = ["lsp", "stdio"] }
-# formatter = { command = "taplo", args = ["format"] }
-file-types = ["toml"]
-scope = "text.toml"
-comment-token = "#"
-auto-format = true
+  name = "toml"
+  [language-server.taplo] 
+    command = "taplo"
+    args = ["lsp", "stdio"] 
+  # formatter = { command = "taplo", args = ["format"] }
+  file-types = ["toml"]
+  scope = "text.toml"
+  comment-token = "#"
+  auto-format = true
 
 [[language]]
-name = "nix"
-formatter = { command = "nixfmt" }
-file-types = ["nix", "flake"]
-roots = ["flake.lock"]
-comment-token = "#"
-auto-format = true
+  name = "nix"
+  formatter = { command = "nixfmt" }
+  file-types = ["nix", "flake"]
+  roots = ["flake.lock"]
+  scope = "source.nix"
+  comment-token = "#"
+  auto-format = true
 
 [[language]]
-name = "ansible"
-language-server = { command = "ansible-language-server", args = ["--stdio"] }
-file-types = ["yml", "yaml"]
-roots = ["local.yml", "local.yaml"]
-scope = "text.ansible"
-comment-token = "#"
-auto-format = true
+  name = "ansible"
+  [language-server.ansible] 
+    command = "ansible-language-server"
+    args = ["--stdio"]
+  file-types = ["yml", "yaml"]
+  roots = ["local.yml", "local.yaml"]
+  scope = "text.ansible"
+  comment-token = "#"
+  auto-format = true
 
 [[language]]
-name = "lua"
-language-server = { command = "lua-language-server" }
-formatter = { command = "lua-format" }
-file-types = ["lua"]
-comment-token = "--"
-auto-format = true
+  name = "lua"
+  [language-servers.lua] 
+    command = "lua-language-server" 
+  formatter = { command = "lua-format" }
+  file-types = ["lua"]
+  scope = "source.lua"
+  comment-token = "--"
+  auto-format = true
