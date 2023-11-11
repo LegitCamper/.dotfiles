@@ -42,7 +42,7 @@ alias ll='eza -l --color=always --group-directories-first' # long format
 alias lt='eza -aT --color=always --group-directories-first' # tree listing
 
 # Power settings
-alias sleep="echo deep | sudo tee /sys/power/mem_sleep && echo mem | sudo tee /sys/power/state"
+alias suspend="systemctl suspend"
 alias hibernate="echo disk | sudo tee /sys/power/state" # Requires sufficient swap space
 #poweroff
 
