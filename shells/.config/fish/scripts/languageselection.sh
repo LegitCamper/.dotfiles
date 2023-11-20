@@ -7,7 +7,9 @@ selected=$(echo rust python nix java go current_dir | tr " " "\n" |
 # https://nix-community.github.io/awesome-nix/#programming-languages
 
 if [ $selected == rust ]; then
-	echo nix develop github:cargo2nix/cargo2nix#bootstrap
+	echo nix develop github:loophp/rust-shell#stable-default
+	# if [ $selected == rust_nightly ]; then
+	# echo nix develop github:loophp/rust-shell#beta-default
 elif [ $selected == go ]; then
 	echo nix shell nixpkgs#go nixpkgs#libcap nixpkgs#gcc nixpkgs#gopls
 elif [ $selected == python ]; then

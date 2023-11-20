@@ -1,102 +1,102 @@
 [[language]]
-  name = "python"
-  roots = [ "pyproject.toml" ]
-  scope = "source.py"
-  formatter = { command = "black", args = [ "--quiet", "-" ] }
-  indent = { tab-width = 4, unit = "    " }
-  language-servers = [ "ruff" ]
-  auto-format = true
+name = "python"
+roots = ["pyproject.toml"]
+scope = "source.py"
+formatter = { command = "black", args = ["--quiet", "-"] }
+indent = { tab-width = 4, unit = "    " }
+language-servers = ["ruff"]
+auto-format = true
 
 [[language]]
-  name = "rust"
-  formatter = { command = "clippy" }
-  language-servers = [ "rust-analyzer" ]
-  injection-regex = "rust"
-  indent = { tab-width = 4, unit = "    " }
-  roots = [ "Cargo.lock" ]
-  scope = "source.rs"
-  file-types = ["rs"]
-  auto-format = true
+name = "rust"
+formatter = { command = "clippy" }
+language-servers = ["rust-analyzer"]
+injection-regex = "rust"
+indent = { tab-width = 4, unit = "    " }
+roots = ["Cargo.lock"]
+scope = "source.rs"
+file-types = ["rs"]
+auto-format = true
 
 [[language]]
-  name = "go"
-  formatter = { command = "gofmt" }
-  language-servers = [ "go-pls" ]
-  scope = "source.go"
-  file-types = ["go"]
-  auto-format = true
+name = "go"
+formatter = { command = "gofmt" }
+language-servers = ["go-pls"]
+scope = "source.go"
+file-types = ["go"]
+auto-format = true
 
 [[language]]
-  name = "toml"
-  # formatter = { command = "taplo", args = ["format"] }
-  file-types = ["toml"]
-  scope = "text.toml"
-  comment-token = "#"
-  auto-format = true
+name = "toml"
+# formatter = { command = "taplo", args = ["format"] }
+file-types = ["toml"]
+scope = "text.toml"
+comment-token = "#"
+auto-format = true
 
 [[language]]
-  name = "nix"
-  formatter = { command = "nixfmt" }
-  file-types = ["nix", "flake"]
-  roots = ["flake.lock"]
-  scope = "source.nix"
-  comment-token = "#"
-  auto-format = true
+name = "nix"
+formatter = { command = "nixfmt" }
+file-types = ["nix", "flake"]
+roots = ["flake.lock"]
+scope = "source.nix"
+comment-token = "#"
+auto-format = true
 
 [[language]]
-  name = "ansible"
-  file-types = ["yml", "yaml"]
-  language-servers = [ "ansible" ]
-  roots = ["local.yml", "local.yaml"]
-  scope = "text.ansible"
-  comment-token = "#"
-  auto-format = true
+name = "ansible"
+file-types = ["yml", "yaml"]
+language-servers = ["ansible"]
+roots = ["local.yml", "local.yaml"]
+scope = "text.ansible"
+comment-token = "#"
+auto-format = true
 
 [[language]]
-  name = "lua"
-  formatter = { command = "lua-format" }
-  language-servers = [ "lua" ]
-  file-types = ["lua"]
-  scope = "source.lua"
-  comment-token = "--"
-  auto-format = true
+name = "lua"
+formatter = { command = "lua-format" }
+language-servers = ["lua"]
+file-types = ["lua"]
+scope = "source.lua"
+comment-token = "--"
+auto-format = true
 
-[language-server.rust-analyzer] 
-  command = "rustup"
-  args = [
-    "run",
-    "stable",
-    "rust-analyzer",
-  ]
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+# command = "rustup"
+# args = [
+#   "run",
+#   "stable",
+#   "rust-analyzer",
+# ]
 [language-server.rust-analyzer.config]
-  inlayHints.bindingModeHints.enable = false
-  inlayHints.closingBraceHints.minLines = 10
-  inlayHints.closureReturnTypeHints.enable = "with_block"
-  inlayHints.discriminantHints.enable = "fieldless"
-  inlayHints.lifetimeElisionHints.enable = "skip_trivial"
-  inlayHints.typeHints.hideClosureInitialization = false
+inlayHints.bindingModeHints.enable = false
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureReturnTypeHints.enable = "with_block"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
 
-[language-servers.lua] 
-  command = "lua-language-server" 
+[language-servers.lua]
+command = "lua-language-server"
 
-[language-server.ansible] 
-  command = "ansible-language-server"
-  args = ["--stdio"]
+[language-server.ansible]
+command = "ansible-language-server"
+args = ["--stdio"]
 
-[language-server.taplo] 
-  command = "taplo"
-  args = ["lsp", "stdio"] 
+[language-server.taplo]
+command = "taplo"
+args = ["lsp", "stdio"]
 
 [language-server.ruff]
-  command = "ruff-lsp"
+command = "ruff-lsp"
 
-[language-server.gopls] 
-  command = "gopls" 
+[language-server.gopls]
+command = "gopls"
 [language-server.gopls.config.hints]
-  assignVariableTypes = true
-  compositeLiteralFields = true
-  constantValues = true
-  functionTypeParameters = true
-  parameterNames = true
-  rangeVariableTypes = true
-
+assignVariableTypes = true
+compositeLiteralFields = true
+constantValues = true
+functionTypeParameters = true
+parameterNames = true
+rangeVariableTypes = true
