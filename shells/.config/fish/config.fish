@@ -92,4 +92,4 @@ alias cd="z"
 macchina
 
 # minecraft
-alias minecraft="mkdir ~/minecraft-nix/ && cd ~/minecraft-nix/ && nix run github:Ninlives/minecraft.nix#v1_20_1.vanilla.client"
+alias minecraft="cd ~/minecraft-nix/ && nix run github:Ninlives/minecraft.nix#v1_20_1.vanilla.client"
