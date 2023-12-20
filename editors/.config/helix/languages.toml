@@ -20,11 +20,15 @@ auto-format = true
 
 [[language]]
 name = "go"
-formatter = { command = "gofmt" }
-language-servers = ["go-pls"]
 scope = "source.go"
+injection-regex = "go"
 file-types = ["go"]
+roots = ["go.work", "go.mod"]
 auto-format = true
+comment-token = "//"
+language-servers = [ "gopls", "golangci-lint-lsp" ]
+# TODO: gopls needs utf-8 offsets?
+indent = { tab-width = 4, unit = "\t" }
 
 [[language]]
 name = "toml"
@@ -100,3 +104,8 @@ constantValues = true
 functionTypeParameters = true
 parameterNames = true
 rangeVariableTypes = true
+
+[language-server.golangci-lint-lsp]
+command = "golangci-lint-langserver"
+[language-server.golangci-lint-lsp.config]
+command = ["golangci-lint", "run", "--out-format", "json", "--issues-exit-code=1"]
