@@ -6,7 +6,7 @@
   tasks:
   - block: # packages
     - name: install packages all
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
+      when: ansible_distribution in [ "Archlinux" ]
       package:
         name:
           - stow
@@ -28,8 +28,6 @@
           - neovim
           - lazygit
           - flameshot
-          - flatpak
-          - flatpak-xdg-utils
           - swaylock
           - swayidle
           - swaybg
@@ -49,87 +47,19 @@
           - cmake
           - pavucontrol
           - lxappearance
-    
-    - name: install flatpak packages all
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
-      community.general.flatpak:
-        name:
-          - com.valvesoftware.Steam
-          - org.videolan.VLC
-          - net.lutris.Lutris
-          - com.heroicgameslauncher.hgl
-          - com.getpostman.Postman
-          - org.js.nuclear.Nuclear
-          - com.github.sdv43.whaler
-          - net.davidotek.pupgui2
-          - com.github.tchx84.Flatseal
-          - com.bitwarden.desktop
-          - org.libreoffice.LibreOffice
-  
-    - name: install packages arch
-      when: ansible_distribution == "Archlinux"
-      package:
-        name:
+          - ttf-ubuntu-mono-nerd
           - pipewire-pulse
           - mpc
           - light
           - network-manager-applet
           - cronie
   
-    - name: install packages suse
-      when: ansible_distribution == "openSUSE Tumbleweed"
-      package:
-        name:
-          - NetworkManager
-          - NetworkManager-applet
-          # - catppuccin-gtk-theme-macchiato
-          # - libqt5-wayland
-          # - libqt6-wayland
-          # - xdg-desktip-portal-wlr
-      
     - name: install packages debian
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+      when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
       package:
         name:
           - None
-    
-    - name: create helix folder (if not exist)
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
-      file:
-        path: /opt/helix
-        state: directory
-        owner: sawyer
-        group: sawyer
-  
-    - name: clone helix
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
-      become_user: sawyer
-      git:
-        repo: "https://github.com/helix-editor/helix"
-        dest: /opt/helix
-        clone: yes
-        update: yes
-  
-    - name: install cargo packages
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
-      become_user: sawyer
-      shell: |
-        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-        rustup toolchain install stable
-        rustup toolchain install nightly
-        rustup default stable
-  
-        cargo install nu --features starship-prompt
-        cargo install starship --locked
-        cargo install macchina --locked
-        cargo install zellij --locked
-        
-        RUSTFLAGS="-C target-feature=-crt-static" cargo install --path /opt/helix/helix-term --locked
-        ~/.cargo/bin/hx -g fetch
-        ~/.cargo/bin/hx -g build
-  
-        # exit 0
-
+          
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
       become_user: sawyer
@@ -139,14 +69,11 @@
         owner: sawyer
         group: sawyer
         
-    - name: clone .dotfiles
+    - name: copy .dotfiles
       become_user: sawyer
-      git:
-        # repo: "git@github.com:LegitCamper/.dotfiles.git"
-        repo: "https://github.com/LegitCamper/.dotfiles.git"
+      copy:
+        src: ~/.ansible/tmp/.dotfiles
         dest: ~/projects/.dotfiles
-        clone: yes
-        update: yes
   
     - name: stow dotfiles
       become_user: sawyer
@@ -166,32 +93,6 @@
           dest: ~/.ssh/id_ed25519
         - src: ssh_key.pub
           dest: ~/.ssh/id_ed25519.pub
-        - src: editors/.wakatime.cfg        
-          dest: ~/.wakatime.cfg
-        - src: editors/.config/github-copilot/hosts.json
-          dest: ~/.config/github-copilot/hosts.json
-
-  - block: # get nerdfonts
-    - name: create nerdfonts folder (if not exist)
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
-      file:
-        path: /opt/nerdfonts
-        state: directory
-        owner: sawyer
-        group: sawyer
-
-    - name: clone nerdfonts
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
-      git:
-        repo: "https://github.com/ryanoasis/nerd-fonts.git"
-        dest: /opt/nerdfonts
-        clone: yes
-        update: yes
-    
-    - name: get nerdfonts
-      when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu", "Archlinux", "openSUSE Tumbleweed" ]
-      become_user: sawyer
-      shell: cd /opt/nerdfonts && ./install.sh JetBrainsMono
           
   - block: # setup auto updater
     - name: add ansible user
