@@ -47,12 +47,124 @@
           - cmake
           - pavucontrol
           - lxappearance
-          - ttf-ubuntu-mono-nerd
+          - ttf-jetbrains-mono-nerd
           - pipewire-pulse
           - mpc
           - light
           - network-manager-applet
           - cronie
+
+          # Networking tools
+          - inetutils # hostname ping ifconfig...
+          - dnsutils # dig nslookup...
+          - bridge-utils # brctl
+          - iw
+          - wirelesstools # iwconfig
+ 
+          # window manager
+          - pulseaudio
+          - kvantum
+          - lxqt-qtplugin
+          - papirus-icon-theme
+          - networkmanagerapplet
+          - lxappearance
+          - dolphin
+          - pavucontrol
+          - blueman
+          - xboxdrv
+          - swayidle
+          - swaybg
+          - wofi
+          - dunst
+          - playerctl
+          - waybar
+          - grim
+          - slurp
+          - wl-clipboard
+          - socat
+          - brightnessctl
+          - bash
+          - fish
+          - moreutils # sponge...
+          - unzip
+          - git
+          - wget
+          - htop
+          - efibootmgr
+          - ansible
+          - usbutils # lsusb
+  
+          # apps
+          - bitwarden
+          - dolphin
+          - ark
+          - kate
+          - gwenview
+          - kcalc
+          - rhythmbox
+          - emote
+          - socat
+          - qemu
+          - libreoffice
+          - vlc
+          - ffmpeg-full
+          - procs
+          - solaar
+          - discord
+          - vivaldi
+          - floorp
+          - vivaldi-ffmpeg-codecs
+          - nuclear
+          - obsidian
+  
+          # gaming
+          - lutris
+          - heroic
+          - gamescope
+          - steamtinkerlaunch
+          - minecraft
+          - jre8 # for minecrfaft
+  
+          # cli
+          - nmap
+          - fd
+          - bitwarden-cli
+          - stow
+          - alacritty
+          - fd
+          - fish
+          - upower
+          - htop
+          - tldr
+          - yt-dlp
+  
+          # dev
+          - ansible-language-server
+          - git
+          - neovim
+          - lazygit
+          - gitui
+          - lua-language-server
+          - luaformatter # lua formatter
+          - taplo # toml lsp
+          - jq
+          - fzf
+          - docker
+          - docker-ls
+          - docker-compose
+          - lazydocker
+          - wireshark-qt
+          - docker
+          - docker-compose
+  
+          # rust tools
+          - eza
+          - ripgrep
+          - zellij
+          - macchina
+          - starship
+          - zoxide
+          - helix
   
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
