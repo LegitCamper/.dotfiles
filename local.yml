@@ -20,7 +20,6 @@
           - kvantum
           - lxqt-qtplugin
           - papirus-icon-theme
-          - networkmanagerapplet
           - lxappearance
           - dolphin
           - pavucontrol
@@ -43,6 +42,8 @@
           - grub-btrfs
 
           # Networking tools
+          - networkmanager
+          - network-manager-applet
           - inetutils # hostname ping ifconfig...
           - dnsutils # dig nslookup...
           - bridge-utils # brctl
