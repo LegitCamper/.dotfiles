@@ -107,7 +107,6 @@
           # language servers
           - ansible-language-server
           - lua-language-server
-          - lua-format
           - taplo # toml lsp
           # tools 
           - neovim
@@ -130,6 +129,7 @@
           - steamtinkerlaunch
           - minecraft-launcher
           - macchina
+          - lua-format
 
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
