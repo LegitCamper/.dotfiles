@@ -9,59 +9,13 @@
       when: ansible_distribution in [ "Archlinux" ]
       package:
         name:
-          - stow
-          - alacritty
-          - kitty
-          - solaar
-          - exa
-          - fd
-          - ripgrep
-          - fish
-          - htop
-          - git
-          - python3
-          - go
-          - npm
-          - ninja
-          - gcc
-          - docker
-          - neovim
-          - lazygit
-          - flameshot
-          - swaylock
-          - swayidle
-          - swaybg
-          - wofi
-          - rofi
-          - dunst
-          - pipewire
-          - pipewire-alsa
-          - wireplumber
-          - jq
-          - playerctl
+          # window manager
+          - ttf-jetbrains-mono-nerd
           - hyprland
           - waybar
-          - grim
-          - slurp
-          - fzf
-          - cmake
-          - pavucontrol
-          - lxappearance
-          - ttf-jetbrains-mono-nerd
-          - pipewire-pulse
-          - mpc
-          - light
-          - network-manager-applet
-          - cronie
-
-          # Networking tools
-          - inetutils # hostname ping ifconfig...
-          - dnsutils # dig nslookup...
-          - bridge-utils # brctl
-          - iw
-          - wirelesstools # iwconfig
- 
-          # window manager
+          - greetd
+          - tuigreet
+          - flameshot
           - pulseaudio
           - kvantum
           - lxqt-qtplugin
@@ -83,16 +37,16 @@
           - wl-clipboard
           - socat
           - brightnessctl
-          - bash
-          - fish
           - moreutils # sponge...
-          - unzip
-          - git
-          - wget
-          - htop
           - efibootmgr
-          - ansible
           - usbutils # lsusb
+
+          # Networking tools
+          - inetutils # hostname ping ifconfig...
+          - dnsutils # dig nslookup...
+          - bridge-utils # brctl
+          - iw
+          - wirelesstools # iwconfig
   
           # apps
           - bitwarden
@@ -123,41 +77,23 @@
           - gamescope
           - steamtinkerlaunch
           - minecraft
-          - jre8 # for minecrfaft
   
           # cli
+          - unzip
+          - wget
           - nmap
           - fd
-          - bitwarden-cli
           - stow
           - alacritty
-          - fd
           - fish
+          - bash
           - upower
           - htop
-          - tldr
           - yt-dlp
-  
-          # dev
-          - ansible-language-server
-          - git
-          - neovim
-          - lazygit
-          - gitui
-          - lua-language-server
-          - luaformatter # lua formatter
-          - taplo # toml lsp
           - jq
           - fzf
-          - docker
-          - docker-ls
-          - docker-compose
-          - lazydocker
-          - wireshark-qt
-          - docker
-          - docker-compose
-  
-          # rust tools
+          - git
+          # rust cli tools
           - eza
           - ripgrep
           - zellij
@@ -166,11 +102,46 @@
           - zoxide
           - helix
   
+          # dev
+          # languages
+          - npm
+          - ninja
+          - gcc
+          - cmake
+          - jre8 
+          - python3
+          - go
+          - rust
+          # language servers
+          - ansible-language-server
+          - lua-language-server
+          - luaformatter 
+          - taplo # toml lsp
+          # tools 
+          - neovim
+          - lazygit
+          - lazydocker
+          - wireshark-qt
+          - docker
+          - docker-compose
+  
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
       package:
         name:
           - None
+
+    - name: install packages debian
+      when: ansible_distribution in [ "OpenSuse" ]
+      package:
+        name:
+          - None
+
+    - name: set display & login manaer
+      become_user: root
+      shell: |
+        cat "[default_session]" > /etc/greetd/config.toml
+        cat 'command = "/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland "' >> /etc/greetd/config.toml 
           
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
