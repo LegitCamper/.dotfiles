@@ -40,6 +40,7 @@
           - moreutils # sponge...
           - efibootmgr
           - usbutils # lsusb
+          - grub-btrfs
 
           # Networking tools
           - inetutils # hostname ping ifconfig...
@@ -137,11 +138,18 @@
         name:
           - None
 
-    - name: set display & login manaer
+    - name: set display manager
+      become_user: root
+      systemd_service:
+        name: greetd
+        state: started
+        enabled: true
+
+    - name: login manaer
       become_user: root
       shell: |
         cat "[default_session]" > /etc/greetd/config.toml
-        cat 'command = "/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland "' >> /etc/greetd/config.toml 
+        cat 'command = "/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland "' >> /etc/greetd/config.toml
           
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
@@ -176,6 +184,35 @@
           dest: ~/.ssh/id_ed25519
         - src: ssh_key.pub
           dest: ~/.ssh/id_ed25519.pub
+
+  - block: # system snapshots (btfs)
+    - name: set snapper snapshot limits
+      shell: |
+        cat 'ALLOW_USERS="sawyer"' > /etc/snapper/configs/root
+        cat 'TIMELINE_MIN_AGE="1800"' >> /etc/snapper/configs/root
+        cat 'TIMELINE_LIMIT_HOURLY="5"' >> /etc/snapper/configs/root
+        cat 'TIMELINE_LIMIT_DAILY="7"' >> /etc/snapper/configs/root
+        cat 'TIMELINE_LIMIT_WEEKLY="0"' >> /etc/snapper/configs/root
+        cat 'TIMELINE_LIMIT_MONTHLY="0"' >> /etc/snapper/configs/root
+        cat 'TIMELINE_LIMIT_YEARLY="0"' >> /etc/snapper/configs/root
+
+    - name: update grub with new snapshot entries
+      systemd_service:
+        name: grub-btrfs.path 
+        state: started
+        enabled: true
+
+    - name: snapper-timeline
+      systemd_service:
+        name: snapper-timeline
+        state: restarted
+        enabled: true
+
+    - name: snapper-cleanup
+      systemd_service:
+        name: snapper-cleanup
+        state: restarted
+        enabled: true
           
   - block: # setup auto updater
     - name: add ansible user
