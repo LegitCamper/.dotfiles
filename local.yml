@@ -111,7 +111,6 @@
           # tools 
           - neovim
           - lazygit
-          - lazydocker
           - wireshark-qt
           - docker
           - docker-compose
@@ -130,6 +129,7 @@
           - minecraft-launcher
           - macchina
           - lua-format
+          - lazydocker
 
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
