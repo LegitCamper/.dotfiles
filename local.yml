@@ -70,10 +70,6 @@
   
           # gaming
           - lutris
-          - heroic
-          - gamescope
-          - steamtinkerlaunch
-          - minecraft
   
           # cli
           - yay
@@ -130,6 +126,10 @@
           - aura
           - xboxdrv
           - floorp
+          - heroic-games-launcher 
+          - gamescope-git
+          - steamtinkerlaunch
+          - minecraft-launcher
   
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
