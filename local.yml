@@ -130,8 +130,8 @@
 
     - name: install packages aur
       when: ansible_distribution in [ "Archlinux" ]
-      use: yay
       package:
+        use: yay
         name:
           - aura
           - xboxdrv
