@@ -65,7 +65,6 @@
           - solaar
           - discord
           - vivaldi
-          - floorp
           - vivaldi-ffmpeg-codecs
           - nuclear
           - obsidian
@@ -131,6 +130,7 @@
         name:
           - aura
           - xboxdrv
+          - floorp
   
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
