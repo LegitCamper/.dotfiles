@@ -107,7 +107,7 @@
           # language servers
           - ansible-language-server
           - lua-language-server
-          - luaformatter 
+          - lua-format
           - taplo # toml lsp
           # tools 
           - neovim
