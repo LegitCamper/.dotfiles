@@ -142,7 +142,7 @@
         name:
           - None
 
-    - name: install packages debian
+    - name: install packages opensuse
       when: ansible_distribution in [ "OpenSuse" ]
       package:
         name:
