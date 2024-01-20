@@ -90,7 +90,6 @@
           - eza
           - ripgrep
           - zellij
-          - macchina
           - starship
           - zoxide
           - helix
@@ -130,7 +129,8 @@
           - gamescope-git
           - steamtinkerlaunch
           - minecraft-launcher
-  
+          - macchina
+
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
       package:
