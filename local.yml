@@ -116,19 +116,19 @@
 
     - name: install packages aur
       when: ansible_distribution in [ "Archlinux" ]
-      package:
-        use: yay
+      shell: | 
         name:
-          - aura
-          - xboxdrv
-          - floorp
-          - heroic-games-launcher 
-          - gamescope-git
-          - steamtinkerlaunch
-          - minecraft-launcher
-          - macchina
-          - lua-format
-          - lazydocker
+          yay -Syu
+          aura
+          xboxdrv
+          floorp
+          heroic-games-launcher 
+          gamescope-git
+          steamtinkerlaunch
+          minecraft-launcher
+          macchina
+          lua-format
+          lazydocker
 
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
