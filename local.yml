@@ -100,7 +100,7 @@
           - ninja
           - gcc
           - cmake
-          - jre8 
+          - jdk-openjdk
           - python3
           - go
           - rust
