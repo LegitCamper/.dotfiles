@@ -46,8 +46,7 @@
           - inetutils # hostname ping ifconfig...
           - dnsutils # dig nslookup...
           - bridge-utils # brctl
-          - iw
-          - wirelesstools # iwconfig
+          - nmap
   
           # apps
           - bitwarden
@@ -83,7 +82,6 @@
           - yay
           - unzip
           - wget
-          - nmap
           - fd
           - stow
           - alacritty
