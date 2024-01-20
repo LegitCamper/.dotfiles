@@ -5,7 +5,7 @@
 
   tasks:
   - block: # packages
-    - name: install packages all
+    - name: install packages arch
       when: ansible_distribution in [ "Archlinux" ]
       package:
         name:
@@ -81,6 +81,7 @@
           - minecraft
   
           # cli
+          - yay
           - unzip
           - wget
           - nmap
@@ -126,6 +127,14 @@
           - wireshark-qt
           - docker
           - docker-compose
+
+    - name: install packages aur
+      when: ansible_distribution in [ "Archlinux" ]
+      use: yay
+      package:
+        name:
+          - aura
+          - xboxdrv
   
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
