@@ -116,6 +116,7 @@
 
     - name: install packages aur
       when: ansible_distribution in [ "Archlinux" ]
+      become_user: sawyer
       shell: | 
         name:
           yay -Syu --noconfirm aura-bin xboxdrv floorp-bin heroic-games-launcher-bin  gamescope-git steamtinkerlaunch minecraft-launcher-bin macchina-bin lua-format lazydocker-bin
