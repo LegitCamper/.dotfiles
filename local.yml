@@ -184,13 +184,13 @@
   - block: # system snapshots (btfs)
     - name: set snapper snapshot limits
       shell: |
-        cat 'ALLOW_USERS="sawyer"' > /etc/snapper/configs/root
-        cat 'TIMELINE_MIN_AGE="1800"' >> /etc/snapper/configs/root
-        cat 'TIMELINE_LIMIT_HOURLY="5"' >> /etc/snapper/configs/root
-        cat 'TIMELINE_LIMIT_DAILY="7"' >> /etc/snapper/configs/root
-        cat 'TIMELINE_LIMIT_WEEKLY="0"' >> /etc/snapper/configs/root
-        cat 'TIMELINE_LIMIT_MONTHLY="0"' >> /etc/snapper/configs/root
-        cat 'TIMELINE_LIMIT_YEARLY="0"' >> /etc/snapper/configs/root
+        echo 'ALLOW_USERS="sawyer"' > /etc/snapper/configs/root
+        echo 'TIMELINE_MIN_AGE="1800"' >> /etc/snapper/configs/root
+        echo 'TIMELINE_LIMIT_HOURLY="5"' >> /etc/snapper/configs/root
+        echo 'TIMELINE_LIMIT_DAILY="7"' >> /etc/snapper/configs/root
+        echo 'TIMELINE_LIMIT_WEEKLY="0"' >> /etc/snapper/configs/root
+        echo 'TIMELINE_LIMIT_MONTHLY="0"' >> /etc/snapper/configs/root
+        echo 'TIMELINE_LIMIT_YEARLY="0"' >> /etc/snapper/configs/root
 
     - name: update grub with new snapshot entries
       systemd_service:
