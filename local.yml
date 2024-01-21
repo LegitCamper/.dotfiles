@@ -144,8 +144,8 @@
     - name: login manaer
       become_user: root
       shell: |
-        cat "[default_session]" > /etc/greetd/config.toml
-        cat 'command = "/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland "' >> /etc/greetd/config.toml
+        echo "[default_session]" > /etc/greetd/config.toml
+        echo 'command = "/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland "' >> /etc/greetd/config.toml
           
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
