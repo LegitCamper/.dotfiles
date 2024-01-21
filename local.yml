@@ -159,7 +159,7 @@
     - name: copy .dotfiles
       become_user: sawyer
       copy:
-        src: ~/.ansible/tmp/.dotfiles
+        src: ~/.ansible/pull/$(hostname)/
         dest: ~/projects/.dotfiles
   
     - name: stow dotfiles
