@@ -38,6 +38,7 @@
           - efibootmgr
           - usbutils # lsusb
           - grub-btrfs
+          - inotify-tools # dep for grub-btrfs
 
           # Networking tools
           - networkmanager
@@ -199,7 +200,7 @@
 
     - name: update grub with new snapshot entries
       systemd_service:
-        name: grub-btrfs.path 
+        name: grub-btrfsd
         state: started
         enabled: true
 
