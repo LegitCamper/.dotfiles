@@ -70,6 +70,7 @@
   
           # gaming
           - lutris
+          - steam
   
           # cli
           - yay
@@ -120,8 +121,19 @@
       become_user: sawyer
       shell: | 
         name:
-          yay -Syu --noconfirm aura-bin floorp-bin heroic-games-launcher-bin  gamescope-git steamtinkerlaunch minecraft-launcher-bin macchina-bin lua-format lazydocker-bin
-          # xboxdrv # not working
+          echo "
+          aura-bin 
+          xboxdrv 
+          floorp-bin 
+          heroic-games-launcher-bin  
+          gamescope-git 
+          steamtinkerlaunch 
+          minecraft-launcher-bin 
+          macchina-bin 
+          lua-format 
+          lazydocker-bin 
+          catppuccin-gtk-theme-macchiato
+          " | tr "\n" " " | yay -Syu --noconfirm 
 
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
