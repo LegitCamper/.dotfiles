@@ -119,7 +119,8 @@
       become_user: sawyer
       shell: | 
         name:
-          yay -Syu --noconfirm aura-bin xboxdrv floorp-bin heroic-games-launcher-bin  gamescope-git steamtinkerlaunch minecraft-launcher-bin macchina-bin lua-format lazydocker-bin
+          yay -Syu --noconfirm aura-bin floorp-bin heroic-games-launcher-bin  gamescope-git steamtinkerlaunch minecraft-launcher-bin macchina-bin lua-format lazydocker-bin
+          # xboxdrv # not working
 
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
