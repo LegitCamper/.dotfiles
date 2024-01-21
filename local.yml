@@ -158,8 +158,9 @@
         
     - name: copy .dotfiles
       become_user: sawyer
-      shell:
-        cp -r ~/.ansible/pull/$(hostname)/ ~/projects/.dotfiles
+      shell: |
+        cp -r ~/.ansible/pull/$(hostname)/ ~/projects/.dotfiles/
+        exit 0
   
     - name: stow dotfiles
       become_user: sawyer
