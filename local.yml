@@ -216,17 +216,17 @@
         state: started
         enabled: true
 
-    - name: snapper-timeline
-      systemd_service:
-        name: snapper-timeline
-        state: restarted
-        enabled: true
+    # - name: snapper-timeline
+    #   systemd_service:
+    #     name: snapper-timeline
+    #     state: restarted
+    #     enabled: true
 
-    - name: snapper-cleanup
-      systemd_service:
-        name: snapper-cleanup
-        state: restarted
-        enabled: true
+    # - name: snapper-cleanup
+    #   systemd_service:
+    #     name: snapper-cleanup
+    #     state: restarted
+    #     enabled: true
           
   - block: # setup auto updater
     - name: add ansible user
