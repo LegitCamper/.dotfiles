@@ -4,7 +4,7 @@ layout {
     }
     tab name="Development" split_direction="vertical" {
         pane name="else" size="25%"
-        pane name="helix" command="hx" args="./"
+        pane name="helix" command="helix" args="./"
         pane name="compiler" size="25%"
     }
 }

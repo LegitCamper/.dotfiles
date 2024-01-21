@@ -107,6 +107,8 @@
           - go
           - rust
           # language servers
+          - gopls
+          - rust-analyzer
           - ansible-language-server
           - lua-language-server
           - taplo # toml lsp
