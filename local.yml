@@ -158,8 +158,11 @@
     - name: login manaer
       become_user: root
       shell: |
-        echo "[default_session]" > /etc/greetd/config.toml
-        echo 'command = "/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland "' >> /etc/greetd/config.toml
+        echo '[terminal]
+        vt = 1
+        [default_session]
+        command = "/bin/tuigreet --time --asterisks --user-menu --cmd Hyprland "
+        user = "greeter"' >> /etc/greetd/config.toml
           
   - block: # stow dotfiles
     - name: create projects folder (if not exist)
