@@ -118,7 +118,7 @@
       when: ansible_distribution in [ "Archlinux" ]
       shell: | 
         name:
-          yay -Syu aura-bin xboxdrv floorp-bin heroic-games-launcher-bin  gamescope-git steamtinkerlaunch minecraft-launcher-bin macchina-bin lua-format lazydocker-bin
+          yay -Syu --noconfirm aura-bin xboxdrv floorp-bin heroic-games-launcher-bin  gamescope-git steamtinkerlaunch minecraft-launcher-bin macchina-bin lua-format lazydocker-bin
 
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
