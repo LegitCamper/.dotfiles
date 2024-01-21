@@ -39,6 +39,7 @@
           - usbutils # lsusb
           - grub-btrfs
           - inotify-tools # dep for grub-btrfs
+          - cronie
 
           # Networking tools
           - networkmanager
