@@ -79,6 +79,7 @@ alias tb="nc termbin.com 9999"
 alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 set HELIX_RUNTIME ~/.config/helix/runtime
+alias hx="helix"
 
 # nix aliases
 alias update="bash ~/projects/.nix-config/.update.sh"
