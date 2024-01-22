@@ -219,6 +219,11 @@
           dest: ~/.ssh/id_ed25519.pub
 
   - block: # services
+    - name: start grub-btrfsd and generate file
+      systemd_service:
+        name: grub-btrfsd
+        state: started
+
     - name: replace line
       lineinfile: 
         path: /etc/systemd/system/grub-btrfsd.service 
@@ -233,7 +238,7 @@
     - name: update grub with new snapshot entries
       systemd_service:
         name: grub-btrfsd
-        state: started
+        state: restarted
         enabled: true
 
     - name: enable cronie
