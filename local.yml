@@ -128,12 +128,12 @@
       become_user: sawyer
       shell: | 
         name:
+          #xboxdrv 
+          #gamescope-git 
           packages=$(echo "
           aura-bin 
-          # xboxdrv 
           floorp-bin 
           heroic-games-launcher-bin  
-          # gamescope-git 
           steamtinkerlaunch 
           minecraft-launcher 
           macchina-bin 
