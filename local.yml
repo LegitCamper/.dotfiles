@@ -37,10 +37,11 @@
           - moreutils # sponge...
           - efibootmgr
           - usbutils # lsusb
-          - grub-btrfs
           - inotify-tools # dep for grub-btrfs
           - cronie
           - qt5-styleplugins
+          - timeshift
+          - grub-btrfs
 
           # Networking tools
           - networkmanager
@@ -137,6 +138,7 @@
           lua-format 
           lazydocker-bin 
           catppuccin-gtk-theme-macchiato
+          timeshift-autosnap
           " | tr "\n" " " | yay -Syu --noconfirm 
 
     - name: install packages debian
@@ -163,9 +165,9 @@
       shell: |
         gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Macchiato-Standard-Lavender-Dark"
 
-    - name: set qt theme
-      become_user: sawyer
-      shell: |
+    # - name: set qt theme
+    #   become_user: sawyer
+    #   shell: |
 
     - name: login manager
       become_user: root
@@ -226,9 +228,26 @@
         echo 'TIMELINE_LIMIT_YEARLY="0"' >> /etc/snapper/configs/root
         exit 0
 
+    - name: replace line
+      lineinfile: 
+        path: /etc/systemd/system/grub-btrfsd.service 
+        regexp: '^ExecStart' 
+        line: 'ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto'
+        backrefs: yes
+        
+    - name: rebuild grub conf
+      become_user: root
+      shell: grub-mkconfig -o /boot/grub/grub.cfg
+
     - name: update grub with new snapshot entries
       systemd_service:
         name: grub-btrfsd
+        state: started
+        enabled: true
+
+    - name: enable cronie
+      systemd_service:
+        name: cronie
         state: started
         enabled: true
 
