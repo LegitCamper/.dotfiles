@@ -42,6 +42,8 @@
           - qt5-styleplugins
           - timeshift
           - grub-btrfs
+          - udisks2
+          - udiskie
 
           # Networking tools
           - networkmanager
