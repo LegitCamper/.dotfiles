@@ -189,11 +189,13 @@
         owner: sawyer
         group: sawyer
         
-    - name: copy .dotfiles
+    - name: clone .dotfiles
       become_user: sawyer
-      shell: |
-        cp -r ~/.ansible/pull/$(hostname)/ ~/projects/.dotfiles/
-        exit 0
+      git:
+        repo: "https://github.com/LegitCamper/.dotfiles.git"
+        dest: ~/projects/.dotfiles
+        clone: yes
+        update: yes
   
     - name: stow dotfiles
       become_user: sawyer
