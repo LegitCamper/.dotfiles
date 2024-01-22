@@ -114,6 +114,7 @@
           - rust-analyzer
           - ansible-language-server
           - lua-language-server
+          - yaml-language-server
           - taplo # toml lsp
           # tools 
           - neovim
@@ -124,15 +125,15 @@
 
     - name: install packages aur
       when: ansible_distribution in [ "Archlinux" ]
-      become_user: sawyer
+      become_user: root
       shell: | 
         name:
-          echo "
+          packages=$(echo "
           aura-bin 
           xboxdrv 
           floorp-bin 
           heroic-games-launcher-bin  
-          gamescope-git 
+          # gamescope-git 
           steamtinkerlaunch 
           minecraft-launcher-bin 
           macchina-bin 
@@ -141,7 +142,8 @@
           catppuccin-gtk-theme-macchiato
           qt5-styleplugins
           timeshift-autosnap
-          " | tr "\n" " " | yay -Syu --noconfirm 
+          " | tr "\n" " ") 
+          yay -Syu $packages --noconfirm 
 
     - name: install packages debian
       when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
@@ -216,6 +218,7 @@
         - src: ssh_key.pub
           dest: ~/.ssh/id_ed25519.pub
 
+  - block: # services
     - name: replace line
       lineinfile: 
         path: /etc/systemd/system/grub-btrfsd.service 
