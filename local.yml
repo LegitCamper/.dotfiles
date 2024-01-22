@@ -130,7 +130,7 @@
         name:
           packages=$(echo "
           aura-bin 
-          xboxdrv 
+          # xboxdrv 
           floorp-bin 
           heroic-games-launcher-bin  
           # gamescope-git 
