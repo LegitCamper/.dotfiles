@@ -224,12 +224,12 @@
         name: grub-btrfsd
         state: started
 
-    - name: replace line loc 1
-      lineinfile: 
-        path: /etc/systemd/system/grub-btrfsd.service 
-        regexp: '^ExecStart' 
-        line: 'ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto'
-        backrefs: yes
+    # - name: replace line loc 1
+    #   lineinfile: 
+    #     path: /etc/systemd/system/grub-btrfsd.service 
+    #     regexp: '^ExecStart' 
+    #     line: 'ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto'
+    #     backrefs: yes
 
     - name: replace line loc 2
       lineinfile: 
