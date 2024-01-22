@@ -125,7 +125,7 @@
 
     - name: install packages aur
       when: ansible_distribution in [ "Archlinux" ]
-      become_user: root
+      become_user: sawyer
       shell: | 
         name:
           packages=$(echo "
