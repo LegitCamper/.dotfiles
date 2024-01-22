@@ -40,6 +40,7 @@
           - grub-btrfs
           - inotify-tools # dep for grub-btrfs
           - cronie
+          - qt5-styleplugins
 
           # Networking tools
           - networkmanager
@@ -157,7 +158,16 @@
         state: started
         enabled: true
 
-    - name: login manaer
+    - name: set gtk theme
+      become_user: sawyer
+      shell: |
+        gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Macchiato-Standard-Lavender-Dark"
+
+    - name: set qt theme
+      become_user: sawyer
+      shell: |
+
+    - name: login manager
       become_user: root
       shell: |
         echo '[terminal]
