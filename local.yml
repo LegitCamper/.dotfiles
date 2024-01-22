@@ -39,7 +39,6 @@
           - usbutils # lsusb
           - inotify-tools # dep for grub-btrfs
           - cronie
-          - qt5-styleplugins
           - timeshift
           - grub-btrfs
           - udisks2
@@ -140,6 +139,7 @@
           lua-format 
           lazydocker-bin 
           catppuccin-gtk-theme-macchiato
+          qt5-styleplugins
           timeshift-autosnap
           " | tr "\n" " " | yay -Syu --noconfirm 
 
@@ -214,22 +214,6 @@
         - src: ssh_key.pub
           dest: ~/.ssh/id_ed25519.pub
 
-  - block: # system snapshots (btfs)
-    - name: set snapper snapshot limits
-      shell: |
-        mkdir /etc/snapper
-        mkdir /etc/snapper/configs
-        mkdir /etc/snapper/configs
-        touch /etc/snapper/configs/root
-        echo 'ALLOW_USERS="sawyer"' > /etc/snapper/configs/root
-        echo 'TIMELINE_MIN_AGE="1800"' >> /etc/snapper/configs/root
-        echo 'TIMELINE_LIMIT_HOURLY="5"' >> /etc/snapper/configs/root
-        echo 'TIMELINE_LIMIT_DAILY="7"' >> /etc/snapper/configs/root
-        echo 'TIMELINE_LIMIT_WEEKLY="0"' >> /etc/snapper/configs/root
-        echo 'TIMELINE_LIMIT_MONTHLY="0"' >> /etc/snapper/configs/root
-        echo 'TIMELINE_LIMIT_YEARLY="0"' >> /etc/snapper/configs/root
-        exit 0
-
     - name: replace line
       lineinfile: 
         path: /etc/systemd/system/grub-btrfsd.service 
@@ -252,19 +236,7 @@
         name: cronie
         state: started
         enabled: true
-
-    # - name: snapper-timeline
-    #   systemd_service:
-    #     name: snapper-timeline
-    #     state: restarted
-    #     enabled: true
-
-    # - name: snapper-cleanup
-    #   systemd_service:
-    #     name: snapper-cleanup
-    #     state: restarted
-    #     enabled: true
-          
+       
   - block: # setup auto updater
     - name: add ansible user
       user: name=ansible uid=900
