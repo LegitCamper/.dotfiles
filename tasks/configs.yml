@@ -1,0 +1,61 @@
+- name: set gtk theme
+  become_user: sawyer
+  shell: |
+    gsettings set org.gnome.desktop.interface gtk-theme \
+    "Catppuccin-Macchiato-Standard-Lavender-Dark"
+
+# - name: set qt theme
+#   become_user: sawyer
+#   shell: |
+
+- name: create projects folder (if not exist)
+  become_user: sawyer
+  file:
+    path: ~/projects
+    state: directory
+    owner: sawyer
+    group: sawyer
+    
+- name: clone .dotfiles
+  become_user: sawyer
+  git:
+    repo: "https://github.com/LegitCamper/.dotfiles.git"
+    dest: ~/projects/.dotfiles
+    clone: yes
+    update: yes
+
+- name: stow dotfiles
+  become_user: sawyer
+  shell: bash -c '~/projects/.dotfiles/.stow.sh'
+
+- name: copy and decrypt keys (if needed)
+  become_user: sawyer
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    decrypt: yes
+    owner: sawyer
+    group: sawyer
+    mode: 0600
+  loop:
+    - src: ssh_key
+      dest: ~/.ssh/id_ed25519
+    - src: ssh_key.pub
+      dest: ~/.ssh/id_ed25519.pub
+
+- name: login manager config
+  become_user: root
+  shell: |
+    cat /home/sawyer/projects/.dotfiles/tasks/files/greetd_config.toml \
+    >> /etc/greetd/config.toml
+
+- name: replace line 
+  lineinfile: 
+    path: /usr/lib/systemd/system/grub-btrfsd.service 
+    regexp: '^ExecStart' 
+    line: 'ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto'
+    backrefs: yes
+    
+- name: rebuild grub conf
+  become_user: root
+  shell: grub-mkconfig -o /boot/grub/grub.cfg

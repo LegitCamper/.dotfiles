@@ -1,0 +1,149 @@
+- name: install packages arch
+  when: ansible_distribution in [ "Archlinux" ]
+  package:
+    name:
+      # window manager
+      - ttf-jetbrains-mono-nerd
+      - hyprland
+      - waybar
+      - greetd
+      - greetd-tuigreet
+      - flameshot
+      - kvantum
+      - lxqt-qtplugin
+      - papirus-icon-theme
+      - lxappearance
+      - dolphin
+      - pavucontrol
+      - blueman
+      - swayidle
+      - swaybg
+      - wofi
+      - dunst
+      - playerctl
+      - waybar
+      - grim
+      - slurp
+      - wl-clipboard
+      - socat
+      - brightnessctl
+      - moreutils # sponge...
+      - efibootmgr
+      - usbutils # lsusb
+      - inotify-tools # dep for grub-btrfs
+      - cronie
+      - timeshift
+      - grub-btrfs
+      - udisks2
+      - udiskie
+
+      # Networking tools
+      - networkmanager
+      - network-manager-applet
+      - inetutils # hostname ping ifconfig...
+      - dnsutils # dig nslookup...
+      - bridge-utils # brctl
+      - nmap
+
+      # apps
+      - bitwarden
+      - dolphin
+      - ark
+      - kate
+      - gwenview
+      - kcalc
+      - rhythmbox
+      - socat
+      - qemu
+      - libreoffice
+      - vlc
+      - ffmpeg
+      - procs
+      - solaar
+      - discord
+      - vivaldi
+      - vivaldi-ffmpeg-codecs
+      - obsidian
+
+      # gaming
+      - lutris
+      - steam
+
+      # cli
+      - yay
+      - unzip
+      - wget
+      - fd
+      - stow
+      - alacritty
+      - fish
+      - bash
+      - upower
+      - htop
+      - yt-dlp
+      - jq
+      - fzf
+      - git
+      # rust cli tools
+      - eza
+      - ripgrep
+      - zellij
+      - starship
+      - zoxide
+      - helix
+
+      # dev
+      # languages
+      - npm
+      - ninja
+      - gcc
+      - cmake
+      - jdk-openjdk
+      - python3
+      - go
+      - rust
+      # language servers
+      - gopls
+      - rust-analyzer
+      - ansible-language-server
+      - lua-language-server
+      - yaml-language-server
+      - taplo # toml lsp
+      # tools 
+      - neovim
+      - lazygit
+      - wireshark-qt
+      - docker
+      - docker-compose
+
+- name: Install aur packages with yay via aur plugin
+  when: ansible_distribution in [ "Archlinux" ]
+  kewlfft.aur.aur:
+    use: yay
+    name:
+      # - xboxdrv 
+      # - gamescope-git 
+      - packages=$(echo "
+      - aura-bin 
+      - floorp-bin 
+      - heroic-games-launcher-bin  
+      - steamtinkerlaunch 
+      - minecraft-launcher 
+      - macchina-bin 
+      - lua-format 
+      - lazydocker-bin 
+      - catppuccin-gtk-theme-macchiato
+      - qt5-styleplugins
+      - timeshift-autosnap
+
+- name: install packages debian
+  when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
+  package:
+    name:
+      - None
+
+- name: install packages opensuse
+  when: ansible_distribution in [ "OpenSuse" ]
+  package:
+    name:
+      - None
