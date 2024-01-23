@@ -14,4 +14,4 @@
         # running services again with new configs
         - tasks/pull.yml # configs a cron task to auto update system
       ansible.builtin.include_tasks:
-        file: {{ item }}
+        file: "{{ item }}"
