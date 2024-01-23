@@ -3,3 +3,4 @@ editors/.config/nvim/lazy-lock.json
 editors/.config/helix/runtime/grammars
 nix/result
 
+.ansible-auto.txt
