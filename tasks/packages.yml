@@ -118,7 +118,10 @@
 
 - name: Install aur packages with yay via aur plugin
   when: ansible_distribution in [ "Archlinux" ]
+  become: yes
+  become_user: aur_builder
   kewlfft.aur.aur:
+    state: present # just installs and does not upgrade
     use: yay
     name:
       # - xboxdrv 

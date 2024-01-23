@@ -3,15 +3,19 @@
   connection: local
   become: true
 
+  pre_tasks:
+    - name: install ansible modules before tasks
+      ansible.builtin.include_tasks:
+        file: tasks/plugins.yml # installs ansible plugins 
+
   tasks:
     - name: Include task list in play
       loop:
-        - tasks/plugins.yml # installs ansible plugins
         - tasks/users.yml # configs users for ansible tasks
         - tasks/packages.yml # installs packages
         - tasks/services.yml # configs a cron task to auto update system      
         - tasks/configs.yml # configs desktop related files and themes
         # running services again with new configs
-        - tasks/pull.yml # configs a cron task to auto update system
+        - tasks/services.yml # configs a cron task to auto update system
       ansible.builtin.include_tasks:
         file: "{{ item }}"
