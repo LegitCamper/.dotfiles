@@ -4,6 +4,14 @@
     groups: 
       - gamemode
 
+- name: find gamescope path
+  shell: which gamescope
+  register: gamescope
+
+- name: escalate gamescope permissions
+  become_user: root
+  shell: setcap 'CAP_SYS_NICE=eip' \ "{{ gamescope.stdout }}"
+
 - name: create ansible user
   user: name=ansible uid=900
 
