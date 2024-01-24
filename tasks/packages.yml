@@ -109,9 +109,9 @@
           - docker
           - docker-compose  
     aur_packages:
-      # - xboxdrv 
+      - aur-auto-vote-git 
+      - xpadneo-dkms # xbox controller support
       # - gamescope-git 
-      - packages=$(echo "
       - aura-bin 
       - floorp-bin 
       - heroic-games-launcher-bin  
