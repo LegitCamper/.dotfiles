@@ -26,7 +26,7 @@ file-types = ["go"]
 roots = ["go.work", "go.mod"]
 auto-format = true
 comment-token = "//"
-language-servers = [ "gopls", "golangci-lint-lsp" ]
+language-servers = ["gopls", "golangci-lint-lsp"]
 # TODO: gopls needs utf-8 offsets?
 indent = { tab-width = 4, unit = "\t" }
 
@@ -48,13 +48,13 @@ comment-token = "#"
 auto-format = true
 
 [[language]]
-name = "ansible"
+name = "yaml"
+scope = "source.yaml"
 file-types = ["yml", "yaml"]
-language-servers = ["ansible"]
-roots = ["local.yml", "local.yaml"]
-scope = "text.ansible"
 comment-token = "#"
-auto-format = true
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["yaml-language-server", "ansible-language-server"]
+injection-regex = "yml|yaml"
 
 [[language]]
 name = "lua"
@@ -108,4 +108,10 @@ rangeVariableTypes = true
 [language-server.golangci-lint-lsp]
 command = "golangci-lint-langserver"
 [language-server.golangci-lint-lsp.config]
-command = ["golangci-lint", "run", "--out-format", "json", "--issues-exit-code=1"]
+command = [
+  "golangci-lint",
+  "run",
+  "--out-format",
+  "json",
+  "--issues-exit-code=1",
+]

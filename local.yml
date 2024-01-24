@@ -4,7 +4,7 @@
   become: true
 
   pre_tasks:
-    - name: install ansible modules before tasks
+    - name: install ansible modules
       ansible.builtin.include_tasks:
         file: tasks/plugins.yml # installs ansible plugins 
 
@@ -14,6 +14,7 @@
         - tasks/users.yml # configs users for ansible tasks
         - tasks/packages.yml # installs packages
         - tasks/services.yml # configs a cron task to auto update system      
+        - tasks/snapshot.yml # creates snapshot before modifications
         - tasks/configs.yml # configs desktop related files and themes
         # running services again with new configs
         - tasks/services.yml # configs a cron task to auto update system
