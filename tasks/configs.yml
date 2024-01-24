@@ -4,9 +4,10 @@
     gsettings set org.gnome.desktop.interface gtk-theme \
     "Catppuccin-Macchiato-Standard-Lavender-Dark"
 
-# - name: set qt theme
-#   become_user: sawyer
-#   shell: |
+- name: set icon theme
+  become_user: sawyer
+  shell: |
+    gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 
 - name: create projects folder (if not exist)
   become_user: sawyer
@@ -31,7 +32,6 @@
     exit 0
   args:
     executable: /bin/bash
-
 
 - name: copy and decrypt keys (if needed)
   become_user: sawyer
