@@ -82,7 +82,7 @@ set HELIX_RUNTIME ~/.config/helix/runtime
 alias hx="helix"
 
 # nix aliases
-alias update="bash ~/projects/.nix-config/.update.sh"
+alias update="sudo ansible-pull -U https://github.com/LegitCamper/.dotfiles.git" #"bash ~/projects/.nix-config/.update.sh"
 
 starship init fish | source
 
