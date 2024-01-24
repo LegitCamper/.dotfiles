@@ -11,8 +11,8 @@
   tasks:
     - name: Include task list in play
       loop:
-        - tasks/users.yml # configs users for ansible tasks
         - tasks/packages.yml # installs packages
+        - tasks/users.yml # configs users for ansible tasks
         - tasks/services.yml # configs a cron task to auto update system      
         - tasks/snapshot.yml # creates snapshot before modifications
         - tasks/configs.yml # configs desktop related files and themes

@@ -62,8 +62,11 @@
         - vivaldi-ffmpeg-codecs
         - obsidian
       gaming:
+        - gamescope
         - lutris
         - steam
+        - gamemode
+        - lib32-gamemode
       cli:
         - yay
         - unzip
@@ -111,7 +114,6 @@
     aur_packages:
       - aur-auto-vote-git 
       - xpadneo-dkms # xbox controller support
-      # - gamescope-git 
       - aura-bin 
       - floorp-bin 
       - heroic-games-launcher-bin  

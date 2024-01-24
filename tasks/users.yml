@@ -1,3 +1,9 @@
+- name: add user to gamemode group
+  ansible.builtin.user:
+    name: sawyer
+    groups: 
+      - gamemode
+
 - name: create ansible user
   user: name=ansible uid=900
 
@@ -5,14 +11,12 @@
   copy: src=tasks/files/sudoers_ansible dest=/etc/sudoers.d/ansible owner=root group=root mode=0440
 
 - name: Create the `aur_builder` user
-  become: yes
   ansible.builtin.user:
     name: aur_builder
     create_home: yes
     group: wheel
 
 - name: Allow the `aur_builder` user to run `sudo pacman` without a password
-  become: yes
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/11-install-aur_builder
     line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
