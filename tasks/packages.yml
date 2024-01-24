@@ -4,6 +4,7 @@
       window_manager:
         - ttf-jetbrains-mono-nerd
         - hyprland
+        - xdg-desktop-portal-hyprland
         - waybar
         - greetd
         - greetd-tuigreet
