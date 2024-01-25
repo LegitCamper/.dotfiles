@@ -114,6 +114,7 @@
     aur_packages:
       - aur-auto-vote-git 
       - xpadneo-dkms # xbox controller support
+      - proton-ge-custom-bin
       - aura-bin 
       - floorp-bin 
       - heroic-games-launcher-bin  
