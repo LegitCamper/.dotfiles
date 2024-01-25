@@ -1,8 +1,8 @@
-- name: add user to gamemode group
+- name: add user groups
   ansible.builtin.user:
     name: sawyer
-    groups: 
-      - gamemode
+    append: true
+    groups: wheel,adm,games,log,rfkill,sys,gamemode,qemu,uucp,audio,disk,input,scanner,storage,video,openvpn,docker,wireshark,ansible
 
 - name: find gamescope path
   shell: which gamescope
