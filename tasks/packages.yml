@@ -94,6 +94,7 @@
           - cmake
           - jdk-openjdk
           - python3
+          - python-pip
           - go
           - rust
         language_servers:
