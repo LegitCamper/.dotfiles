@@ -97,7 +97,7 @@
           - go
           - rust
         language_servers:
-          - clangd
+          - clang
           - gopls
           - rust-analyzer
           - ansible-language-server
