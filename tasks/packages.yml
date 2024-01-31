@@ -122,6 +122,7 @@
       - minecraft-launcher 
       - macchina-bin 
       - lua-format 
+      - clang-format-static-bin
       - lazydocker-bin 
       - catppuccin-gtk-theme-macchiato
       - qt5-styleplugins

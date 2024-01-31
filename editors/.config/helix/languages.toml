@@ -19,6 +19,16 @@ file-types = ["rs"]
 auto-format = true
 
 [[language]]
+name = "c"
+scope = "source.c"
+injection-regex = "c"
+file-types = ["c"]
+comment-token = "//"
+language-servers = [ "clangd" ]
+formatter = { command = "clang-format" }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
 name = "go"
 scope = "source.go"
 injection-regex = "go"
