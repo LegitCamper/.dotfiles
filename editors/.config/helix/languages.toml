@@ -25,6 +25,7 @@ injection-regex = "c"
 file-types = ["c"]
 comment-token = "//"
 language-servers = [ "clangd" ]
+auto-format = true
 formatter = { command = "clang-format" }
 indent = { tab-width = 2, unit = "  " }
 
