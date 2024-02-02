@@ -79,6 +79,9 @@
         - upower
         - htop
         - yt-dlp
+        - yazi
+        - poppler
+        - rg
         - jq
         - fzf
         - git
