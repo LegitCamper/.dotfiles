@@ -9,7 +9,7 @@ set -U fish_user_paths $HOME/.local/bin $HOME/Applications $HOME/.cargo/bin $fis
 ### EXPORT ###
 set fish_greeting # Supresses fish's intro message
 set TERM screen-256color # Sets the terminal type
-set EDITOR hx
+set EDITOR helix
 set VISUAL kate
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
