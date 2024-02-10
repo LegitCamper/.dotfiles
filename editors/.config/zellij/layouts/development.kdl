@@ -3,7 +3,7 @@ layout {
         pane name="lazygit" command="lazygit"
     }
     tab name="Development" split_direction="vertical" {
-        pane name="else" size="25%"
+        pane name="else" size="30%"
         pane name="helix" command="helix" args="./"
         pane name="compiler" size="25%"
     }
