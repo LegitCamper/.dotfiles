@@ -29,8 +29,11 @@ alias .3='cd ../../..'
 alias .4='cd ../../../..'
 alias .5='cd ../../../../..'
 
-# vim and emacs
+# editor
 alias vim='nvim'
+alias nano="nano -l"
+set HELIX_RUNTIME ~/.config/helix/runtime
+alias hx="helix"
 
 # Lazygit alias
 alias lg='lazygit'
@@ -49,6 +52,9 @@ alias hibernate="echo disk | sudo tee /sys/power/state" # Requires sufficient sw
 # Changing find and grep applications
 alias find="fd"
 alias grep="rg"
+
+# zoxide
+alias cd="z"
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -69,28 +75,10 @@ alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias psmem='ps auxf | sort -nr -k 4'
 alias pscpu='ps auxf | sort -nr -k 3'
 
-# nano settings
-alias nano="nano -l"
-
-# termbin
-alias tb="nc termbin.com 9999"
-
-# the terminal rickroll
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
-
-set HELIX_RUNTIME ~/.config/helix/runtime
-alias hx="helix"
-
-# nix aliases
 alias update="sudo ansible-pull -U https://github.com/LegitCamper/.dotfiles.git" #"bash ~/projects/.nix-config/.update.sh"
 
 starship init fish | source
 
 zoxide init fish | source
-alias cd="z"
 
-# runs macchina
 macchina
-
-# minecraft
-alias minecraft="cd ~/minecraft-nix/ && nix run github:Ninlives/minecraft.nix#v1_20_1.vanilla.client"
