@@ -4,7 +4,6 @@
       window_manager:
         - ttf-jetbrains-mono-nerd
         - hyprland
-        - pyprland
         - xdg-desktop-portal-hyprland
         - waybar
         - greetd
@@ -82,7 +81,7 @@
         - yt-dlp
         - yazi
         - poppler
-        - rg
+        - ripgrep
         - jq
         - fzf
         - git
@@ -120,6 +119,7 @@
           - docker-compose  
     aur_packages:
       - aur-auto-vote-git 
+      - pyprland
       - xpadneo-dkms # xbox controller support
       - proton-ge-custom-bin
       - aura-bin 
