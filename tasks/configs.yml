@@ -51,10 +51,26 @@
 - name: login manager config
   become_user: root
   shell: |
-    cat /home/sawyer/projects/.dotfiles/tasks/files/greetd_config.toml \
-    >> /etc/greetd/config.toml
+    if ! grep -Fxq "Hyprland" /etc/greetd/config.toml; then
+      cat /home/sawyer/projects/.dotfiles/tasks/files/greetd_config.toml \
+      >> /etc/greetd/config.toml
+    fi
+  args:
+    executable: /bin/bash
 
-- name: replace line 
+- name: configure u2f as alternative athentication method
+  become_user: root
+  shell: |
+    if ! grep -q "pam_u2f" /etc/pam.d/sudo; then
+        u2f="auth sufficient pam_u2f.so cue origin=pam://$(hostname) appid=pam://$(hostname)"
+        sed -i "2i$u2f" /etc/pam.d/sudo
+        sed -i -e 's/required/include/g' /etc/pam.d/sudo
+        sed -i -e 's/requisite/include/g' /etc/pam.d/sudo
+    fi
+  args:
+    executable: /bin/bash   
+
+- name: replace line for btrfs timeshift conf 
   lineinfile: 
     path: /usr/lib/systemd/system/grub-btrfsd.service 
     regexp: '^ExecStart' 
