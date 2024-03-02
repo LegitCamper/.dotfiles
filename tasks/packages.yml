@@ -35,6 +35,7 @@
         - grub-btrfs
         - udisks2
         - udiskie
+        - pam-u2f  
       networking_tools:
         - networkmanager
         - network-manager-applet
