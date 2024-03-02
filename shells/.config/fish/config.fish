@@ -20,15 +20,6 @@ set fish_color_error '#ed8796'
 set fish_color_param "#a6da95"
 
 ### ALIASES ###
-alias clear="clear && fish"
-
-# navigation
-alias ..='cd ..'
-alias ...='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../../..'
-alias .5='cd ../../../../..'
-
 # editor
 alias vim='nvim'
 alias nano="nano -l"
@@ -53,9 +44,6 @@ alias hibernate="echo disk | sudo tee /sys/power/state" # Requires sufficient sw
 alias find="fd"
 alias grep="rg"
 
-# zoxide
-alias cd="z"
-
 # confirm before overwriting something
 alias cp="cp -i"
 alias mv='mv -i'
@@ -64,21 +52,11 @@ alias rm='rm -i'
 # adding flags
 alias df='df -h' # human-readable sizes
 alias free='free -m' # show sizes in MB
-alias lynx='lynx -cfg=~/.lynx/lynx.cfg -lss=~/.lynx/lynx.lss -vikeys'
-alias vifm='./.config/vifm/scripts/vifmrun'
-alias ncmpcpp='ncmpcpp ncmpcpp_directory=$HOME/.config/ncmpcpp/'
-alias mocp='mocp -M "$XDG_CONFIG_HOME"/moc -O MOCDir="$XDG_CONFIG_HOME"/moc'
-
-# ps
-alias psa="ps auxf"
-alias psgrep="ps aux | grep -v grep | grep -i -e VSZ -e"
-alias psmem='ps auxf | sort -nr -k 4'
-alias pscpu='ps auxf | sort -nr -k 3'
-
-alias update="sudo ansible-pull -U https://github.com/LegitCamper/.dotfiles.git" #"bash ~/projects/.nix-config/.update.sh"
 
 starship init fish | source
 
+# zoxide
 zoxide init fish | source
+alias cd="z"
 
 macchina
