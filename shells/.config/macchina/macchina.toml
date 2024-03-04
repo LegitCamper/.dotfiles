@@ -1,30 +1,16 @@
-# Specifies the network interface to use for the LocalIP readout
-interface = "wlan0"
-
-# Lengthen uptime output
 long_uptime = true
-
-# Lengthen shell output
 long_shell = false
-
-# Lengthen kernel output
 long_kernel = false
-
-# Toggle between displaying the current shell or your user's default one.
 current_shell = true
-
-# Toggle between displaying the number of physical or logical cores of your
-# processor.
-physical_cores = true 
-
-# Stock themes
-#theme = "Hydrogen"
-#theme = "Lithium"
-#theme = "Helium"
-#theme = "Beryllium"
-
-# My Themes
+physical_cores = true
 theme = "Oxygen"
-
-# Displays only the specified readouts.
-show = ["Host", "Kernel", "Distribution", "WindowManager", "Resolution", "Terminal", "Shell", "Uptime", "Processor", "ProcessorLoad", "Memory"] #"GPU"
+show = [
+  "Kernel",
+  "Distribution",
+  "WindowManager",
+  "Resolution",
+  "Terminal",
+  "Uptime",
+  "ProcessorLoad",
+  "Memory",
+]
