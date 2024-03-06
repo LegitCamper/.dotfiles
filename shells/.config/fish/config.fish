@@ -29,20 +29,10 @@ alias hx="helix"
 # Lazygit alias
 alias lg='lazygit'
 
-# Changing "ls" to "eza"
-alias ls='eza -al --color=always --group-directories-first' # my preferred listing
-alias la='eza -a --color=always --group-directories-first' # all files and dirs
-alias ll='eza -l --color=always --group-directories-first' # long format
-alias lt='eza -aT --color=always --group-directories-first' # tree listing
-
 # Power settings
 alias suspend="systemctl suspend"
 alias hibernate="echo disk | sudo tee /sys/power/state" # Requires sufficient swap space
 #poweroff
-
-# Changing find and grep applications
-alias find="fd"
-alias grep="rg"
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -54,6 +44,12 @@ alias df='df -h' # human-readable sizes
 alias free='free -m' # show sizes in MB
 
 starship init fish | source
+
+# better aliases
+alias find="fd"
+alias grep="rg"
+alias ls='eza -al --color=always --group-directories-first'
+alias cat='bat'
 
 # zoxide
 zoxide init fish | source

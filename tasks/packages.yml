@@ -90,6 +90,8 @@
         - ripgrep
         - starship
         - zoxide
+        - bat
+        - entr
       dev:
         languages:
           - npm
