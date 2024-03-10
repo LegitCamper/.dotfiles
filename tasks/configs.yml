@@ -35,18 +35,20 @@
 
 - name: copy and decrypt keys (if needed)
   become_user: sawyer
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    decrypt: yes
-    owner: sawyer
-    group: sawyer
-    mode: 0600
-  loop:
+  with_items:
     - src: ssh_key
       dest: ~/.ssh/id_ed25519
     - src: ssh_key.pub
       dest: ~/.ssh/id_ed25519.pub
+  loop_control:
+    loop_var: ssh_file
+  copy:
+    src: "{{ ssh_file.src }}"
+    dest: "{{ ssh_file.dest }}"
+    decrypt: yes
+    owner: sawyer
+    group: sawyer
+    mode: 0600
 
 - name: login manager config
   become_user: root
@@ -60,15 +62,20 @@
 
 - name: configure u2f as alternative athentication method
   become_user: root
+  with_items:
+    - sudo
+    - greetd
+  loop_control:
+    loop_var: u2f_file
   shell: |
-    if ! grep -q "pam_u2f" /etc/pam.d/sudo; then
+    if ! grep -qs "pam_u2f" /etc/pam.d/{{ u2f_file }}; then
         u2f="auth sufficient pam_u2f.so cue origin=pam://$(hostname) appid=pam://$(hostname)"
-        sed -i "2i$u2f" /etc/pam.d/sudo
-        sed -i -e 's/required/include/g' /etc/pam.d/sudo
-        sed -i -e 's/requisite/include/g' /etc/pam.d/sudo
+        sed -i "2i$u2f" /etc/pam.d/{{ u2f_file }}
+        sed -i -e 's/required/include/g' /etc/pam.d/{{ u2f_file }}
+        sed -i -e 's/requisite/include/g' /etc/pam.d/{{ u2f_file }}
     fi
   args:
-    executable: /bin/bash   
+    executable: /bin/bash    
 
 - name: replace line for btrfs timeshift conf 
   lineinfile: 

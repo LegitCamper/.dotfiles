@@ -140,7 +140,7 @@
 
 - name: install packages arch
   when: ansible_distribution in [ "Archlinux" ]
-  loop:
+  with_items:
       - "{{ packages.window_manager }}"
       - "{{ packages.networking_tools }}"
       - "{{ packages.apps }}"
@@ -149,8 +149,10 @@
       - "{{ packages.dev.tools }}"
       - "{{ packages.dev.languages }}"
       - "{{ packages.dev.language_servers }}"
+  loop_control:
+    loop_var: package
   package:
-    name: "{{ item }}"
+    name: "{{ package }}"
       
 - name: Install aur packages with yay via aur plugin
   when: ansible_distribution in [ "Archlinux" ]
