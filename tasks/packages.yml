@@ -35,7 +35,7 @@
         - grub-btrfs
         - udisks2
         - udiskie
-        - pam-u2f  
+        - pam-u2f
       networking_tools:
         - networkmanager
         - network-manager-applet
@@ -101,6 +101,7 @@
           - jdk-openjdk
           - python3
           - python-pip
+          - prettier
           - go
           - rust
         language_servers:
@@ -119,41 +120,41 @@
           - lazygit
           - wireshark-qt
           - docker
-          - docker-compose  
+          - docker-compose
     aur_packages:
-      - aur-auto-vote-git 
+      - aur-auto-vote-git
       - pyprland
       - xpadneo-dkms # xbox controller support
       - proton-ge-custom-bin
-      - aura-bin 
-      - floorp-bin 
-      - heroic-games-launcher-bin  
-      - steamtinkerlaunch 
-      - minecraft-launcher 
-      - macchina-bin 
-      - lua-format 
+      - aura-bin
+      - floorp-bin
+      - heroic-games-launcher-bin
+      - steamtinkerlaunch
+      - minecraft-launcher
+      - macchina-bin
+      - lua-format
       - clang-format-static-bin
-      - lazydocker-bin 
+      - lazydocker-bin
       - catppuccin-gtk-theme-macchiato
       - qt5-styleplugins
-      - timeshift-autosnap  
+      - timeshift-autosnap
 
 - name: install packages arch
   when: ansible_distribution in [ "Archlinux" ]
   with_items:
-      - "{{ packages.window_manager }}"
-      - "{{ packages.networking_tools }}"
-      - "{{ packages.apps }}"
-      - "{{ packages.gaming }}"
-      - "{{ packages.cli }}"
-      - "{{ packages.dev.tools }}"
-      - "{{ packages.dev.languages }}"
-      - "{{ packages.dev.language_servers }}"
+    - "{{ packages.window_manager }}"
+    - "{{ packages.networking_tools }}"
+    - "{{ packages.apps }}"
+    - "{{ packages.gaming }}"
+    - "{{ packages.cli }}"
+    - "{{ packages.dev.tools }}"
+    - "{{ packages.dev.languages }}"
+    - "{{ packages.dev.language_servers }}"
   loop_control:
     loop_var: package
   package:
     name: "{{ package }}"
-      
+
 - name: Install aur packages with yay via aur plugin
   when: ansible_distribution in [ "Archlinux" ]
   become_user: aur_builder
@@ -161,7 +162,6 @@
     state: present # just installs and does not upgrade
     use: yay
     name: "{{ aur_packages }}"
-      
 
 - name: install packages debian
   when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]

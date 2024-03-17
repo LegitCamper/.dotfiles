@@ -64,7 +64,9 @@ scope = "source.yaml"
 file-types = ["yml", "yaml"]
 comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
-language-servers = ["yaml-language-server", "ansible-language-server"]
+auto-format = true
+formatter = { command = 'prettier', args = ["--parser", "yaml"] }
+language-servers = ["yaml", "ansible"]
 injection-regex = "yml|yaml"
 
 [[language]]
@@ -97,6 +99,10 @@ command = "lua-language-server"
 
 [language-server.ansible]
 command = "ansible-language-server"
+args = ["--stdio"]
+
+[language-server.yaml]
+command = "yaml-language-server"
 args = ["--stdio"]
 
 [language-server.taplo]

@@ -3,6 +3,8 @@
 	email = sawyerbristol@gmail.com
 [credential "https://github.com"]
 	username = LegitCamper
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [filter "lfs"]
@@ -14,3 +16,6 @@
 	pushInsteadOf = https://github.com/
 [url "ssh://git@gitlab.com/"]
 	pushInsteadOf = https://gitlab.com/
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential

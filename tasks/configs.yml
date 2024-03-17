@@ -16,7 +16,7 @@
     state: directory
     owner: sawyer
     group: sawyer
-    
+
 - name: clone .dotfiles
   become_user: sawyer
   git:
@@ -75,15 +75,15 @@
         sed -i -e 's/requisite/include/g' /etc/pam.d/{{ u2f_file }}
     fi
   args:
-    executable: /bin/bash    
+    executable: /bin/bash
 
-- name: replace line for btrfs timeshift conf 
-  lineinfile: 
-    path: /usr/lib/systemd/system/grub-btrfsd.service 
-    regexp: '^ExecStart' 
-    line: 'ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto'
+- name: replace line for btrfs timeshift conf
+  lineinfile:
+    path: /usr/lib/systemd/system/grub-btrfsd.service
+    regexp: "^ExecStart"
+    line: "ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto"
     backrefs: yes
-    
+
 - name: rebuild grub conf
   become_user: root
   shell: grub-mkconfig -o /boot/grub/grub.cfg
