@@ -5,6 +5,13 @@
   connection: local
 
   pre_tasks:
+    - name: confirm running as root
+      become: true
+      command: id -u
+      register: id_output
+    - assert:
+        that: id_output.stdout == '0'
+
     - name: install ansible modules
       ansible.builtin.include_tasks:
         file: tasks/plugins.yml # installs ansible plugins
