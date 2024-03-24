@@ -1,3 +1,15 @@
 #!/usr/bin/env bash
 
-sudo ansible-playbook --connection=local --inventory 127.0.0.1 --limit 127.0.0.1 local.yml
+if [[ "$1" == "usedvm" ]]; then
+  vagrant up --provision
+  vagrant halt
+elif [[ "$1" == "newvm" ]]; then
+  vagrant destroy -f
+  vagrant up --provision
+  vagrant halt
+elif [[ "$1" == "local" ]]; then
+  sudo ansible-playbook \
+  --connection=local local.yml
+else
+  echo "need to pass parameter like 'newvm'/'used' or 'local'"
+fi

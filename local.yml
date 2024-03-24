@@ -1,20 +1,25 @@
---- 
-- hosts: localhost
+---
+- hosts:
+    - localhost
+    - all
   connection: local
-  become: true
 
   pre_tasks:
     - name: install ansible modules
       ansible.builtin.include_tasks:
-        file: tasks/plugins.yml # installs ansible plugins 
+        file: tasks/plugins.yml # installs ansible plugins
+
+    - name: create users
+      ansible.builtin.include_tasks:
+        file: tasks/users.yml
 
   tasks:
     - name: Include task list in play
       loop:
         - tasks/packages.yml # installs packages
-        - tasks/snapshot.yml # creates snapshot before modifications
-        - tasks/users.yml # configs users for ansible tasks
-        - tasks/services.yml # configs a cron task to auto update system      
         - tasks/configs.yml # configs desktop related files and themes
+        - tasks/services.yml # configs a cron task to auto update system
+      loop_control:
+        loop_var: task
       ansible.builtin.include_tasks:
-        file: "{{ item }}"
+        file: "{{ task }}"

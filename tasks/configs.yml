@@ -1,3 +1,4 @@
+---
 - name: set gtk theme
   become_user: sawyer
   shell: |
@@ -14,10 +15,8 @@
   file:
     path: ~/projects
     state: directory
-    owner: sawyer
-    group: sawyer
 
-- name: clone .dotfiles
+- name: clone .dotfile
   become_user: sawyer
   git:
     repo: "https://github.com/LegitCamper/.dotfiles.git"
@@ -28,7 +27,7 @@
 - name: stow dotfiles
   become_user: sawyer
   shell: |
-    ~/projects/.dotfiles/.stow.sh
+    stow -t ~ --adopt -S dots
     exit 0
   args:
     executable: /bin/bash
@@ -36,9 +35,9 @@
 - name: copy and decrypt keys (if needed)
   become_user: sawyer
   with_items:
-    - src: ssh_key
+    - src: ./dots/ssh_key
       dest: ~/.ssh/id_ed25519
-    - src: ssh_key.pub
+    - src: ./dots/ssh_key.pub
       dest: ~/.ssh/id_ed25519.pub
   loop_control:
     loop_var: ssh_file
@@ -50,18 +49,37 @@
     group: sawyer
     mode: 0600
 
-- name: login manager config
-  become_user: root
+- name: get virtmanager config state
+  shell: grep -Fxq "Configured by me! - ansible" \
+    /etc/libvirt/libvirtd.conf
+  register: virtmanger_config_state
+  ignore_errors: true
+- name: virtmanger config
+  when: virtmanger_config_state.rc == 1
+  become: true
+  vars:
+    conf_path: /etc/libvirt/libvirtd.conf
   shell: |
-    if ! grep -Fxq "Hyprland" /etc/greetd/config.toml; then
+    echo '#Below - Configured by me!' >> /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_group = "libvirt"' >> /etc/libvirt/libvirtd.conf
+    echo 'unix_sock_rw_perms = "0770"' >> /etc/libvirt/libvirtd.conf
+  args:
+    executable: /bin/bash
+
+- name: login manager config
+  become: true
+  vars:
+    conf_path: /etc/greetd/config.toml
+  shell: |
+    if ! grep -Fxq "Hyprland" {{ conf_path }}; then
       cat /home/sawyer/projects/.dotfiles/tasks/files/greetd_config.toml \
-      >> /etc/greetd/config.toml
+      >> {{ conf_path }}
     fi
   args:
     executable: /bin/bash
 
 - name: configure u2f as alternative athentication method
-  become_user: root
+  become: true
   with_items:
     - sudo
     - greetd
@@ -85,5 +103,5 @@
     backrefs: yes
 
 - name: rebuild grub conf
-  become_user: root
+  become: true
   shell: grub-mkconfig -o /boot/grub/grub.cfg

@@ -1,0 +1,16 @@
+lastupdatecheck: 0
+recentrepos:
+- /home/sawyer/projects/.dotfiles
+- /home/sawyer/projects/homelab
+- /home/sawyer/projects/.nix-config
+- /home/sawyer/projects/nix-starter-configs
+- /home/sawyer/projects/homelab-proxy
+- /home/sawyer/projects/zmk-autocorrect-module
+- /home/sawyer/projects/Legitcamper
+- /home/sawyer/projects/searxng-firefox-extension
+- /home/sawyer/projects/Triangular-Arbitrage
+startuppopupversion: 5
+customcommandshistory:
+- q
+hidecommandlog: false
+ignorewhitespaceindiffview: false

@@ -1,4 +1,0 @@
-- name: config timeshift and create snapshot
-  shell: |
-    sudo timeshift --btrfs --scripted --yes \
-    --create --comments "Snapshot after upgrade"

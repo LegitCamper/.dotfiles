@@ -1,29 +1,21 @@
+---
 - name: set display manager
-  become_user: root
+  become: true
   systemd_service:
     name: greetd
     state: started
     enabled: true
 
 - name: start grub with new snapshot entries
+  become: true
   systemd_service:
     name: grub-btrfsd
     state: restarted
     enabled: true
 
 - name: enable bluetooth
+  become: true
   systemd_service:
     name: bluetooth
     state: started
     enabled: true
-
-- name: enable cronie
-  systemd_service:
-    name: cronie
-    state: started
-    enabled: true
-
-- name: install cron job (ansible-pull)
-  cron: user="ansible" name="ansible provision" minute="*/10" job="sudo /usr/bin/ansible-pull -o -U https://github.com/LegitCamper/.dotfiles.git > /dev/null"
-
-

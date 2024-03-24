@@ -1,3 +1,4 @@
+---
 - name: packages declaration
   set_fact:
     packages:
@@ -8,7 +9,6 @@
         - waybar
         - greetd
         - greetd-tuigreet
-        - flameshot
         - lxqt-qtplugin
         - papirus-icon-theme
         - lxappearance
@@ -19,18 +19,14 @@
         - swaybg
         - wofi
         - dunst
-        - playerctl
-        - waybar
         - grim
         - slurp
         - wl-clipboard
         - socat
         - brightnessctl
-        - moreutils # sponge...
         - efibootmgr
         - usbutils # lsusb
         - inotify-tools # dep for grub-btrfs
-        - cronie
         - timeshift
         - grub-btrfs
         - udisks2
@@ -47,21 +43,12 @@
         - bitwarden
         - dolphin
         - ark
-        - kate
-        - gwenview
-        - kcalc
-        - rhythmbox
         - socat
-        - qemu
-        - libreoffice
-        - vlc
         - ffmpeg
         - procs
-        - solaar
         - discord
         - vivaldi
         - vivaldi-ffmpeg-codecs
-        - obsidian
       gaming:
         - gamescope
         - lutris
@@ -93,6 +80,16 @@
         - bat
         - entr
       dev:
+        qemu:
+          - virt-manager
+          - virt-viewer
+          - dnsmasq
+          - vde2
+          - bridge-utils
+          - openbsd-netcat
+          - ebtables
+          - iptables-nft
+          - libguestfs
         languages:
           - npm
           - ninja
@@ -139,7 +136,7 @@
       - qt5-styleplugins
       - timeshift-autosnap
 
-- name: install packages arch
+- name: install missing/new packages arch
   when: ansible_distribution in [ "Archlinux" ]
   with_items:
     - "{{ packages.window_manager }}"
@@ -148,6 +145,7 @@
     - "{{ packages.gaming }}"
     - "{{ packages.cli }}"
     - "{{ packages.dev.tools }}"
+    - "{{ packages.dev.qemu }}"
     - "{{ packages.dev.languages }}"
     - "{{ packages.dev.language_servers }}"
   loop_control:
@@ -165,12 +163,6 @@
 
 - name: install packages debian
   when: ansible_distribution in [ "Debian", "Pop!_OS", "Ubuntu" ]
-  package:
-    name:
-      - None
-
-- name: install packages opensuse
-  when: ansible_distribution in [ "OpenSuse" ]
   package:
     name:
       - None
