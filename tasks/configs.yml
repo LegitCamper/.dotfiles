@@ -82,7 +82,7 @@
   become: true
   with_items:
     - sudo
-    - greetd
+    # - greetd
   loop_control:
     loop_var: u2f_file
   shell: |
