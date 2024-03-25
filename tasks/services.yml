@@ -19,3 +19,10 @@
     name: bluetooth
     state: started
     enabled: true
+
+- name: enable and start libvirtd
+  become: true
+  systemd_service:
+    name: libvirtd
+    state: started
+    enabled: true
