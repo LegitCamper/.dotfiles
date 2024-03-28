@@ -7,7 +7,7 @@ scrolloff = 20
 scroll-lines = 3
 shell = ["fish", "-c"]
 gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
-auto-pairs = true
+auto-pairs = false
 true-color = true
 cursorline = true
 
@@ -20,18 +20,10 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
-#[editor.indent-guides] 
-#render = true
-#character = "|" # Some characters that work well: "▏", "┆", "┊", "⸽"
-#skip-levels = 1
-
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
 select = "block"
-
-[editor.file-picker]
-hidden = true
 
 [editor.lsp]
 display-messages = true
