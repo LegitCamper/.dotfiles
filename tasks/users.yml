@@ -1,10 +1,5 @@
 ---
-- name: create libvirt group
-  ansible.builtin.group:
-    name: libvirt
-    state: present
-
-- name: add user groups
+- name: add user to system groups
   ansible.builtin.user:
     name: sawyer
     append: true
@@ -15,9 +10,6 @@
       - log
       - rfkill
       - sys
-      - gamemode
-      - qemu
-      - libvirt
       - uucp
       - audio
       - disk
@@ -25,7 +17,15 @@
       - scanner
       - storage
       - video
-      - openvpn
+
+- name: add user to other groups
+  when: packages_installed == true
+  ansible.builtin.user:
+    name: sawyer
+    append: true
+    groups:
+      - qemu
+      - libvirt
       - docker
       - wireshark
 

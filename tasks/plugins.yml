@@ -1,5 +1,10 @@
 ---
-- name: Install collection community.network
+- name: Install ansible galaxy content
+  loop_control:
+    loop_var: content
+  with_items:
+    - type: collection
+      name: kewlfft.aur
   community.general.ansible_galaxy_install:
-    type: collection
-    name: kewlfft.aur
+    type: "{{ content.type }}"
+    name: "{{ content.name }}"
