@@ -1,9 +1,9 @@
 ﻿;#Warn
 #SingleInstance Force
 ; Load library
-#Include komorebic.lib.ahk
+#Include "komorebic.lib.ahk"
 ; Load configuration
-#Include komorebi.generated.ahk
+#Include "komorebi.generated.ahk"
 
 ; On Startup
 FocusWorkspace(0) ; Start windows on workspace 1
@@ -65,8 +65,8 @@ FocusWorkspace(0) ; Start windows on workspace 1
 #+4::MoveToWorkspace(3)
 
 ; Other keybinds
-#t::Run alacritty 
-#q:: Send !{f4} 
+#t::Run("alacritty")
+#q::Send("!{f4}")
 ; Disables windows keys :)
-~LWin::Send {Blind}{vkE8}
-~RWin::Send {Blind}{vkE8}
+~LWin::Send("{Blind}{vkE8}")
+~RWin::Send("{Blind}{vkE8}")
