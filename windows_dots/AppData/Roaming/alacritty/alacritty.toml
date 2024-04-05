@@ -1,0 +1,32 @@
+import = ["%APPDATA%\alacritty\catppuccin-macchiato.toml"]
+
+shell = "wsl"
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+opacity = 0.85
+decorations = "None"
+blur = true
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[font]
+normal = { family = "JetBrainsMono Nerd Font Mono", style = "Regular" }
+bold = { family = "JetBrainsMono Nerd Font Mono", style = "Bold" }
+italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
+bold_italic = { family = "JetBrainsMono Nerd Font Mono", style = "Italic" }
+size = 11.5
+
+[cursor]
+style = { shape = "Block", blinking = "Off" }
+
+[keyboard]
+bindings = [
+  { mods = "Command|Shift", key = "C", mode = "AppCursor|AppKeypad|Search|Alt|Vi", action = "Copy" },
+  { mods = "Control|Shift", key = "V", mode = "AppCursor|AppKeypad|Search|Alt|Vi", action = "Paste" },
+  { mods = "Control", key = "V", mode = "AppCursor|AppKeypad|Search|Alt|Vi", action = "ToggleViMode" },
+]
