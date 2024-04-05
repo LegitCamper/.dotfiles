@@ -53,10 +53,7 @@
         - gamescope
         - lutris
         - steam
-        - gamemode
-        - lib32-gamemode
       cli:
-        - yay
         - unzip
         - wget
         - fd
@@ -83,13 +80,7 @@
         qemu:
           - virt-manager
           - virt-viewer
-          - dnsmasq
-          - vde2
-          - bridge-utils
-          - openbsd-netcat
-          - ebtables
-          - iptables-nft
-          - libguestfs
+          - qemu
         languages:
           - npm
           - ninja
@@ -110,6 +101,7 @@
           - yaml-language-server
           - taplo # toml lsp
         tools:
+          - base-devel
           - lldb # c+rust debug adpater
           - zellij
           - helix
@@ -136,6 +128,15 @@
       - qt5-styleplugins
       - timeshift-autosnap
 
+- name: enable multilib repo
+  when: ansible_distribution in [ "Archlinux" ]
+  shell: |
+    cp /etc/pacman.conf /etc/pacman.conf.backup
+    mline=$(grep -n "\\[multilib\\]" /etc/pacman.conf | cut -d: -f1)
+    rline=$(($mline + 1))
+    sed -i ''$mline's|#\[multilib\]|\[multilib\]|g' /etc/pacman.conf
+    sed -i ''$rline's|#Include = /etc/pacman.d/mirrorlist|Include = /etc/pacman.d/mirrorlist|g' /etc/pacman.conf
+
 - name: install missing/new packages arch
   when: ansible_distribution in [ "Archlinux" ]
   with_items:
@@ -153,11 +154,25 @@
   package:
     name: "{{ package }}"
 
+- shell: yay -V
+  register: yay_installed
+  ignore_errors: true
+- name: Install yay
+  when:
+    - ansible_distribution in [ "Archlinux" ]
+    - yay_installed.rc == 0
+  shell: |
+    cd /opt/
+    git clone https://aur.archlinux.org/yay-bin.git
+    chown aur_builder yay-bin 
+    cd yay-bin
+    su aur_builder -c "makepkg -si --noconfirm"
+
 - name: Install aur packages with yay via aur plugin
   when: ansible_distribution in [ "Archlinux" ]
   become_user: aur_builder
   kewlfft.aur.aur:
-    state: present # just installs and does not upgrade
+    state: present
     use: yay
     name: "{{ aur_packages }}"
 
@@ -166,3 +181,6 @@
   package:
     name:
       - None
+
+- set_fact:
+    packages_installed: true
