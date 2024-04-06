@@ -14,4 +14,5 @@ New-Item -Path $HOME\.config\komorebi -ItemType SymbolicLink -Value $HOME\projec
 New-Item -Path $HOME\.config\yasb -ItemType SymbolicLink -Value $HOME\projects\.dotfiles\windows_dots\yasb\
 New-Item -Path $HOME\AppData\Roaming\alacritty -ItemType SymbolicLink -Value $HOME\projects\.dotfiles\windows_dots\alacritty\
 New-Item -Path $HOME\AppData\Roaming\helix -ItemType SymbolicLink -Value $HOME\projects\.dotfiles\windows_dots\helix\
+New-Item -Path $HOME\.config\starship.toml -ItemType SymbolicLink -Value $HOME\projects\.dotfiles\windows_dots\starship.toml
 ```
