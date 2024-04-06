@@ -1,4 +1,4 @@
-import = ["%APPDATA%\alacritty\catppuccin-macchiato.toml"]
+import = ["~/AppData/Roaming/alacritty/catppuccin-macchiato.toml"]
 
 shell = "wsl"
 

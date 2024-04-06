@@ -3,21 +3,24 @@
   "app_specific_configuration_path": "$Env:USERPROFILE/applications.yaml",
   "window_hiding_behaviour": "Cloak",
   "cross_monitor_move_behaviour": "Insert",
-  "default_workspace_padding": 5,
-  "default_container_padding": 5,
-  "border_padding": 2,
-  "border_offset": -1,
+  "default_workspace_padding": 1,
+  "default_container_padding": 1,
+  "border_padding": 1,
+  "border_offset": 0,
   "active_window_border": false,
   "monitors": [
     {
       "workspaces": [
-        { "name": "I", "layout": "UltrawideVerticalStack" },
-        { "name": "II", "layout": "UltrawideVerticalStack" },
-        { "name": "III", "layout": "UltrawideVerticalStack" },
-        { "name": "IV", "layout": "Float" },
-        { "name": "V", "layout": "UltrawideVerticalStack" },
-        { "name": "VI", "layout": "UltrawideVerticalStack" },
-        { "name": "VII", "layout": "UltrawideVerticalStack" }
+        { "name": "1", "layout": "UltrawideVerticalStack" },
+        { "name": "2", "layout": "UltrawideVerticalStack" },
+        { "name": "3", "layout": "UltrawideVerticalStack" },
+        { "name": "4", "layout": "UltrawideVerticalStack" },
+        { "name": "5", "layout": "UltrawideVerticalStack" },
+        { "name": "6", "layout": "UltrawideVerticalStack" },
+        { "name": "7", "layout": "UltrawideVerticalStack" },
+        { "name": "8", "layout": "UltrawideVerticalStack" },
+        { "name": "9", "layout": "UltrawideVerticalStack" },
+        { "name": "0", "layout": "UltrawideVerticalStack" },
       ]
     }
   ],
