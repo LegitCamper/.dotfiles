@@ -12,8 +12,8 @@ max_size = "1920px 100%"
 
 [scratchpads.volume]
 animation = "fromTop"
-command = "pavucontrol"
-class = "pavucontrol"
+command = "pavucontrol-qt"
+class = "pavucontrol-qt"
 lazy = true
 size = "40% 90%"
 unfocus = "hide"
