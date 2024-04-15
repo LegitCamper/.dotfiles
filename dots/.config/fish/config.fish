@@ -24,7 +24,14 @@ set fish_color_param "#a6da95"
 alias vim='nvim'
 alias nano="nano -l"
 set HELIX_RUNTIME ~/.config/helix/runtime
-alias hx="helix"
+command which helix &> /dev/null
+if test $status -eq 0
+    alias hx="helix"
+end
+command which hx &> /dev/null
+if test $status -eq 0
+    alias helix="hx"
+end
 
 # Lazygit alias
 alias lg='lazygit'
