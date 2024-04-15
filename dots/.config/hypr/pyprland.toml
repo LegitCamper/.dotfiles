@@ -3,7 +3,7 @@ plugins = ["scratchpads"]
 
 [scratchpads.term]
 animation = "fromTop"
-command = "alacritty --class alcritty-dropterm"
+command = "alacritty --class alcritty-dropterm -e distrobox enter devbox -e fish"
 class = "alacritty-dropterm"
 size = "75% 60%"
 margin = 50
@@ -13,7 +13,7 @@ max_size = "1920px 100%"
 [scratchpads.volume]
 animation = "fromTop"
 command = "pavucontrol-qt"
-class = "pavucontrol-qt"
+class = "pavucontrol"
 lazy = true
 size = "40% 90%"
 unfocus = "hide"
