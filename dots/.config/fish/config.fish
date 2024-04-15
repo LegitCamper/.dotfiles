@@ -23,6 +23,7 @@ set fish_color_param "#a6da95"
 # editor
 alias vim='nvim'
 alias nano="nano -l"
+alias lazygit="lz"
 set HELIX_RUNTIME ~/.config/helix/runtime
 command which helix &> /dev/null
 if test $status -eq 0

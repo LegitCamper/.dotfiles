@@ -4,7 +4,7 @@ layout {
     }
     tab name="Development" split_direction="vertical" {
         pane name="else" size="30%"
-        pane name="helix" command="helix" args="./"
+        pane name="helix" command="~/.config/zellij/helixselector.sh"
         pane name="compiler" size="25%"
     }
 }
