@@ -5,24 +5,23 @@
 
   tasks:
     - name: Check if nix is installed
-      ansible.builtin.raw: which nix-env
+      ansible.builtin.raw: | 
+        source ~/.nix-profile/etc/profile.d/nix.sh 
+        which nix-env
       check_mode: false
       changed_when: false
-      failed_when: which_res.rc > 1
-      register: which_res
+      failed_when: which_nix.rc > 1
+      register: which_nix
 
     - name: install nix package manager
-      when: which_res != 0
+      when: which_nix.rc != 0
       shell: |
         sh <(curl -L https://nixos.org/nix/install) --no-daemon
-        exit 0
+        source ~/.nix-profile/etc/profile.d/nix.sh 
         # switch to stable repo
-        bash -ic 'nix-channel --remove nixpkgs '
-        bash -ic 'nix-channel --add \
-        https://nixos.org/channels/nixos-23.11 nixpkgs'
-        bash -ic 'nix-channel --update'
-      args:
-        executable: /bin/bash
+        nix-channel --remove nixpkgs
+        nix-channel --add https://nixos.org/channels/nixos-23.11 nixpkgs
+        nix-channel --update
 
     - name: packages declaration
       set_fact:
@@ -77,7 +76,9 @@
         - "{{ packages}}"
       loop_control:
         loop_var: package
-      shell: bash -ic 'nix-env -iA nixpkgs.{{ package }}'
+      shell: |
+        source ~/.nix-profile/etc/profile.d/nix.sh 
+        nix-env -iA nixpkgs.{{ package }}
 
     - name: create projects folder (if not exist)
       file:
@@ -94,9 +95,9 @@
     - name: stow dotfiles
       shell: |
         stow -t ~ --adopt -S dots
-        exit 0
-      args:
-        executable: /bin/bash
+      check_mode: false
+      changed_when: false
+      failed_when: false
 
     - name: copy and decrypt keys (if needed)
       with_items:
