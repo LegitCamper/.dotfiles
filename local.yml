@@ -1,34 +1,118 @@
 ---
+# THIS SCRIPT IS INTENDED TO BE RAN INSIDE A TOOLBOX CONTAINER
 - hosts: localhost
   connection: local
 
-  pre_tasks:
-    - name: confirm running as root
-      become: true
-      command: id -u
-      register: id_output
-    - assert:
-        that: id_output.stdout == '0'
-
-    - name: install ansible modules
-      ansible.builtin.include_tasks:
-        file: tasks/plugins.yml # installs ansible plugins
-
-    - set_fact:
-        packages_installed: false
-
-    - name: create users
-      ansible.builtin.include_tasks:
-        file: tasks/users.yml
-
   tasks:
-    - name: Include task list in play
-      loop:
-        - tasks/packages.yml # installs packages
-        - tasks/users.yml # add user to package groups
-        - tasks/configs.yml # configs desktop related files and themes
-        - tasks/services.yml # configs a cron task to auto update system
+    - name: create projects folder (if not exist)
+      file:
+        path: ~/projects
+        state: directory
+
+    - name: clone .dotfile
+      git:
+        repo: "https://github.com/LegitCamper/.dotfiles.git"
+        dest: ~/projects/.dotfiles
+        clone: yes
+        update: no
+
+    - name: stow dotfiles
+      shell: |
+        stow -t ~ --adopt -S dots
+      args:
+        executable: /bin/bash
+
+    - name: copy and decrypt keys (if needed)
+      with_items:
+        - src: ./dots/ssh_key
+          dest: ~/.ssh/id_ed25519
+        - src: ./dots/ssh_key.pub
+          dest: ~/.ssh/id_ed25519.pub
       loop_control:
-        loop_var: task
-      ansible.builtin.include_tasks:
-        file: "{{ task }}"
+        loop_var: ssh_file
+      copy:
+        src: "{{ ssh_file.src }}"
+        dest: "{{ ssh_file.dest }}"
+        decrypt: yes
+        owner: sawyer
+        group: sawyer
+        mode: 0600
+
+    - name: Check if nix is installed
+      ansible.builtin.raw: which nix-env
+      check_mode: false
+      changed_when: false
+      failed_when: which_res.rc > 1
+      register: which_res
+
+    - name: install nix package manager
+      when: which_res != 0
+      shell: |
+        sh <(curl -L https://nixos.org/nix/install) --daemon
+        exit 0
+        # switch to stable repo
+        bash -ic 'nix-channel --remove nixpkgs '
+        bash -ic 'nix-channel --add \
+        https://nixos.org/channels/nixos-23.11 nixpkgs'
+        bash -ic 'nix-channel --update'
+      args:
+        executable: /bin/bash
+
+    - name: packages declaration
+      set_fact:
+        packages:
+          # cli
+          - git
+          - openssh
+          - wget
+          - unzip
+          - fd
+          - stow
+          - fish
+          - htop
+          - yazi
+          - jq
+          - fzf
+          - entr
+          - diffutils
+          - zellij
+          - helix
+          - lazygit
+          - eza
+          - ripgrep
+          - starship
+          - macchina
+          - zoxide
+          - bat
+          - ripgrep
+          # languages
+          - python3
+          - go
+          - rust
+          - rustup
+          - cargo
+          # build tools
+          - ninja
+          - gcc
+          - gnumake
+          - cmake
+          - clang
+          # lsps
+          - lldb
+          - rust-analyzer
+          - gopls
+          - prettierd
+          - lua-language-server
+          - luaformatter
+          - yaml-language-server
+          - ansible-language-server
+
+    - name: install nix packages
+      become_user: root
+      environment:
+        NIXPKGS_ALLOW_UNFREE: 1
+      with_items:
+        - "{{ packages}}"
+      loop_control:
+        loop_var: package
+      shell: sudo bash -ic 'nix-env -iA nixpkgs.{{ package }}'
