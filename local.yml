@@ -54,8 +54,9 @@
           - python3
           - go
           - rust
-          - rustup
+          - cargo
           # build tools
+          - pkg-config
           - ninja
           - gcc
           - gnumake
@@ -64,6 +65,8 @@
           - lldb
           - gopls
           - prettierd
+          - rust-analyzer
+          - clippy
           - lua-language-server
           - luaformatter
           - yaml-language-server
