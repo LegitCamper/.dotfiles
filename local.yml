@@ -95,6 +95,7 @@
     - name: stow dotfiles
       shell: |
         stow -t ~ --adopt -S dots
+        exit 0
       args:
         executable: /bin/bash
 
