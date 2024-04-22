@@ -4,40 +4,6 @@
   connection: local
 
   tasks:
-    - name: create projects folder (if not exist)
-      file:
-        path: ~/projects
-        state: directory
-
-    - name: clone .dotfile
-      git:
-        repo: "https://github.com/LegitCamper/.dotfiles.git"
-        dest: ~/projects/.dotfiles
-        clone: yes
-        update: no
-
-    - name: stow dotfiles
-      shell: |
-        stow -t ~ --adopt -S dots
-      args:
-        executable: /bin/bash
-
-    - name: copy and decrypt keys (if needed)
-      with_items:
-        - src: ./dots/ssh_key
-          dest: ~/.ssh/id_ed25519
-        - src: ./dots/ssh_key.pub
-          dest: ~/.ssh/id_ed25519.pub
-      loop_control:
-        loop_var: ssh_file
-      copy:
-        src: "{{ ssh_file.src }}"
-        dest: "{{ ssh_file.dest }}"
-        decrypt: yes
-        owner: sawyer
-        group: sawyer
-        mode: 0600
-
     - name: Check if nix is installed
       ansible.builtin.raw: which nix-env
       check_mode: false
@@ -90,16 +56,13 @@
           - go
           - rust
           - rustup
-          - cargo
           # build tools
           - ninja
           - gcc
           - gnumake
           - cmake
-          - clang
           # lsps
           - lldb
-          - rust-analyzer
           - gopls
           - prettierd
           - lua-language-server
@@ -116,3 +79,37 @@
       loop_control:
         loop_var: package
       shell: sudo bash -ic 'nix-env -iA nixpkgs.{{ package }}'
+
+    - name: create projects folder (if not exist)
+      file:
+        path: ~/projects
+        state: directory
+
+    - name: clone .dotfile
+      git:
+        repo: "https://github.com/LegitCamper/.dotfiles.git"
+        dest: ~/projects/.dotfiles
+        clone: yes
+        update: no
+
+    - name: stow dotfiles
+      shell: |
+        stow -t ~ --adopt -S dots
+      args:
+        executable: /bin/bash
+
+    - name: copy and decrypt keys (if needed)
+      with_items:
+        - src: ./dots/ssh_key
+          dest: ~/.ssh/id_ed25519
+        - src: ./dots/ssh_key.pub
+          dest: ~/.ssh/id_ed25519.pub
+      loop_control:
+        loop_var: ssh_file
+      copy:
+        src: "{{ ssh_file.src }}"
+        dest: "{{ ssh_file.dest }}"
+        decrypt: yes
+        owner: sawyer
+        group: sawyer
+        mode: 0600
