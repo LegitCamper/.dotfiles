@@ -1,8 +1,7 @@
-editors/.config/lazygit/state.yml
-editors/.config/nvim/lazy-lock.json
-editors/.config/helix/runtime/grammars
-nix/result
-
+.dots/.config/nvim/lazy-lock.json
+dots/.config/lazygit/state.yml
+dots/.config/helix/runtime/grammars
 .ansible-auto.txt
 .vagrant
-dots/.config/lazygit/state.yml
+dots/ssh_key
+dots/ssh_key.pub
