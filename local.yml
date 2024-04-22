@@ -67,6 +67,8 @@
           - prettierd
           - rust-analyzer
           - clippy
+          - rustfmt
+          - taplo
           - lua-language-server
           - luaformatter
           - yaml-language-server
