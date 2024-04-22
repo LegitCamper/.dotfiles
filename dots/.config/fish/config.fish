@@ -11,6 +11,7 @@ set fish_greeting # Supresses fish's intro message
 set TERM screen-256color # Sets the terminal type
 set EDITOR helix
 set VISUAL kate
+set GIT_SSH /usr/bin/ssh 
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal "#8bd5ca"
