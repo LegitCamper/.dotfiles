@@ -14,7 +14,7 @@
     - name: install nix package manager
       when: which_res != 0
       shell: |
-        sh <(curl -L https://nixos.org/nix/install) --daemon
+        sh <(curl -L https://nixos.org/nix/install) --no-daemon
         exit 0
         # switch to stable repo
         bash -ic 'nix-channel --remove nixpkgs '
@@ -71,14 +71,13 @@
           - ansible-language-server
 
     - name: install nix packages
-      become_user: root
       environment:
         NIXPKGS_ALLOW_UNFREE: 1
       with_items:
         - "{{ packages}}"
       loop_control:
         loop_var: package
-      shell: sudo bash -ic 'nix-env -iA nixpkgs.{{ package }}'
+      shell: bash -ic 'nix-env -iA nixpkgs.{{ package }}'
 
     - name: create projects folder (if not exist)
       file:
