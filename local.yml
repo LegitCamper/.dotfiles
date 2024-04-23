@@ -53,8 +53,6 @@
           # languages
           - python3
           - go
-          - rust
-          - cargo
           # build tools
           - pkg-config
           - ninja
@@ -65,9 +63,6 @@
           - lldb
           - gopls
           - prettierd
-          - rust-analyzer
-          - clippy
-          - rustfmt
           - taplo
           - lua-language-server
           - luaformatter
