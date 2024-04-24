@@ -6,3 +6,4 @@ end
 
 contains -- $rustup_path $PATH
   or set -gx PATH $rustup_path $PATH
+. "$HOME/.cargo/env.fish"

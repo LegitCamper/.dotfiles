@@ -1,4 +1,3 @@
-
 layout {
     default_tab_template name="bars" {
         pane size=1 borderless=true {
@@ -37,12 +36,8 @@ layout {
         }
     }
 
-    tab name="Git" {
-        pane name="lazygit" command="lazygit"
-    }
-    tab name="Development" split_direction="vertical" {
-        pane size="30%"
-        pane name="helix" command="~/.config/zellij/helixselector.sh"
-        pane size="25%"
+	tab name="Zellij" split_direction="vertical" {
+		pane size="25%" 
+        pane size="75%" focus=true
     }
 }
