@@ -2,7 +2,7 @@ theme = "catppuccin_macchiato"
 
 [editor]
 line-number = "relative"
-mouse = true
+mouse = false
 scrolloff = 20
 scroll-lines = 3
 shell = ["fish", "-c"]
@@ -10,6 +10,8 @@ gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 auto-pairs = false
 true-color = true
 cursorline = true
+[editor.file-picker]
+hidden = false
 
 [editor.statusline]
 left = ["mode", "workspace-diagnostics", "spinner"]
