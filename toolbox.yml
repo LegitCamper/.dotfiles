@@ -2,8 +2,11 @@
 # THIS SCRIPT IS INTENDED TO BE RAN INSIDE A TOOLBOX CONTAINER
 - hosts: localhost
   connection: local
+  ignore_unreachable: true
+  vars_files:
+    - packages.yml
 
-  tasks:
+  pre_tasks:
     - name: Check if nix is installed
       ansible.builtin.raw: | 
         source ~/.nix-profile/etc/profile.d/nix.sh 
@@ -13,72 +16,37 @@
       failed_when: which_nix.rc > 1
       register: which_nix
 
+  tasks:
     - name: install nix package manager
       when: which_nix.rc != 0
       shell: |
         sh <(curl -L https://nixos.org/nix/install) --no-daemon
         source ~/.nix-profile/etc/profile.d/nix.sh 
-        # switch to stable repo
-        nix-channel --remove nixpkgs
-        nix-channel --add https://nixos.org/channels/nixos-23.11 nixpkgs
+        nix-channel --add https://nixos.org/channels/nixos-23.11 stable
+        nix-channel --add https://nixos.org/channels/nixos-unstable unstable
         nix-channel --update
-
-    - name: packages declaration
-      set_fact:
-        packages:
-          # cli
-          - git
-          - openssh
-          - wget
-          - unzip
-          - fd
-          - stow
-          - fish
-          - htop
-          - yazi
-          - jq
-          - fzf
-          - entr
-          - diffutils
-          - zellij
-          - helix
-          - lazygit
-          - eza
-          - ripgrep
-          - starship
-          - macchina
-          - zoxide
-          - bat
-          - ripgrep
-          # languages
-          - python3
-          - go
-          # build tools
-          - pkg-config
-          - ninja
-          - gcc
-          - gnumake
-          - cmake
-          # lsps
-          - lldb
-          - gopls
-          - prettierd
-          - taplo
-          - lua-language-server
-          - luaformatter
-          - yaml-language-server
-          - ansible-language-server
 
     - name: install nix packages
       environment:
         NIXPKGS_ALLOW_UNFREE: 1
       with_items:
-        - "{{ packages}}"
+        - "{{ dev.nix.cli }}"
+        - "{{ dev.nix.lsps }}"
       loop_control:
         loop_var: package
       shell: |
         source ~/.nix-profile/etc/profile.d/nix.sh 
-        nix-env -iA nixpkgs.{{ package }}
+        nix-env -iA stable.{{ package }}
+
+    - name: install ubuntu packages
+      when: ansible_os_family == "Ubuntu"
+      with_items:
+        - "{{ build.ubuntu.languages}}"
+        - "{{ build.ubuntu.build-tools }}"
+      loop_control:
+        loop_var: package
+      package:
+        name: "{{ package }}"
 
     - name: create projects folder (if not exist)
       file:

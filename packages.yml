@@ -1,0 +1,46 @@
+dev:
+  nix:
+    cli:
+      - git
+      - openssh
+      - wget
+      - unzip
+      - fd
+      - stow
+      - fish
+      - htop
+      - yazi
+      - jq
+      - fzf
+      - entr
+      - diffutils
+      - zellij
+      - helix
+      - lazygit
+      - eza
+      - ripgrep
+      - starship
+      - macchina
+      - zoxide
+      - bat
+      - ripgrep
+    lsps:
+      - lldb
+      - gopls
+      - prettierd
+      - taplo
+      - lua-language-server
+      - luaformatter
+      - yaml-language-server
+      - ansible-language-server
+build:
+  ubuntu:
+    languages:
+      - python3
+      - go
+    build-tools:
+      - pkg-config
+      - ninja
+      - gcc
+      - gnumake
+      - cmake
