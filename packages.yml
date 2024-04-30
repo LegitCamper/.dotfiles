@@ -16,6 +16,7 @@ dev:
       - diffutils
       - zellij
       - helix
+      - wl-clipboard
       - lazygit
       - eza
       - ripgrep
