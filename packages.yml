@@ -14,11 +14,16 @@ dev:
       - fzf
       - entr
       - diffutils
-      - zellij
       - helix
       - wl-clipboard
       - lazygit
       - eza
+      - atuin
+      - zellij
+      - just
+      - delta
+      - hwatch
+      - procs
       - ripgrep
       - starship
       - macchina

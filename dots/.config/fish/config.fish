@@ -21,10 +21,18 @@ set fish_color_error '#ed8796'
 set fish_color_param "#a6da95"
 
 ### ALIASES ###
-# editor
 alias vim='nvim'
 alias nano="nano -l"
 alias lz="lazygit"
+alias lg='lazygit'
+alias find="fd"
+alias grep="rg"
+alias ls='eza -al --color=always --group-directories-first'
+alias cat='bat'
+alias history='atuin'
+alias diff='delta'
+alias watch='hwatch'
+alias ps='procs' 
 set HELIX_RUNTIME ~/.config/helix/runtime
 command which helix &> /dev/null
 if test $status -eq 0
@@ -35,13 +43,9 @@ if test $status -eq 0
     alias helix="hx"
 end
 
-# Lazygit alias
-alias lg='lazygit'
-
 # Power settings
 alias suspend="systemctl suspend"
 alias hibernate="echo disk | sudo tee /sys/power/state" # Requires sufficient swap space
-#poweroff
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -52,15 +56,9 @@ alias rm='rm -i'
 alias df='df -h' # human-readable sizes
 alias free='free -m' # show sizes in MB
 
+## Inits 
+atuin init fish | source
 starship init fish | source
-
-# better aliases
-alias find="fd"
-alias grep="rg"
-alias ls='eza -al --color=always --group-directories-first'
-alias cat='bat'
-
-# zoxide
 zoxide init fish | source
 alias cd="z"
 
