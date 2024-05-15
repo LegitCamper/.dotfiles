@@ -13,14 +13,30 @@
         which nix-env
       check_mode: false
       changed_when: false
-      failed_when: which_nix.rc > 1
+      failed_when: false
       register: which_nix
+
+    - name: create projects folder (if not exist)
+      file:
+        path: ~/projects
+        state: directory
+
+    - name: create ssh directory (if not exist)
+      file:
+        path: ~/.ssh
+        state: directory
 
   tasks:
     - name: install nix package manager
       when: which_nix.rc != 0
+      shell: sh <(curl -L https://nixos.org/nix/install) --no-daemon
+      args:
+        executable: /bin/bash
+
+    # This should be a handler but I dont want to make a role file :(
+    - name: add nix repos
+      when: which_nix.rc != 0
       shell: |
-        sh <(curl -L https://nixos.org/nix/install) --no-daemon
         source ~/.nix-profile/etc/profile.d/nix.sh 
         nix-channel --add https://nixos.org/channels/nixos-23.11 stable
         nix-channel --add https://nixos.org/channels/nixos-unstable unstable
@@ -48,11 +64,6 @@
       package:
         name: "{{ package }}"
 
-    - name: create projects folder (if not exist)
-      file:
-        path: ~/projects
-        state: directory
-
     - name: clone .dotfile
       git:
         repo: "https://github.com/LegitCamper/.dotfiles.git"
@@ -61,8 +72,7 @@
         update: no
 
     - name: stow dotfiles
-      shell: |
-        stow -t ~ --adopt -S dots
+      shell: stow -t ~ --adopt -S dots
       check_mode: false
       changed_when: false
       failed_when: false
@@ -79,6 +89,6 @@
         src: "{{ ssh_file.src }}"
         dest: "{{ ssh_file.dest }}"
         decrypt: yes
-        owner: sawyer
-        group: sawyer
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
         mode: 0600
