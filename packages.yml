@@ -46,6 +46,7 @@ build:
       - go
     build-tools:
       - pkg-config
+      - build-essential
       - ninja
       - gcc
       - gnumake
