@@ -33,6 +33,7 @@ alias history='atuin'
 alias diff='delta'
 alias watch='hwatch'
 alias ps='procs' 
+alias cargo='cargo test -- --nocapture'
 set HELIX_RUNTIME ~/.config/helix/runtime
 command which helix &> /dev/null
 if test $status -eq 0
@@ -55,6 +56,9 @@ alias rm='rm -i'
 # adding flags
 alias df='df -h' # human-readable sizes
 alias free='free -m' # show sizes in MB
+
+# toolbox alias
+alias podman='flatpak-spawn --host podman'
 
 ## Inits 
 atuin init fish | source
