@@ -38,8 +38,9 @@ layout {
 
     floating_panes {
         pane name="git" {
-            width "60%"
-            height "60%"
+            y "10%"
+            width "50%"
+            height "80%"
         }
     }
 
