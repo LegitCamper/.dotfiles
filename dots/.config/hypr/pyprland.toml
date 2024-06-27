@@ -12,7 +12,7 @@ max_size = "1920px 100%"
 
 [scratchpads.volume]
 animation = "fromTop"
-command = "pavucontrol-qt"
+command = "pavucontrol"
 class = "pavucontrol"
 lazy = true
 size = "40% 90%"
