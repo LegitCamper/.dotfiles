@@ -11,7 +11,7 @@ set fish_greeting # Supresses fish's intro message
 set TERM screen-256color # Sets the terminal type
 set EDITOR helix
 set VISUAL kate
-set -x GIT_SSH /usr/bin/ssh 
+set -x GIT_SSH /usr/bin/ssh
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal "#8bd5ca"
@@ -32,14 +32,13 @@ alias cat='bat'
 alias history='atuin'
 alias diff='delta'
 alias watch='hwatch'
-alias ps='procs' 
-alias cargo='cargo test -- --nocapture'
+alias ps='procs'
 set HELIX_RUNTIME ~/.config/helix/runtime
-command which helix &> /dev/null
+command which helix &>/dev/null
 if test $status -eq 0
     alias hx="helix"
 end
-command which hx &> /dev/null
+command which hx &>/dev/null
 if test $status -eq 0
     alias helix="hx"
 end
