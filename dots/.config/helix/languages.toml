@@ -24,7 +24,7 @@ scope = "source.c"
 injection-regex = "c"
 file-types = ["c"]
 comment-token = "//"
-language-servers = [ "clangd" ]
+language-servers = ["clangd"]
 auto-format = true
 formatter = { command = "clang-format" }
 indent = { tab-width = 2, unit = "  " }
@@ -77,6 +77,21 @@ file-types = ["lua"]
 scope = "source.lua"
 comment-token = "--"
 auto-format = true
+
+[[language]]
+name = "just"
+scope = "source.just"
+file-types = [
+  { glob = "justfile" },
+  { glob = "Justfile" },
+  { glob = ".justfile" },
+  { glob = ".Justfile" },
+]
+injection-regex = "just"
+comment-token = "#"
+indent = { tab-width = 4, unit = "    " }
+# auto-format = true
+# formatter = { command = "just", args = ["--dump"] } # Please see: https://github.com/helix-editor/helix/issues/9703
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"
@@ -132,3 +147,7 @@ command = [
   "json",
   "--issues-exit-code=1",
 ]
+
+[[grammar]]
+name = "just"
+source = { git = "https://github.com/IndianBoy42/tree-sitter-just", rev = "8af0aab79854aaf25b620a52c39485849922f766" }
