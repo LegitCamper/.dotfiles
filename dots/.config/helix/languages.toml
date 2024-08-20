@@ -82,10 +82,10 @@ auto-format = true
 name = "just"
 scope = "source.just"
 file-types = [
-  { glob = "justfile" },
-  { glob = "Justfile" },
-  { glob = ".justfile" },
-  { glob = ".Justfile" },
+  "justfile",
+  "Justfile",
+  ".justfile",
+  ".Justfile",
 ]
 injection-regex = "just"
 comment-token = "#"
