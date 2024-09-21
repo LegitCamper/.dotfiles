@@ -5,3 +5,4 @@ dots/.config/helix/runtime/grammars
 .vagrant
 dots/ssh_key
 dots/ssh_key.pub
+dots/.config/helix/runtime
