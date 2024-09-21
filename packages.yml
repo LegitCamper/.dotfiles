@@ -30,6 +30,7 @@ dev:
       - zoxide
       - bat
       - ripgrep
+      - act
     lsps:
       - lldb
       - gopls
@@ -48,6 +49,7 @@ build:
       - pkg-config
       - build-essential
       - ninja
+      - clang
       - gcc
       - gnumake
       - cmake
