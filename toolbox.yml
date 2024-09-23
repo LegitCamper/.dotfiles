@@ -46,8 +46,8 @@
       environment:
         NIXPKGS_ALLOW_UNFREE: 1
       with_items:
-        - "{{ dev.nix.cli }}"
-        - "{{ dev.nix.lsps }}"
+        - "{{ nix.cli }}"
+        - "{{ nix.lsps }}"
       loop_control:
         loop_var: package
       shell: |
@@ -55,14 +55,16 @@
         nix-env -iA stable.{{ package }}
 
     - name: install ubuntu packages
-      when: ansible_os_family == "Ubuntu"
       with_items:
-        - "{{ build.ubuntu.languages}}"
-        - "{{ build.ubuntu.build-tools }}"
+        - "{{ ubuntu.languages}}"
+        - "{{ ubuntu.tools }}"
       loop_control:
         loop_var: package
-      package:
+      apt:
         name: "{{ package }}"
+        state: latest
+        update_cache: yes
+
 
     - name: check if cargo is installed
       shell: command -v cargo

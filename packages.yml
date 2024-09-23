@@ -1,55 +1,53 @@
-dev:
-  nix:
-    cli:
-      - git
-      - openssh
-      - wget
-      - unzip
-      - fd
-      - stow
-      - fish
-      - htop
-      - yazi
-      - jq
-      - fzf
-      - entr
-      - diffutils
-      - helix
-      - wl-clipboard
-      - lazygit
-      - eza
-      - atuin
-      - zellij
-      - just
-      - delta
-      - hwatch
-      - procs
-      - ripgrep
-      - starship
-      - macchina
-      - zoxide
-      - bat
-      - ripgrep
-      - act
-    lsps:
-      - lldb
-      - gopls
-      - prettierd
-      - taplo
-      - lua-language-server
-      - luaformatter
-      - yaml-language-server
-      - ansible-language-server
-build:
-  ubuntu:
-    languages:
-      - python3
-      - go
-    build-tools:
-      - pkg-config
-      - build-essential
-      - ninja
-      - clang
-      - gcc
-      - gnumake
-      - cmake
+nix:
+  cli:
+    - git
+    - openssh
+    - wget
+    - unzip
+    - fd
+    - stow
+    - fish
+    - htop
+    - yazi
+    - jq
+    - fzf
+    - entr
+    - diffutils
+    - helix
+    - wl-clipboard
+    - lazygit
+    - eza
+    - atuin
+    - zellij
+    - just
+    - delta
+    - hwatch
+    - procs
+    - ripgrep
+    - starship
+    - macchina
+    - zoxide
+    - bat
+    - ripgrep
+    - act
+  lsps:
+    - lldb
+    - gopls
+    - prettierd
+    - taplo
+    - lua-language-server
+    - luaformatter
+    - yaml-language-server
+    - ansible-language-server
+ubuntu:
+  languages:
+    - python3
+    - go
+  tools:
+    - pkg-config
+    - build-essential
+    - ninja
+    - clang
+    - gcc
+    - gnumake
+    - cmake
