@@ -55,12 +55,13 @@
         nix-env -iA stable.{{ package }}
 
     - name: install ubuntu packages
+      become: true
       with_items:
         - "{{ ubuntu.languages}}"
         - "{{ ubuntu.tools }}"
       loop_control:
         loop_var: package
-      apt:
+      package:
         name: "{{ package }}"
         state: latest
         update_cache: yes

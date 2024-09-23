@@ -42,12 +42,12 @@ nix:
 ubuntu:
   languages:
     - python3
-    - go
+    - golang
   tools:
     - pkg-config
     - build-essential
-    - ninja
+    - ninja-build
     - clang
     - gcc
-    - gnumake
+    - make
     - cmake
