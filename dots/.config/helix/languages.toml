@@ -10,7 +10,7 @@ auto-format = true
 [[language]]
 name = "rust"
 formatter = { command = "clippy" }
-language-servers = ["rust-analyzer"]
+language-servers = ["rust-analyzer", "typos"]
 injection-regex = "rust"
 indent = { tab-width = 4, unit = "    " }
 roots = ["Cargo.lock"]
@@ -81,12 +81,7 @@ auto-format = true
 [[language]]
 name = "just"
 scope = "source.just"
-file-types = [
-  "justfile",
-  "Justfile",
-  ".justfile",
-  ".Justfile",
-]
+file-types = ["justfile", "Justfile", ".justfile", ".Justfile"]
 injection-regex = "just"
 comment-token = "#"
 indent = { tab-width = 4, unit = "    " }
@@ -108,6 +103,11 @@ inlayHints.closureReturnTypeHints.enable = "with_block"
 inlayHints.discriminantHints.enable = "fieldless"
 inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.typeHints.hideClosureInitialization = false
+procMacro = { ignored = { leptos_macro = [
+  # Optional:
+  # "component",
+  "server",
+] } }
 
 [language-servers.lua]
 command = "lua-language-server"
@@ -147,6 +147,19 @@ command = [
   "json",
   "--issues-exit-code=1",
 ]
+
+[language-server.typos]
+# typos-lsp must be on your PATH, or otherwise change this to an absolute path to typos-lsp
+command = "typos-lsp"
+# Logging level of the language server. Defaults to error.
+# Run with helix -v to output LSP logs to the editor log (:log-open)
+environment = { "RUST_LOG" = "error" }
+# Custom config. Used together with a config file found in the workspace or its parents,
+# taking precedence for settings declared in both. Equivalent to the typos `--config` cli argument.
+config.config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml"
+# How typos are rendered in the editor, can be one of an Error, Warning, Info or Hint.
+# Defaults to Warning.
+config.diagnosticSeverity = "Warning"
 
 [[grammar]]
 name = "just"
