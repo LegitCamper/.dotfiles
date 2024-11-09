@@ -3,6 +3,7 @@
 - hosts: localhost
   connection: local
   ignore_unreachable: true
+  become: true
   vars_files:
     - packages.yml
 

@@ -6,7 +6,7 @@ nix:
     - unzip
     - fd
     - stow
-    - nu
+    - nushell
     - htop
     - yazi
     - jq
