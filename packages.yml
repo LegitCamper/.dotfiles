@@ -6,7 +6,7 @@ nix:
     - unzip
     - fd
     - stow
-    - fish
+    - nu
     - htop
     - yazi
     - jq
