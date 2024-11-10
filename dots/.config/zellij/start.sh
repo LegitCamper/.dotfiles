@@ -2,5 +2,5 @@
 
 while true; do
   cd ~/projects/$(eza -a ~/projects/ | fzf --margin 30% --header="Select project")
-  zellij
+  zellij options --on-force-close quit 
 done

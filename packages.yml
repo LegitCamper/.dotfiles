@@ -6,6 +6,7 @@ nix:
     - unzip
     - fd
     - stow
+    - fish
     - nushell
     - htop
     - yazi

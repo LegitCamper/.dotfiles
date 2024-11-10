@@ -1,6 +1,6 @@
 default_layout "main"
 on_force_close "quit"
-default_shell "nu"
+default_shell "fish"
 pane_frames true
 auto_layout true
 theme "catppuccin-macchiato"
