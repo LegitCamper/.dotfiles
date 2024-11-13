@@ -1,5 +1,6 @@
-import = ["~/.config/alacritty/catppuccin-macchiato.toml"]
+general.import = ["~/.config/alacritty/catppuccin-macchiato.toml"]
 
+[terminal]
 shell = "fish"
 
 [env]
