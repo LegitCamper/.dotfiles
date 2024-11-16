@@ -8,15 +8,6 @@
     - packages.yml
 
   pre_tasks:
-    - name: Check if nix is installed
-      ansible.builtin.raw: | 
-        source ~/.nix-profile/etc/profile.d/nix.sh 
-        which nix-env
-      check_mode: false
-      changed_when: false
-      failed_when: false
-      register: which_nix
-
     - name: create projects folder (if not exist)
       file:
         path: ~/projects
@@ -28,63 +19,6 @@
         state: directory
 
   tasks:
-    - name: install nix package manager
-      when: which_nix.rc != 0
-      shell: sh <(curl -L https://nixos.org/nix/install) --no-daemon
-      args:
-        executable: /bin/bash
-
-    # This should be a handler but I dont want to make a role file :(
-    - name: add nix repos
-      when: which_nix.rc != 0
-      shell: |
-        source ~/.nix-profile/etc/profile.d/nix.sh 
-        nix-channel --add https://nixos.org/channels/nixos-23.11 stable
-        nix-channel --add https://nixos.org/channels/nixos-unstable unstable
-        nix-channel --update
-
-    - name: install nix packages
-      environment:
-        NIXPKGS_ALLOW_UNFREE: 1
-      with_items:
-        - "{{ nix.cli }}"
-        - "{{ nix.lsps }}"
-      loop_control:
-        loop_var: package
-      shell: |
-        source ~/.nix-profile/etc/profile.d/nix.sh 
-        nix-env -iA stable.{{ package }}
-
-    - name: install ubuntu packages
-      become: true
-      with_items:
-        - "{{ ubuntu.languages}}"
-        - "{{ ubuntu.tools }}"
-      loop_control:
-        loop_var: package
-      package:
-        name: "{{ package }}"
-        state: latest
-        update_cache: yes
-
-
-    - name: check if cargo is installed
-      shell: command -v cargo
-      register: cargo_exists
-      ignore_errors: yes
-
-    - name: Download Installer
-      when: cargo_exists is failed
-      get_url:
-        url: https://sh.rustup.rs
-        dest: /tmp/sh.rustup.rs
-        mode: '0755'
-        force: 'yes'
-
-    - name: install rust/cargo
-      when: cargo_exists is failed
-      shell: /tmp/sh.rustup.rs -y
-
     - name: clone .dotfile
       git:
         repo: "https://github.com/LegitCamper/.dotfiles.git"
