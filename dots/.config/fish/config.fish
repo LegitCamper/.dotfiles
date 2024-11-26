@@ -59,6 +59,8 @@ alias free='free -m' # show sizes in MB
 # toolbox alias
 alias podman='flatpak-spawn --host podman'
 
+alias steam='gamescope -e -w $(xrandr --query |awk '/\<connected\>/{print $3}' | cut -f1 -d"+" |  cut -d "x" -f1) -h $(xrandr --query |awk '/\<connected\>/{print $3}' | cut -f1 -d"+" |  cut -d "x" -f2) -f --expose-wayland --hdr-enabled --force-grab-cursor flatpak run com.valvesoftware.Steam'
+
 ## Inits 
 atuin init fish | source
 starship init fish | source
