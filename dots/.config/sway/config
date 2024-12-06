@@ -14,10 +14,6 @@ set $menu wofi
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in @datadir@/backgrounds/sway/)
-set $wallpapers_path $HOME/Wallpapers/
-output * bg `find $wallpapers_path -type f | shuf -n 1` fill
-#
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -40,12 +36,20 @@ output eDP1 pos 0 0 res 1920x1080
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
+input "type:touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll false
+    middle_emulation enabled
+}
+
+
 ### Key bindings
 #
 # Basics:
 #
-    bindsym $mod+Shift+t exec $term -e toolbox run bash  ~/.config/zellij/start.sh
-    bindsym $mod+t exec $term -e bash
+    bindsym $mod+t exec $term -e toolbox run bash  ~/.config/zellij/start.sh
+    bindsym $mod+Shift+t exec $term -e bash
     bindsym $mod+Return exec $menu
     bindsym $mod+q kill
 
@@ -85,6 +89,9 @@ output eDP1 pos 0 0 res 1920x1080
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+    bindgesture swipe:right workspace prev
+    bindgesture swipe:left workspace next
 #
 # Workspaces:
 #
@@ -182,22 +189,32 @@ bindsym $mod+r mode "resize"
     bindsym $mod+s exec grim
     bindsym $mod+Shift+s exec grim
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#
+# rules:
+#
+    for_window [workspace="4"] floating enable
+    assign [class="Vivaldi-flatpak"] 1
+    assign [app_id="Alacritty"] 2
+    assign [app_id="WebCord"] 3
+    assign [class="steam"] 4
 
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+
+#
+# Autostarts:
+#
+    # Services
+    exec waybar &
+    exec swaybg -m fill -i ~/.config/Wallpapers/$(/bin/ls ~/.config/Wallpapers | shuf -n 1)
+    exec dunst -config ~/.config/dunst/dunstrc &
+    exec nm-applet --indicator &
+    exec blueman-applet &
+    exec udiskie -a -t -n &
+
+    # Applications
+    exec flatpak run com.vivaldi.Vivaldi 
+    exec $term -e toolbox run bash ~/.config/zellij/start.sh
+    exec flatpak run io.github.spacingbat3.webcord --ozone-platform=wayland
+    exec flatpak run com.valvesoftware.Steam 
 
 include @sysconfdir@/sway/config.d/*
