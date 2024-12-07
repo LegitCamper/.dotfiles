@@ -64,7 +64,5 @@ alias steam='gamescope -e -w $(xrandr --query |awk '/\<connected\>/{print $3}' |
 ## Inits 
 atuin init fish | source
 starship init fish | source
-zoxide init fish | source
-alias cd="z"
 
 macchina
