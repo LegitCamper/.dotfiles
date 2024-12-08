@@ -82,6 +82,8 @@ client.background        $base
 font pango:monospace 0.001
 titlebar_padding 1
 
+gaps inner 10
+
 ### Key bindings
 #
 # Basics:
