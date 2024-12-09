@@ -15,33 +15,26 @@ set -x GIT_SSH /usr/bin/ssh
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal "#8bd5ca"
-set fish_color_autosuggestion '#8aadf4'
+set fish_color_autosuggestion "#8aadf4"
 set fish_color_command "#a6da95"
-set fish_color_error '#ed8796'
+set fish_color_error "#ed8796"
 set fish_color_param "#a6da95"
 
 ### ALIASES ###
-alias vim='nvim'
+alias vim="nvim"
 alias nano="nano -l"
 alias lz="lazygit"
-alias lg='lazygit'
+alias lg="lazygit"
 alias find="fd"
 alias grep="rg"
-alias ls='eza -al --color=always --group-directories-first'
-alias cat='bat'
-alias history='atuin'
-alias diff='delta'
-alias watch='hwatch'
-alias ps='procs'
+alias ls="eza -al --color=always --group-directories-first"
+alias cat="bat"
+alias history="atuin"
+alias diff="delta"
+alias watch="hwatch"
+alias ps="procs"
 set HELIX_RUNTIME ~/.config/helix/runtime
-command which helix &>/dev/null
-if test $status -eq 0
-    alias hx="helix"
-end
-command which hx &>/dev/null
-if test $status -eq 0
-    alias helix="hx"
-end
+alias hx="helix"
 
 # Power settings
 alias suspend="systemctl suspend"
@@ -49,17 +42,15 @@ alias hibernate="echo disk | sudo tee /sys/power/state" # Requires sufficient sw
 
 # confirm before overwriting something
 alias cp="cp -i"
-alias mv='mv -i'
-alias rm='rm -i'
+alias mv="mv -i"
+alias rm="rm -i"
 
 # adding flags
-alias df='df -h' # human-readable sizes
-alias free='free -m' # show sizes in MB
+alias df="df -h" # human-readable sizes
+alias free="free -m" # show sizes in MB
 
 # toolbox alias
-alias podman='flatpak-spawn --host podman'
-
-alias steam='gamescope -e -w $(xrandr --query |awk '/\<connected\>/{print $3}' | cut -f1 -d"+" |  cut -d "x" -f1) -h $(xrandr --query |awk '/\<connected\>/{print $3}' | cut -f1 -d"+" |  cut -d "x" -f2) -f --expose-wayland --hdr-enabled --force-grab-cursor flatpak run com.valvesoftware.Steam'
+alias podman="flatpak-spawn --host podman"
 
 ## Inits 
 atuin init fish | source
