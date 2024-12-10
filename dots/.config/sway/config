@@ -132,6 +132,10 @@ gaps inner 10
 
     bindgesture swipe:right workspace prev
     bindgesture swipe:left workspace next
+
+    bindsym $mod+tab workspace next_on_output 
+    bindsym $mod+Shift+tab workspace prev_on_output 
+    
 #
 # Workspaces:
 #
