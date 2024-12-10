@@ -229,9 +229,9 @@ bindsym $mod+r mode "resize"
     bindswitch --reload --locked lid:off output $laptop enable
 
     # Special key to take a screenshot with grim
-    bindsym Print exec grim
-    bindsym $mod+s exec grim
-    bindsym $mod+Shift+s exec grim
+    bindsym $mod+Print exec IMG=~/Pictures/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp)" $IMG && wl-copy < $IMG
+    bindsym $mod+s exec IMG=~/Pictures/$(date +%Y-%m-%d_%H-%m-%s).png && grim $IMG && wl-copy < $IMG
+    bindsym $mod+Shift+s exec IMG=~/Pictures/$(date +%Y-%m-%d_%H-%m-%s).png && grim -g "$(slurp)" $IMG && wl-copy < $IMG
 
 
 #
