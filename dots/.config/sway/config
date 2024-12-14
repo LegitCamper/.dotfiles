@@ -254,6 +254,9 @@ bindsym $mod+r mode "resize"
     exec nm-applet --indicator &
     exec blueman-applet &
     exec udiskie -a -t -n &
+    exec /usr/libexec/xdg-desktop-portal &
+    exec /usr/libexec/xdg-desktop-portal-gtk &
+    exec /usr/libexec/xdg-desktop-portal-wlr &
 
     # Applications
     exec flatpak run com.vivaldi.Vivaldi 
