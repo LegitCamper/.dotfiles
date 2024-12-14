@@ -88,8 +88,8 @@ gaps inner 10
 #
 # Basics:
 #
-    bindsym $mod+t exec $term -e toolbox run bash  ~/.config/zellij/start.sh
-    bindsym $mod+Shift+t exec $term -e bash
+    bindsym $mod+t exec $term --class Alacritty-Toolbox -e toolbox run bash  ~/.config/zellij/start.sh
+    bindsym $mod+Shift+t exec $term --class Alacritty-Local -e bash
     bindsym $mod+Return exec $menu
     bindsym $mod+q kill
 
@@ -238,11 +238,11 @@ bindsym $mod+r mode "resize"
 # rules:
 #
     for_window [workspace="4"] floating enable
+    for_window [title="Picture in picture"] floating enable
     assign [class="Vivaldi-flatpak"] 1
-    assign [app_id="Alacritty"] 2
+    assign [app_id="Alacritty-Toolbox"] 2
     assign [app_id="WebCord"] 3
     assign [class="steam"] 4
-
 
 #
 # Autostarts:
