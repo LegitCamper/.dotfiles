@@ -4,7 +4,7 @@
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
 set -e fish_user_paths
-set -U fish_user_paths $HOME/.local/bin $HOME/Applications $HOME/.cargo/bin $fish_user_paths
+set -U fish_user_paths $HOME/.local/bin $HOME/Applications $HOME/.cargo/bin $HOME/go/bin $fish_user_paths
 
 ### EXPORT ###
 set fish_greeting # Supresses fish's intro message
@@ -12,6 +12,8 @@ set TERM screen-256color # Sets the terminal type
 set EDITOR helix
 set VISUAL kate
 set -x GIT_SSH /usr/bin/ssh
+
+set LC_ALL "C.UTF-8"
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal "#8bd5ca"
