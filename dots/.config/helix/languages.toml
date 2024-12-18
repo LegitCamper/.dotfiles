@@ -50,6 +50,7 @@ roots = ["go.work", "go.mod"]
 auto-format = true
 comment-token = "//"
 language-servers = ["templ", "typos"]
+indent = { tab-width = 4, unit = "\t" }
 
 [[language]]
 name = "toml"
