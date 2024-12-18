@@ -33,13 +33,23 @@ indent = { tab-width = 2, unit = "  " }
 name = "go"
 scope = "source.go"
 injection-regex = "go"
-file-types = ["go", "templ"]
+file-types = ["go"]
 roots = ["go.work", "go.mod"]
 auto-format = true
 comment-token = "//"
 language-servers = ["gopls", "golangci-lint-lsp", "typos"]
 # TODO: gopls needs utf-8 offsets?
 indent = { tab-width = 4, unit = "\t" }
+
+[[language]]
+name = "temp"
+scope = "source.templ"
+injection-regex = "templ"
+file-types = ["templ"]
+roots = ["go.work", "go.mod"]
+auto-format = true
+comment-token = "//"
+language-servers = ["templ", "typos"]
 
 [[language]]
 name = "toml"
@@ -147,6 +157,9 @@ command = [
   "json",
   "--issues-exit-code=1",
 ]
+
+[language-servers.templ]
+command = ["templ", "lsp"]
 
 [language-server.typos]
 # typos-lsp must be on your PATH, or otherwise change this to an absolute path to typos-lsp
