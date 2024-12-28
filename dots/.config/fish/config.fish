@@ -13,7 +13,21 @@ set EDITOR helix
 set VISUAL kate
 set -x GIT_SSH /usr/bin/ssh
 
+# Locales
+set LANG "en_US.UTF-8"
 set LC_ALL "C.UTF-8"
+set LC_CTYPE "en_US.UTF-8"
+set LC_NUMERIC "en_US.UTF-8"
+set LC_TIME "en_US.UTF-8"
+set LC_COLLATE "en_US.UTF-8"
+set LC_MONETARY "en_US.UTF-8"
+set LC_MESSAGES "en_US.UTF-8"
+set LC_PAPER "en_US.UTF-8"
+set LC_NAME "en_US.UTF-8"
+set LC_ADDRESS "en_US.UTF-8"
+set LC_TELEPHONE "en_US.UTF-8"
+set LC_MEASUREMENT "en_US.UTF-8"
+set LC_IDENTIFICATION "en_US.UTF-8"
 
 ### AUTOCOMPLETE AND HIGHLIGHT COLORS ###
 set fish_color_normal "#8bd5ca"
