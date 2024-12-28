@@ -7,9 +7,8 @@ set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
-set $term alacritty
-# Your preferred application launcher
+set $term ghostty
+set $toolbox $term --class Ghostty-Toolbox -e toolbox run bash  ~/.config/zellij/start.sh  
 set $menu wofi
 
 ### Output configuration
@@ -88,8 +87,8 @@ gaps inner 10
 #
 # Basics:
 #
-    bindsym $mod+t exec $term --class Alacritty-Toolbox -e toolbox run bash  ~/.config/zellij/start.sh
-    bindsym $mod+Shift+t exec $term --class Alacritty-Local -e bash
+    bindsym $mod+t exec $toolbox
+    bindsym $mod+Shift+t exec $term --class Ghostty-Local -e bash
     bindsym $mod+Return exec $menu
     bindsym $mod+q kill
 
@@ -240,7 +239,7 @@ bindsym $mod+r mode "resize"
     for_window [workspace="4"] floating enable
     for_window [title="Picture in picture"] floating enable
     assign [class="Vivaldi-flatpak"] 1
-    assign [app_id="Alacritty-Toolbox"] 2
+    assign [app_id="Ghostty-Toolbox"] 2
     assign [app_id="WebCord"] 3
     assign [class="steam"] 4
 
@@ -260,7 +259,7 @@ bindsym $mod+r mode "resize"
 
     # Applications
     exec flatpak run com.vivaldi.Vivaldi 
-    exec $term -e toolbox run bash ~/.config/zellij/start.sh
+    exec $toolbox 
     exec flatpak run io.github.spacingbat3.webcord --ozone-platform=wayland
     exec flatpak run com.valvesoftware.Steam 
 
