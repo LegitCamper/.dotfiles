@@ -8,7 +8,7 @@ set $down j
 set $up k
 set $right l
 set $term ghostty
-set $toolbox $term --class Ghostty-Toolbox -e toolbox run bash  ~/.config/zellij/start.sh  
+set $toolbox $term --title="Ghostty-Toolbox" -e toolbox run bash  ~/.config/zellij/start.sh  
 set $menu wofi
 
 ### Output configuration
@@ -88,7 +88,7 @@ gaps inner 10
 # Basics:
 #
     bindsym $mod+t exec $toolbox
-    bindsym $mod+Shift+t exec $term --class Ghostty-Local -e bash
+    bindsym $mod+Shift+t exec $term --title="Ghostty-Local" -e bash
     bindsym $mod+Return exec $menu
     bindsym $mod+q kill
 
