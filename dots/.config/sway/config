@@ -239,7 +239,7 @@ bindsym $mod+r mode "resize"
     for_window [workspace="4"] floating enable
     for_window [title="Picture in picture"] floating enable
     assign [class="Vivaldi-flatpak"] 1
-    assign [app_id="Ghostty-Toolbox"] 2
+    assign [class="Ghostty-Toolbox"] 2
     assign [app_id="WebCord"] 3
     assign [class="steam"] 4
 
