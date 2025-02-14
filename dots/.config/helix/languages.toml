@@ -4,7 +4,7 @@ roots = ["pyproject.toml"]
 scope = "source.py"
 formatter = { command = "black", args = ["--quiet", "-"] }
 indent = { tab-width = 4, unit = "    " }
-language-servers = ["ruff"]
+language-servers = ["ruff", "typos"]
 auto-format = true
 
 [[language]]
@@ -24,7 +24,7 @@ scope = "source.c"
 injection-regex = "c"
 file-types = ["c"]
 comment-token = "//"
-language-servers = ["clangd"]
+language-servers = ["clangd", "typos"]
 auto-format = true
 formatter = { command = "clang-format" }
 indent = { tab-width = 2, unit = "  " }
@@ -72,7 +72,7 @@ auto-format = true
 [[language]]
 name = "yaml"
 scope = "source.yaml"
-file-types = ["yml", "yaml"]
+file-types = ["yml", "yaml", "typos"]
 comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
 auto-format = true
@@ -99,14 +99,19 @@ indent = { tab-width = 4, unit = "    " }
 # auto-format = true
 # formatter = { command = "just", args = ["--dump"] } # Please see: https://github.com/helix-editor/helix/issues/9703
 
+[[language]]
+name = "typst"
+scope = "source.typst"
+injection-regex = "typ(st)?"
+file-types = ["typst", "typ"]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = ["tinymist", "typos"]
+indent = { tab-width = 2, unit = "  " }
+
 [language-server.rust-analyzer]
 command = "rust-analyzer"
-# command = "rustup"
-# args = [
-#   "run",
-#   "stable",
-#   "rust-analyzer",
-# ]
+
 [language-server.rust-analyzer.config]
 inlayHints.bindingModeHints.enable = false
 inlayHints.closingBraceHints.minLines = 10
@@ -114,29 +119,21 @@ inlayHints.closureReturnTypeHints.enable = "with_block"
 inlayHints.discriminantHints.enable = "fieldless"
 inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.typeHints.hideClosureInitialization = false
-procMacro = { ignored = { leptos_macro = [
-  # Optional:
-  # "component",
-  "server",
-] } }
 
-[language-servers.lua]
-command = "lua-language-server"
+[language-servers]
+tinymist = { command = "tinymist" }
+lua = { command = "lua-language-server" }
+ruff = { command = "ruff-lsp" }
+taplo = { command = "taplo", args = ["lsp", "stdio"] }
+yaml = { command = "yaml-language-server", args = ["--stdio"] }
+ansible = { command = "ansible-language-server", args = ["--stdio"] }
+templ = { command = ["templ", "lsp"] }
 
-[language-server.ansible]
-command = "ansible-language-server"
-args = ["--stdio"]
-
-[language-server.yaml]
-command = "yaml-language-server"
-args = ["--stdio"]
-
-[language-server.taplo]
-command = "taplo"
-args = ["lsp", "stdio"]
-
-[language-server.ruff]
-command = "ruff-lsp"
+[language-server.typos]
+command = "typos-lsp"
+environment = { "RUST_LOG" = "info" }
+config.config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml"
+config.diagnosticSeverity = "Warning"
 
 [language-server.gopls]
 command = "gopls"
@@ -158,23 +155,3 @@ command = [
   "json",
   "--issues-exit-code=1",
 ]
-
-[language-servers.templ]
-command = ["templ", "lsp"]
-
-[language-server.typos]
-# typos-lsp must be on your PATH, or otherwise change this to an absolute path to typos-lsp
-command = "typos-lsp"
-# Logging level of the language server. Defaults to error.
-# Run with helix -v to output LSP logs to the editor log (:log-open)
-environment = { "RUST_LOG" = "error" }
-# Custom config. Used together with a config file found in the workspace or its parents,
-# taking precedence for settings declared in both. Equivalent to the typos `--config` cli argument.
-config.config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml"
-# How typos are rendered in the editor, can be one of an Error, Warning, Info or Hint.
-# Defaults to Warning.
-config.diagnosticSeverity = "Warning"
-
-[[grammar]]
-name = "just"
-source = { git = "https://github.com/IndianBoy42/tree-sitter-just", rev = "8af0aab79854aaf25b620a52c39485849922f766" }
