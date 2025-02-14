@@ -2,7 +2,7 @@ layout {
     tab split_direction="vertical" hide_floating_panes=true {
 		pane size="32%" 
         pane size="35%" name="helix" focus=true command="fish" {
-            args "-Pc helix ."
+            args "-Pc hx ."
         }
         pane size="33%"
         
