@@ -132,7 +132,6 @@ templ = { command = ["templ", "lsp"] }
 [language-server.typos]
 command = "typos-lsp"
 environment = { "RUST_LOG" = "info" }
-config.config = "~/code/typos-lsp/crates/typos-lsp/tests/typos.toml"
 config.diagnosticSeverity = "Warning"
 
 [language-server.gopls]
