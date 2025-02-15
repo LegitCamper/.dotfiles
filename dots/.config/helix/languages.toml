@@ -108,6 +108,17 @@ comment-token = "//"
 block-comment-tokens = { start = "/*", end = "*/" }
 language-servers = ["tinymist", "typos"]
 indent = { tab-width = 2, unit = "  " }
+formatter = { command = "typstyle" }
+auto-format = true
+
+[language-servers]
+tinymist = { command = "tinymist" }
+lua = { command = "lua-language-server" }
+ruff = { command = "ruff-lsp" }
+taplo = { command = "taplo", args = ["lsp", "stdio"] }
+yaml = { command = "yaml-language-server", args = ["--stdio"] }
+ansible = { command = "ansible-language-server", args = ["--stdio"] }
+templ = { command = ["templ", "lsp"] }
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"
@@ -119,15 +130,6 @@ inlayHints.closureReturnTypeHints.enable = "with_block"
 inlayHints.discriminantHints.enable = "fieldless"
 inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.typeHints.hideClosureInitialization = false
-
-[language-servers]
-tinymist = { command = "tinymist" }
-lua = { command = "lua-language-server" }
-ruff = { command = "ruff-lsp" }
-taplo = { command = "taplo", args = ["lsp", "stdio"] }
-yaml = { command = "yaml-language-server", args = ["--stdio"] }
-ansible = { command = "ansible-language-server", args = ["--stdio"] }
-templ = { command = ["templ", "lsp"] }
 
 [language-server.typos]
 command = "typos-lsp"
