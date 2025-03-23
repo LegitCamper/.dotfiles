@@ -132,6 +132,7 @@ auto-format = true
 tinymist = { command = "tinymist" }
 lua = { command = "lua-language-server" }
 ruff = { command = "ruff", args = ["server"] }
+pylsp = { command = "pylsp" }
 taplo = { command = "taplo", args = ["lsp", "stdio"] }
 yaml = { command = "yaml-language-server", args = ["--stdio"] }
 ansible = { command = "ansible-language-server", args = ["--stdio"] }
