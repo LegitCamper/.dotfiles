@@ -1,11 +1,28 @@
 [[language]]
 name = "python"
-roots = ["pyproject.toml"]
-scope = "source.py"
-formatter = { command = "black", args = ["--quiet", "-"] }
-indent = { tab-width = 4, unit = "    " }
-language-servers = ["ruff", "typos"]
-auto-format = true
+scope = "source.python"
+injection-regex = "py(thon)?"
+file-types = [
+  "py",
+  "pyi",
+  "py3",
+  "pyw",
+  "ptl",
+  "rpy",
+  "cpy",
+  "ipy",
+  "pyt",
+  { glob = ".python_history" },
+  { glob = ".pythonstartup" },
+  { glob = ".pythonrc" },
+  { glob = "*SConstruct" },
+  { glob = "*SConscript" },
+  { glob = "*sconstruct" },
+]
+shebangs = ["python", "uv"]
+roots = ["pyproject.toml", "setup.py", "poetry.lock", "pyrightconfig.json"]
+comment-token = "#"
+language-servers = ["ruff", "jedi", "pylsp"]
 
 [[language]]
 name = "rust"
@@ -114,7 +131,7 @@ auto-format = true
 [language-servers]
 tinymist = { command = "tinymist" }
 lua = { command = "lua-language-server" }
-ruff = { command = "ruff-lsp" }
+ruff = { command = "ruff", args = ["server"] }
 taplo = { command = "taplo", args = ["lsp", "stdio"] }
 yaml = { command = "yaml-language-server", args = ["--stdio"] }
 ansible = { command = "ansible-language-server", args = ["--stdio"] }
