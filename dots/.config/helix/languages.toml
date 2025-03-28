@@ -23,6 +23,7 @@ shebangs = ["python", "uv"]
 roots = ["pyproject.toml", "setup.py", "poetry.lock", "pyrightconfig.json"]
 comment-token = "#"
 language-servers = ["ruff", "jedi", "pylsp"]
+auto-format = true
 
 [[language]]
 name = "rust"
