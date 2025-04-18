@@ -42,6 +42,16 @@ input "type:touchpad" {
     middle_emulation enabled
 }
 
+input "Apple Inc. Magic Trackpad 2" {
+    dwt disabled
+    tap enabled
+    natural_scroll false
+    middle_emulation enabled
+    accel_profile "adaptive"
+    pointer_accel 0.8
+}
+
+
 # catppuccin macchiato
 set $rosewater #f4dbd6
 set $flamingo #f0c6c6
