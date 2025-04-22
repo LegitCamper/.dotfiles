@@ -277,6 +277,6 @@ bindsym $mod+r mode "resize"
     exec flatpak run com.vivaldi.Vivaldi
     exec $toolbox 
     exec flatpak run io.github.spacingbat3.webcord --ozone-platform=wayland
-    exec flatpak run steam 
+    exec /bin/bazzite-steam
 
 include @sysconfdir@/sway/config.d/*
