@@ -6,3 +6,5 @@ dots/.config/helix/runtime/grammars
 dots/ssh_key
 dots/ssh_key.pub
 dots/.config/helix/runtime
+dots/.config/quitebrowser/theme.py
+dots/.config/quitebrowser/__pycache__
