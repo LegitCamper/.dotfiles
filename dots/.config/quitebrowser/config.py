@@ -21,20 +21,17 @@ if os.path.exists(config.configdir / "theme.py"):
     theme.setup(c, "macchiato", True)
 
 c.tabs.show = "multiple"
+c.tabs.position = "left"
+c.tabs.max_width = -1
+c.tabs.width = "15%"
 
-c.url.start_pages = "https://search.sawyer.services"
-c.url.default_page = "https://search.sawyer.services"
+c.zoom.default = 90
 
 c.tabs.title.format = "{audio}{current_title}"
 c.fonts.web.size.default = 20
 
 c.url.searchengines = {
-    # note - if you use duckduckgo, you can make use of its built in bangs, of which there are many! https://duckduckgo.com/bangs
-    "DEFAULT": "https://duckduckgo.com/?q={}",
-    "!aw": "https://wiki.archlinux.org/?search={}",
-    "!apkg": "https://archlinux.org/packages/?sort=&q={}&maintainer=&flagged=",
-    "!gh": "https://github.com/search?o=desc&q={}&s=stars",
-    "!yt": "https://www.youtube.com/results?search_query={}",
+    "DEFAULT": "https://unduck.sawyer.services.com/?q={}",
 }
 
 c.completion.open_categories = [
@@ -63,6 +60,10 @@ config.bind("tT", "config-cycle tabs.position top left")
 config.bind("gJ", "tab-move +")
 config.bind("gK", "tab-move -")
 config.bind("gm", "tab-move")
+config.bind("h", "scroll-px -300 0")
+config.bind("j", "scroll-px 0 300")
+config.bind("k", "scroll-px 0 -300")
+config.bind("l", "scroll-px 300 0")
 
 # # dark mode setup
 c.colors.webpage.darkmode.enabled = True
@@ -71,10 +72,8 @@ c.colors.webpage.darkmode.policy.images = "never"
 # config.set("colors.webpage.darkmode.enabled", False, "file://*")
 
 # styles, cosmetics
-# c.content.user_stylesheets = ["~/.config/qutebrowser/styles/youtube-tweaks.css"]
 c.tabs.padding = {"top": 5, "bottom": 5, "left": 9, "right": 9}
 c.tabs.indicator.width = 0  # no tab indicators
-# c.window.transparent = True # apparently not needed
 c.tabs.width = "7%"
 
 # fonts
@@ -86,8 +85,8 @@ c.fonts.web.family.serif = "monospace"
 c.fonts.web.family.standard = "monospace"
 
 # privacy
-# config.set("completion.cmd_history_max_items", 0)
-# config.set("content.private_browsing", True)
+config.set("completion.cmd_history_max_items", 0)
+config.set("content.private_browsing", True)
 config.set("content.webgl", False, "*")
 config.set("content.canvas_reading", False)
 config.set("content.geolocation", False)
