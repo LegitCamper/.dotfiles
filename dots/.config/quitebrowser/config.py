@@ -74,6 +74,7 @@ c.tabs.padding = {"top": 5, "bottom": 5, "left": 9, "right": 9}
 c.tabs.position = "left"
 c.tabs.indicator.width = 0  # no tab indicators
 c.tabs.width = "10%"
+c.tabs.show = "always"
 
 # fonts
 c.fonts.default_family = []
