@@ -257,6 +257,7 @@ bindsym $mod+r mode "resize"
     assign [class="Vivaldi-flatpak"] 1
     assign [title="Alacritty-Toolbox"] 2
     assign [app_id="WebCord"] 3
+    assign [class="discord"] 3
     assign [class="steam"] 4
 
 #
