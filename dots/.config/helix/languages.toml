@@ -108,16 +108,6 @@ comment-token = "--"
 auto-format = true
 
 [[language]]
-name = "just"
-scope = "source.just"
-file-types = ["justfile", "Justfile", ".justfile", ".Justfile"]
-injection-regex = "just"
-comment-token = "#"
-indent = { tab-width = 4, unit = "    " }
-# auto-format = true
-# formatter = { command = "just", args = ["--dump"] } # Please see: https://github.com/helix-editor/helix/issues/9703
-
-[[language]]
 name = "typst"
 scope = "source.typst"
 injection-regex = "typ(st)?"
@@ -148,9 +138,6 @@ inlayHints.closureReturnTypeHints.enable = "with_block"
 inlayHints.discriminantHints.enable = "fieldless"
 inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.typeHints.hideClosureInitialization = false
-[language-server.rust-analyzer.config.check]
-targets = ["x86_64-unknown-linux-gnu"]
-#allTargets = false
 
 [language-server.typos]
 command = "typos-lsp"
