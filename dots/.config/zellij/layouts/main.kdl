@@ -7,7 +7,8 @@ layout {
         pane size="33%"
         
         floating_panes {
-            pane name="git" command="lazygit" {
+            pane name="git" command="fish" {
+                args "-Pc lazygit"
                 y "10%"
                 width "50%"
                 height "80%"
