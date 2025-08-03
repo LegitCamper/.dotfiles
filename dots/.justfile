@@ -19,10 +19,17 @@ toolbox-dev: toolbox-minimal toolbox-rust toolbox-python
 
 minimal-pkgs:= 'git openssh wget unzip fd stow fish htop yazi \
   jq fzf entr diffutils wl-clipboard helix lazygit eza atuin \
-  zellij git-delta procs ripgrep starship macchina bat just'
+  zellij git-delta procs ripgrep starship macchina bat just base-devel'
 
-toolbox-minimal:
+toolbox-minimal: install-paru
   just install-package "{{minimal-pkgs}}"
+
+install-paru:
+  #!/bin/bash
+  cd /tmp/git clone https://aur.archlinux.org/paru.git
+  cd /tmp/paru
+  makepkg -si
+  rm -rf /tmp/paru
 
 toolbox-rust:
   just install-package 'rustup pkgconf cmake'
