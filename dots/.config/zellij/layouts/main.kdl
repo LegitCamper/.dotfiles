@@ -10,8 +10,9 @@ layout {
             pane name="git" command="fish" {
                 args "-Pc lazygit"
                 y "10%"
-                width "50%"
+                x "15%"
                 height "80%"
+                width "70%"
             }
         }
     }

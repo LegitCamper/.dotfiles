@@ -9,3 +9,5 @@ dots/.config/helix/runtime
 dots/.config/quitebrowser/theme.py
 dots/.config/quitebrowser/__pycache__
 dots/.config/quitebrowser/autoconfig.yml
+.crush/logs
+.crush
