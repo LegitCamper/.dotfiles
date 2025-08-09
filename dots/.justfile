@@ -23,10 +23,12 @@ minimal-pkgs:= 'git openssh wget unzip fd stow fish htop yazi \
 
 toolbox-minimal: install-paru
   just install-package "{{minimal-pkgs}}"
+  helix -g fetch
+  helix -g build
 
 install-paru:
   #!/bin/bash
-  cd /tmp/git clone https://aur.archlinux.org/paru.git
+  cd /tmp/ && git clone https://aur.archlinux.org/paru.git
   cd /tmp/paru
   makepkg -si
   rm -rf /tmp/paru
