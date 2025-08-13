@@ -60,17 +60,6 @@ language-servers = ["gopls", "golangci-lint-lsp", "typos"]
 indent = { tab-width = 4, unit = "\t" }
 
 [[language]]
-name = "temp"
-scope = "source.templ"
-injection-regex = "templ"
-file-types = ["templ"]
-roots = ["go.work", "go.mod"]
-auto-format = true
-comment-token = "//"
-language-servers = ["templ", "typos"]
-indent = { tab-width = 4, unit = "\t" }
-
-[[language]]
 name = "toml"
 # formatter = { command = "taplo", args = ["format"] }
 file-types = ["toml"]
@@ -99,6 +88,16 @@ language-servers = ["yaml", "ansible"]
 injection-regex = "yml|yaml"
 
 [[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "livemd", "markdown", "mdx", "mkd", "mkdn", "mdwn", "mdown", "markdn", "mdtxt", "mdtext", "workbook", { glob = "PULLREQ_EDITMSG" }]
+roots = [".marksman.toml"]
+language-servers = [ "markdown-oxide" ]
+indent = { tab-width = 2, unit = "  " }
+block-comment-tokens = { start = "<!--", end = "-->" }
+
+[[language]]
 name = "lua"
 formatter = { command = "lua-format" }
 language-servers = ["lua"]
@@ -115,7 +114,7 @@ pylsp = { command = "pylsp" }
 taplo = { command = "taplo", args = ["lsp", "stdio"] }
 yaml = { command = "yaml-language-server", args = ["--stdio"] }
 ansible = { command = "ansible-language-server", args = ["--stdio"] }
-templ = { command = ["templ", "lsp"] }
+markdown-oxide = { command = "markdown-oxide" }
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"
