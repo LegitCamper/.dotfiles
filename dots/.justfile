@@ -20,7 +20,7 @@ toolbox-dev: toolbox-minimal toolbox-rust toolbox-python
 minimal-pkgs:= 'git openssh wget unzip fd stow fish htop yazi \
   jq fzf entr diffutils wl-clipboard helix lazygit eza atuin \
   zellij git-delta procs ripgrep starship macchina bat just \
-  ansible marksmam base-devel'
+  typos ansible marksmam base-devel'
 
 toolbox-minimal: install-paru
   just install-package "{{minimal-pkgs}}"
