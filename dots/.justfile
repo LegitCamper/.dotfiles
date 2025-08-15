@@ -20,7 +20,7 @@ toolbox-dev: toolbox-minimal toolbox-rust toolbox-python
 minimal-pkgs:= 'git openssh wget unzip fd stow fish htop yazi \
   jq fzf entr diffutils wl-clipboard helix lazygit eza atuin \
   zellij git-delta procs ripgrep starship macchina bat just \
-  typos ansible marksmam base-devel'
+  typos ansible marksman base-devel'
 
 toolbox-minimal: install-paru
   just install-package "{{minimal-pkgs}}"
@@ -38,10 +38,10 @@ toolbox-rust:
   just install-package 'rustup pkgconf cmake'
 
   rustup component add rust-analyzer
-  cargo install cargo-binstall
+  cargo install cargo-binstall --locked
   cargo binstall cargo-binstall
   cargo binstall cargo-edit probe-rs-tools --no-confirm --continue-on-failure
   cargo binstall --git 'https://github.com/feel-ix-343/markdown-oxide' markdown-oxide --no-confirm
 
 toolbox-python:
-  just install-package 'python uv ruff'`
+  just install-package 'python uv ruff'
