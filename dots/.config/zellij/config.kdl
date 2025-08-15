@@ -1,5 +1,6 @@
 default_layout "main"
 on_force_close "quit"
+mouse_mode false
 default_shell "fish"
 pane_frames true
 auto_layout true
