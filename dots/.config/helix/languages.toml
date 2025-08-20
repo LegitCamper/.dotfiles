@@ -128,8 +128,6 @@ inlayHints.typeHints.hideClosureInitialization = false
 
 [language-server.typos]
 command = "typos-lsp"
-environment = { "RUST_LOG" = "info" }
-config.diagnosticSeverity = "Warning"
 
 [language-server.gopls]
 command = "gopls"
