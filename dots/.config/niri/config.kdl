@@ -68,7 +68,7 @@ spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
 spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
 
 spawn-sh-at-startup "flatpak run com.vivaldi.Vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland"
-spawn-sh-at-startup "alacritty -e toolbox run bash ~/.config/zellij/start.sh"
+spawn-sh-at-startup "alacritty --title Alacritty-toolbox -e toolbox run bash ~/.config/zellij/start.sh"
 spawn-sh-at-startup "flatpak run com.discordapp.Discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
 spawn-sh-at-startup "flatpak run com.valvesoftware.Steam"
 spawn-sh-at-startup "flatpak run com.bitwarden.desktop"
@@ -91,8 +91,14 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"Alacritty"#
+    match title=r#"Alacritty-toolbox"#
     open-on-workspace "terminal"
+    open-maximized true
+    draw-border-with-background false
+}
+
+window-rule {
+    match title=r#"Alacritty-system"#
     draw-border-with-background false
 }
 
@@ -115,8 +121,8 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty toolbox" { spawn-sh "alacritty -e toolbox run bash ~/.config/zellij/start.sh"; }
-    Mod+Shift+T hotkey-overlay-title="Open a Terminal: alacritty system" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: alacritty toolbox" { spawn-sh "alacritty --title Alacritty-toolbox -e toolbox run bash ~/.config/zellij/start.sh"; }
+    Mod+Shift+T hotkey-overlay-title="Open a Terminal: alacritty system" { spawn-sh "alacritty --title Alacritty-system"; }
     Mod+Return hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
