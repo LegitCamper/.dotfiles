@@ -4,6 +4,7 @@
         "custom/fedora",
         "sway/workspaces",
         "hyprland/workspaces",
+        "niri/workspaces",
     ],
     "modules-center": [
         "clock" ,
@@ -24,6 +25,18 @@
     "hyprland/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
+    },
+    "niri/workspaces": {
+        "format": "{icon}",
+	    "format-icons": {
+	    	"browser": "1",
+	    	"terminal": "2",
+	    	"chat": "3",
+	    	"steam": "4",
+	    	"games": "5",
+	    	"bitwarden": "10",
+	    	"default": ""
+	    }
     },
     "sway/workspaces": {
         "disable-scroll": true,
