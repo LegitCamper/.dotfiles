@@ -1,4 +1,6 @@
 input {
+    focus-follows-mouse
+
     keyboard {
         numlock
     }
@@ -22,20 +24,14 @@ layout {
     default-column-width { proportion 0.5; }
 
     focus-ring {
-        off
         width 4
-
-        active-color "#363a4f"
+        
+        active-color "#c6a0f6"
         inactive-color "#363a4f"
     }
 
     border {
         off
-        width 4
-
-        active-color "#c6a0f6"
-        inactive-color "#363a4f"
-        urgent-color "#7dc4e4"
     }
 }
 
@@ -49,11 +45,13 @@ animations {
     slowdown 0.75
 }
 
+prefer-no-csd
+
 workspace "browser"
 workspace "terminal"
 workspace "chat"
 workspace "steam"
-workspace "other"
+workspace "game"
 workspace "other2"
 workspace "other3"
 workspace "other4"
@@ -61,25 +59,47 @@ workspace "other5"
 workspace "bitwarden"
 
 spawn-at-startup "waybar"
+spawn-sh-at-startup "swaybg -m fill -i ~/.config/Wallpapers/$(/bin/ls ~/.config/Wallpapers | shuf -n 1)"
+spawn-sh-at-startup "dunst -config ~/.config/dunst/dunstrc &"
+spawn-sh-at-startup "nm-applet --indicator &"
+spawn-sh-at-startup "blueman-applet &"
+spawn-sh-at-startup "udiskie -a -t -n &"
+spawn-sh-at-startup "wl-paste --type text --watch cliphist store"
+spawn-sh-at-startup "wl-paste --type image --watch cliphist store"
+
+spawn-sh-at-startup "flatpak run com.vivaldi.Vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland"
+spawn-sh-at-startup "alacritty -e toolbox run bash ~/.config/zellij/start.sh"
+spawn-sh-at-startup "flatpak run com.discordapp.Discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
+spawn-sh-at-startup "flatpak run com.valvesoftware.Steam"
+spawn-sh-at-startup "flatpak run com.bitwarden.desktop"
 
 window-rule {
-    match at-startup=true app-id=r#"^com\.vivaldi\.Vivaldi$"#
+    match app-id=r#"Vivaldi"#
+    open-maximized true
     open-on-workspace "browser"
 }
 
 window-rule {
-    match at-startup=true app-id=r#"^org\.discordapp\.Discord$"#
+    match app-id=r#"discord"#
     open-on-workspace "chat"
 }
 
 window-rule {
-    match at-startup=true app-id=r#"^org\.valvesoftware\.Steam$"#
+    match app-id=r#"steam"#
     open-on-workspace "steam"
+    open-floating true
 }
 
 window-rule {
-    match at-startup=true app-id=r#"^org\.bitwarden\.desktop$"#
+    match app-id=r#"Alacritty"#
+    open-on-workspace "terminal"
+    draw-border-with-background false
+}
+
+window-rule {
+    match app-id=r#"Bitwarden"#
     open-on-workspace "bitwarden"
+    block-out-from "screen-capture"
 }
 
 window-rule {
@@ -90,11 +110,6 @@ window-rule {
 window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
-}
-
-window-rule {
-    match app-id=r#"^org\.bitwarden\.desktop$"#
-    block-out-from "screen-capture"
 }
 
 binds {
@@ -198,8 +213,8 @@ binds {
     Mod+Shift+9 { move-column-to-workspace 9; }
     Mod+Shift+0 { move-column-to-workspace 10; }
 
-    Mod+BracketLeft  { consume-or-expel-window-right; }
-    Mod+BracketRight { consume-or-expel-window-left; }
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
 
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
