@@ -16,7 +16,7 @@ dev-pkgs:='go gopls taplo cmake make lua-language-server ansible-language-server
 minimal-pkgs:= 'git openssh wget unzip fd stow fish htop yazi \
   jq fzf entr diffutils wl-clipboard helix lazygit eza atuin \
   zellij git-delta procs ripgrep starship macchina bat just \
-  typos ansible marksman base-devel'
+  typos ansible marksman base-devel openssh'
 
 toolbox-setup: toolbox-rust toolbox-python
   just install-package "{{minimal-pkgs}}"
