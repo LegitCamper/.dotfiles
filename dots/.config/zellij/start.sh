@@ -7,5 +7,6 @@ while true; do
   else
     cd ~/projects/$project
     zellij a $project || zellij -s "$project"
+    zellij delete-session "$project" --force
   fi
 done
