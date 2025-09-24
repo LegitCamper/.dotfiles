@@ -34,6 +34,10 @@
 	    	"chat": "3",
 	    	"steam": "4",
 	    	"games": "5",
+	    	"other": "6",
+	    	"other1": "7",
+	    	"other2": "8",
+	    	"other3": "9",
 	    	"bitwarden": "10",
 	    	"default": ""
 	    }
