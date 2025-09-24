@@ -88,7 +88,6 @@ window-rule {
 window-rule {
     match app-id=r#"steam"#
     open-on-workspace "steam"
-    open-floating true
 }
 
 window-rule {
