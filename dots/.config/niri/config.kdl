@@ -14,6 +14,8 @@ input {
 layout {
     gaps 16
     center-focused-column "always"
+    background-color "transparent"
+
 
     preset-column-widths {
         proportion 0.33333
@@ -46,6 +48,24 @@ animations {
 }
 
 prefer-no-csd
+
+layer-rule {
+    match namespace="^wallpaper$"
+    match at-startup=true
+
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="waybar"
+    match at-startup=true
+
+    place-within-backdrop true
+}
+
+xwayland-satellite {
+    path "xwayland-satellite"
+}
 
 workspace "browser"
 workspace "terminal"
