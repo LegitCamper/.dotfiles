@@ -12,7 +12,7 @@ set TERM screen-256color # Sets the terminal type
 set EDITOR helix
 set VISUAL kate
 set -x GIT_SSH /usr/bin/ssh
-set -x SSH_AUTH_SOCK /home/sawyer/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+set -x SSH_AUTH_SOCK ~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
 
 # Locales
 set -gx LANG "en_US.UTF-8"
