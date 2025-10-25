@@ -29,9 +29,8 @@ toolbox-rust:
 
   rustup component add rust-analyzer
   cargo install cargo-binstall --locked
-  cargo binstall cargo-binstall
-  cargo binstall cargo-edit probe-rs-tools aura-pm --no-confirm --continue-on-failure
-  cargo binstall --git 'https://github.com/feel-ix-343/markdown-oxide' markdown-oxide --no-confirm
+  cargo binstall -y --continue-on-failure cargo-edit probe-rs-tools aura-pm
+  cargo binstall -y --git 'https://github.com/feel-ix-343/markdown-oxide' markdown-oxide
 
 toolbox-python:
   just install-package 'python uv ruff'
