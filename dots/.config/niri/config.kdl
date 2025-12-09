@@ -142,6 +142,20 @@ window-rule {
     open-floating true
 }
 
+window-rule {
+    match title="Mouseless"
+    open-floating true
+    geometry-corner-radius 0
+    // opacity 0.5
+    draw-border-with-background false
+}
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 

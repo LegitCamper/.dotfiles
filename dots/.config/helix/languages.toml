@@ -127,6 +127,7 @@ injection-regex = "html"
 file-types = [
   "html",
   "htm",
+  "hbs",
   "shtml",
   "xhtml",
   "xht",
