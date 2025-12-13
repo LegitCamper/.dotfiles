@@ -32,6 +32,7 @@ select = "block"
 
 [editor.lsp]
 display-messages = true
+display-inlay-hints = true
 
 [editor.indent-guides]
 render = true
