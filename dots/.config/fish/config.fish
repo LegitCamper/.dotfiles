@@ -12,7 +12,16 @@ set TERM screen-256color # Sets the terminal type
 set EDITOR helix
 set VISUAL kate
 set -x GIT_SSH /usr/bin/ssh
-set -x SSH_AUTH_SOCK ~/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock
+
+if status is-interactive
+    if test -f ~/.config/environment.d/bitwarden.conf
+        for line in (cat ~/.config/environment.d/bitwarden.conf | grep -v '^#')
+            set -l kv (string split -m 1 "=" $line)
+            # Use eval to expand $HOME if it exists in the value
+            set -gx $kv[1] (eval echo $kv[2])
+        end
+    end
+end
 
 # Locales
 set -gx LANG "en_US.UTF-8"

@@ -11,3 +11,6 @@ dots/.config/quitebrowser/__pycache__
 dots/.config/quitebrowser/autoconfig.yml
 .crush/logs
 .crush
+dots/.config/Wallpapers
+dots/.config/fish/conf.d
+dots/.config/fish/fish_variables

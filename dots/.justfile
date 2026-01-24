@@ -29,7 +29,7 @@ toolbox-rust:
 
   rustup component add rust-analyzer
   cargo install cargo-binstall --locked
-  cargo binstall -y --continue-on-failure cargo-edit probe-rs-tools aura-pm
+  cargo binstall -y --continue-on-failure cargo-edit probe-rs-tools
   cargo binstall -y --git 'https://github.com/feel-ix-343/markdown-oxide' markdown-oxide
 
 toolbox-python:
