@@ -1,6 +1,6 @@
 LC_ALL="C.UTF-8"
 
-BROWSER=flatpak run com.vivaldi.Vivaldi
+BROWSER="flatpak run com.vivaldi.Vivaldi"
 EDITOR=helix
 TERM=alacritty
 

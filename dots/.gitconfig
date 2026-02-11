@@ -1,16 +1,21 @@
 [user]
 	name = sawyer bristol
 	email = sawyerbristol@gmail.com
+
+[credential "https://gitea.sawyer.services"]
+	username = sawyer
 [credential "https://github.com"]
 	username = LegitCamper
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+
+[url "ssh://git@gitea.sawyer.services/"]
+	pushInsteadOf = https://gitea.sawyer.services/
+[url "ssh://git@github.com/"]
+	pushInsteadOf = https://github.com/
+[url "ssh://git@gitlab.com/"]
+	pushInsteadOf = https://gitlab.com/
+
 [filter "lfs"]
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[url "ssh://git@github.com/"]
-	pushInsteadOf = https://github.com/
-[url "ssh://git@gitlab.com/"]
-	pushInsteadOf = https://gitlab.com/
