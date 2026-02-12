@@ -1,6 +1,7 @@
 default_layout "main"
-on_force_close "detach"
-mouse_mode false
+on_force_close "quit"
+mouse_mode true
+advanced_mouse_actions false
 default_shell "fish"
 pane_frames true
 auto_layout true
