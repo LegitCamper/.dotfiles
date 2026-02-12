@@ -1,5 +1,7 @@
 default_layout "main"
 on_force_close "quit"
+session_serialization false
+disable_session_metadata true
 mouse_mode true
 advanced_mouse_actions false
 default_shell "fish"
@@ -148,7 +150,7 @@ keybinds {
     }
     shared_except "locked" {
         bind "Ctrl g" { SwitchToMode "Locked"; }
-        bind "Ctrl q" { Detach; }
+        bind "Ctrl q" { Quit; }
         bind "Alt n" { NewPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }

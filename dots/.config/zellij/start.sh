@@ -7,7 +7,7 @@ while true; do
   if [ "$project" = "New Project" ]; then
     clear && cd ~/projects && fish
   else
-    cd ~/projects/$project
-    zellij -s "$project"
+    cd ~/projects/"$project" || exit 1
+    zellij attach -c "$project" || zellij --session "$project"
   fi
 done
