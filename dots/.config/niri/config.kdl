@@ -139,6 +139,11 @@ window-rule {
 }
 
 window-rule {
+    match app-id=r#"lxqt-policykit-agent"#
+    open-floating true
+}
+
+window-rule {
     match title="Picture in picture"
     open-floating true
 }
