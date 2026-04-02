@@ -153,22 +153,6 @@ window-rule {
     default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
-window-rule {
-    match title="Mouseless"
-    geometry-corner-radius 0
-    default-floating-position x=0 y=-46 relative-to="top"
-    shadow {
-        off
-    }
-    border {
-        off
-    }
-    focus-ring {
-        off
-    }
-    // opacity 0.1
-}
-
 gestures {
     hot-corners {
         off
@@ -181,7 +165,7 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty toolbox" { spawn-sh "alacritty --title Alacritty-toolbox -e toolbox run bash ~/.config/zellij/start.sh"; }
     Mod+Shift+T hotkey-overlay-title="Open a Terminal: alacritty system" { spawn-sh "alacritty --title Alacritty-system"; }
     Mod+Return hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+M hotkey-overlay-title="Run an Application: Mouseless" { spawn "~/projects/mouseless/target/release/mouseless"; }
+    Mod+M hotkey-overlay-title="Run an Application: Mouseless" { spawn "stochos"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
