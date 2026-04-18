@@ -96,7 +96,7 @@ spawn-at-startup "~/.config/niri/gaming.sh"
 spawn-sh-at-startup "flatpak run com.vivaldi.Vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland"
 spawn-sh-at-startup "alacritty --title Alacritty-toolbox -e toolbox run bash ~/.config/zellij/start.sh"
 spawn-sh-at-startup "flatpak run com.discordapp.Discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
-spawn-sh-at-startup "flatpak run com.valvesoftware.Steam"
+spawn-sh-at-startup "steam"
 spawn-sh-at-startup "flatpak run com.bitwarden.desktop"
 
 window-rule {
