@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#! /usr/bin/bash
 
 while true; do
   project=$(eza -aD ~/projects/ | awk 'FNR==1  {print "New Project"}1' | \
