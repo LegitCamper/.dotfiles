@@ -1,0 +1,29 @@
+add_newline = true
+format = '''
+$username@$hostname: $directory
+\$ '''
+
+right_format = '''
+$cmd_duration
+'''
+
+[cmd_duration]
+format = "took [$duration]($style)"
+
+[directory]
+read_only = " 󰉑"
+truncation_length = 5
+truncate_to_repo = false
+home_symbol = '~'
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+
+[username]
+show_always = true
+format = "[$user]($style)"
+
+[shell]
+format = "$indicator"
+disabled = false
