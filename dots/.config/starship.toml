@@ -8,7 +8,7 @@ $cmd_duration
 '''
 
 [cmd_duration]
-format="took [$duration]($style)"
+format = "took [$duration]($style)"
 
 [directory]
 read_only = " "

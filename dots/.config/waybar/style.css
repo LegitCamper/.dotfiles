@@ -40,30 +40,18 @@ window#waybar {
 tooltip {
     background: @base;
     border-radius: 10px;
-    border-width: 2px;
-    border-style: solid;
-    border-color: @lavender;
+    border: 2px solid @lavender;
 }
 
 #workspaces button {
     padding: 5px;
-    color: @text;
     margin-right: 5px;
+    color: @text;
 }
 
-#workspaces button.focused {
-    background: @mauve;
-}
-
-#workspaces button.urgent {
-    color: @red;
-    background: @mantle;
-}
-
-#workspaces button:hover {
-    background: @surface2;
-    color: @lavender;
-}
+#workspaces button.focused { background: @mauve; }
+#workspaces button.urgent { color: @red; background: @mantle; }
+#workspaces button:hover { background: @surface2; color: @lavender; }
 
 #window,
 #clock,
@@ -74,72 +62,60 @@ tooltip {
 #workspaces,
 #tray,
 #backlight,
+#custom-podmantoolbox,
 #placeholder {
     background: @mantle;
     opacity: 0.8;
-    padding: 0px 10px;
-    margin: 3px 0px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    padding: 0 10px;
+    margin: 5px 0;
     border: 1px solid @crust;
+    border-radius: 10px;
+}
+
+#clock,
+#network,
+#bluetooth,
+#tray,
+#backlight,
+#battery,
+#workspaces {
+    margin-right: 10px;
 }
 
 #workspaces {
-    border-radius: 10px;
     margin-left: 10px;
-}
-
-#backlight {
-    border-radius: 10px;
-    margin-right: 10px;
-}
-
-#tray {
-    border-radius: 10px;
-    margin-right: 10px;
 }
 
 #clock {
     color: @rosewater;
-    border-radius: 10px;
-    margin-right: 10px;
     padding: 0 15px;
-    border-right: 0px;
 }
 
 #network {
     color: @peach;
-    border-radius: 10px;
     padding-right: 17px;
-    margin-right: 10px;
 }
 
 #bluetooth {
     color: @maroon;
-    border-radius: 10px;
-    margin-right: 10px;
 }
 
 #pulseaudio {
     color: @blue;
-    border-left: 0px;
-    border-right: 0px;
+    border-left: 0;
+    border-right: 0;
     padding-left: 17px;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 10px 0 0 10px;
 }
 
 #pulseaudio.microphone {
     color: @teal;
-    border-left: 0px;
-    border-right: 0px;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 0 10px 10px 0;
     margin-right: 10px;
 }
 
 #battery {
-    color: @saphire;
-    border-radius: 10px;
-    margin-right: 10px;
+    color: @sapphire;
     padding: 0 15px;
-    border-left: 0px;
+    border-left: 0;
 }

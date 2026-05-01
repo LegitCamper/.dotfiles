@@ -1,10 +1,10 @@
 {
-    "height": 40,
+    "height": 46,
     "modules-left": [
-        "custom/fedora",
         "sway/workspaces",
         "hyprland/workspaces",
         "niri/workspaces",
+        "custom/podmantoolbox",
     ],
     "modules-center": [
         "clock" ,
@@ -47,6 +47,12 @@
         "all-outputs": true,
         "format": "{icon}",
         "on-click": "activate",
+    },
+    "custom/podmantoolbox": {
+        "exec": "~/.config/waybar/scripts/podman.sh -c arch-toolbox-latest",
+        "format": "󰦭 {}",
+        "interval": 2,
+        "on-click": "~/.config/waybar/scripts/podman.sh -c arch-toolbox-latest toggle"
     },
     "clock": {
 		"format": "{:%I:%M %p}",
