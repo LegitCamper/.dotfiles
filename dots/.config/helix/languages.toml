@@ -157,6 +157,9 @@ vscode-html-language-server = { command = "vscode-html-language-server", args = 
   "--stdio",
 ], config = { provideFormatter = true } }
 superhtml = { command = "superhtml", args = ["lsp"] }
+vscode-css-language-server = { command = "vscode-css-language-server", args = [
+  "--stdio",
+], config = { provideFormatter = true, css = { validate = { enable = true } } } }
 
 
 [language-server.rust-analyzer]
@@ -194,3 +197,13 @@ command = [
   "json",
   "--issues-exit-code=1",
 ]
+
+[[language]]
+name = "css"
+scope = "source.css"
+injection-regex = "css"
+file-types = ["css"]
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = ["vscode-css-language-server"]
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
