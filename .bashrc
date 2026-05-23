@@ -15,6 +15,8 @@ alias diff='diff --color=always'
 alias df="df -h" # human-readable sizes
 alias free="free -m" # show sizes in MB
 
+export SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
+
 export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
 
 if [[ "$HOSTNAME" == "toolbx" ]]; then
