@@ -35,6 +35,11 @@ layout {
     border {
         off
     }
+
+    struts {
+        left 64
+        right 64
+    }
 }
 
 output "eDP-1" {
