@@ -9,6 +9,12 @@ LC_ALL="C.UTF-8"
 
 export SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
 
+if [ -r /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+elif [ -r /etc/bash_completion ]; then
+  . /etc/bash_completion
+fi
+
 if [[ "$HOSTNAME" == "toolbx" ]]
     then
         export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
