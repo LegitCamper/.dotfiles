@@ -3,10 +3,6 @@ then
     return
 fi
 
-# Locales
-LANG="en_US.UTF-8"
-LC_ALL="C.UTF-8"
-
 export SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
 
 if [ -r /usr/share/bash-completion/bash_completion ]; then
@@ -19,9 +15,10 @@ if [[ "$HOSTNAME" == "toolbx" ]]
     then
         export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
 
-        HELIX_RUNTIME="~/.config/helix/runtime"
-        alias hx="$HELIX_RUNTIME"
-        alias helix="$HELIX_RUNTIME"
+        HELIX_RUNTIME="$HOME/.config/helix/runtime"
+        HELIX_BIN="$HOME/.config/zellij/helixselector.sh"
+        alias hx="$HELIX_BIN"
+        alias helix="$HELIX_BIN"
         
         ### ALIASES ###
         alias lg="lazygit"
@@ -35,8 +32,36 @@ if [[ "$HOSTNAME" == "toolbx" ]]
         alias ls='ls --color=always'
         alias grep='grep --color=always'
         alias diff='diff --color=always'
-        
-        # adding flags
-        alias df="df -h" # human-readable sizes
-        alias free="free -m" # show sizes in MB
 fi
+
+# Locales
+LANG="en_US.UTF-8"
+LC_ALL="C.UTF-8"
+
+# adding flags
+alias df="df -h" # human-readable sizes
+alias free="free -m" # show sizes in MB
+alias mkdir='mkdir -p'
+
+HISTSIZE=10000
+HISTFILESIZE=20000
+HISTCONTROL=ignoreboth:erasedups
+HISTIGNORE='ls:ll:pwd:clear:history'
+shopt -s histappend
+PROMPT_COMMAND='history -a'
+
+shopt -s checkwinsize
+shopt -s autocd
+shopt -s globstar
+shopt -s cdspell
+shopt -s dirspell
+
+set completion-ignore-case on
+set show-all-if-ambiguous on
+set show-all-if-unmodified on
+set mark-symlinked-directories on
+set colored-stats on
+set visible-stats on
+set menu-complete-display-prefix on
+
+eval "$(dircolors -b)"
