@@ -89,7 +89,7 @@ workspace "bitwarden"
 
 spawn-at-startup "waybar"
 spawn-sh-at-startup "/usr/libexec/lxqt-policykit-agent &"
-spawn-sh-at-startup "swaybg -m fill -i ~/.config/Wallpapers/$(/bin/ls ~/.config/Wallpapers | shuf -n 1)"
+spawn-sh-at-startup "waypaper --restore"
 spawn-sh-at-startup "swayidle -w timeout 601 'swaylock'"
 spawn-sh-at-startup "dunst -config ~/.config/dunst/dunstrc &"
 spawn-sh-at-startup "nm-applet --indicator &"
