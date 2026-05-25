@@ -7,28 +7,30 @@ fi
 LANG="en_US.UTF-8"
 LC_ALL="C.UTF-8"
 
-alias ls='ls --color=always'
-alias grep='grep --color=always'
-alias diff='diff --color=always'
-
-# adding flags
-alias df="df -h" # human-readable sizes
-alias free="free -m" # show sizes in MB
-
 export SSH_AUTH_SOCK="$HOME/.var/app/com.bitwarden.desktop/data/.bitwarden-ssh-agent.sock"
 
-export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
+if [[ "$HOSTNAME" == "toolbx" ]]
+    then
+        export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
 
-if [[ "$HOSTNAME" == "toolbx" ]]; then
-    HELIX_RUNTIME="~/.config/helix/runtime"
-    
-    ### ALIASES ###
-    alias lg="lazygit"
-    alias ls="eza -al --color=always --group-directories-first"
-    alias diff="delta"
-    alias hx="helix"
-    
-    eval -- "$(/usr/bin/starship init bash --print-full-init)"
+        HELIX_RUNTIME="~/.config/helix/runtime"
+        alias hx="$HELIX_RUNTIME"
+        alias helix="$HELIX_RUNTIME"
+        
+        ### ALIASES ###
+        alias lg="lazygit"
+        alias ls="eza -la --color=always --group-directories-first"
+        alias diff="delta"
+        
+        eval -- "$(/usr/bin/starship init bash --print-full-init)"
+
+        clear
+    else
+        alias ls='ls --color=always'
+        alias grep='grep --color=always'
+        alias diff='diff --color=always'
+        
+        # adding flags
+        alias df="df -h" # human-readable sizes
+        alias free="free -m" # show sizes in MB
 fi
-
-clear
