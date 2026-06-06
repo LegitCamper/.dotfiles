@@ -29,6 +29,7 @@ if [[ "$HOSTNAME" == "toolbx" ]]
 
         clear
     else
+        alias flatpak='flatpak --user'
         alias ls='ls --color=always'
         alias grep='grep --color=always'
         alias diff='diff --color=always'
