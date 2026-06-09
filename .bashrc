@@ -11,29 +11,6 @@ elif [ -r /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
-if [[ "$HOSTNAME" == "toolbx" ]]
-    then
-        export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
-
-        HELIX_RUNTIME="$HOME/.config/helix/runtime"
-        HELIX_BIN="$HOME/.config/zellij/helixselector.sh"
-        alias hx="$HELIX_BIN"
-        alias helix="$HELIX_BIN"
-        
-        ### ALIASES ###
-        alias lg="lazygit"
-        alias ls="eza -la --color=always --group-directories-first"
-        alias diff="delta"
-        
-        eval -- "$(/usr/bin/starship init bash --print-full-init)"
-
-        clear
-    else
-        alias flatpak='flatpak --user'
-        alias ls='ls --color=always'
-        alias grep='grep --color=always'
-        alias diff='diff --color=always'
-fi
 
 # Locales
 LANG="en_US.UTF-8"
@@ -66,3 +43,26 @@ set visible-stats on
 set menu-complete-display-prefix on
 
 eval "$(dircolors -b)"
+
+# Check if running inside a container (Toolbox/Distrobox)
+if [ -f /run/.containerenv ] || [ -f /run/.dockerenv ]
+    then
+        export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
+
+        HELIX_RUNTIME="$HOME/.config/helix/runtime"
+        HELIX_BIN="$HOME/.config/zellij/helixselector.sh"
+        alias hx="$HELIX_BIN"
+        alias helix="$HELIX_BIN"
+        
+        ### ALIASES ###
+        alias lg="lazygit"
+        alias ls="eza -la --color=always --group-directories-first"
+        alias diff="delta"
+        
+        eval -- "$(/usr/bin/starship init bash --print-full-init)"
+    else
+        alias flatpak='flatpak --user'
+        alias ls='ls --color=always'
+        alias grep='grep --color=always'
+        alias diff='diff --color=always'
+fi
