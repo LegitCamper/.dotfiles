@@ -47,7 +47,7 @@ eval "$(dircolors -b)"
 # Check if running inside a container (Toolbox/Distrobox)
 if [ -f /run/.containerenv ] || [ -f /run/.dockerenv ]
     then
-        export PATH=$HOME/.cargo/bin:$HOME/go/bin:$PATH
+        export PATH=$HOME/.cargo/bin:$HOME/go/bin:$HOME/.local/bin:$PATH
 
         HELIX_RUNTIME="$HOME/.config/helix/runtime"
         HELIX_BIN="$HOME/.config/zellij/helixselector.sh"
