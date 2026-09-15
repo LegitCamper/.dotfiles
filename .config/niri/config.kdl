@@ -135,7 +135,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"Bitwarden"#
+    match title=r#"Bitwarden"#
     open-on-workspace "bitwarden"
     block-out-from "screen-capture"
 }
