@@ -1,8 +1,8 @@
 create-toolbox:
   toolbox create
 
-setup: create-toolbox
-  toolbox run just --justfile ~/projects/.dotfiles/.justfile toolbox-setup
+setup: create-toolbox 
+  toolbox run bash -ic "sudo pacman -S just && just --justfile ~/projects/.dotfiles/.justfile toolbox-setup"
 
 stow:
   @cd ~/projects/.dotfiles/ && stow -t ~ --adopt -S .
@@ -15,7 +15,8 @@ dev-pkgs:='go gopls taplo cmake make clang'# lua-language-server ansible-languag
 minimal-pkgs:= 'git openssh wget unzip stow htop yazi \
   jq fzf entr diffutils wl-clipboard helix lazygit eza \
   zellij git-delta ripgrep starship macchina just \
-  typos typos-lsp ansible marksman base-devel openssh'
+  typos typos-lsp ansible marksman base-devel openssh
+  fuse fuse3 nspr nss atk cups gtk3 alsa-lib'
 
 toolbox-setup: 
   grep '^en_US.UTF-8 UTF-8' /etc/locale.gen \
