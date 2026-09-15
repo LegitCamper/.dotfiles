@@ -1,5 +1,8 @@
 create-toolbox:
-  toolbox create --distro arch 
+  toolbox create
+
+setup: create-toolbox
+  toolbox run just --justfile ~/projects/.dotfiles/.justfile toolbox-setup
 
 stow:
   @cd ~/projects/.dotfiles/ && stow -t ~ --adopt -S .
