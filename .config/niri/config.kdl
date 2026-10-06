@@ -73,6 +73,13 @@ layer-rule {
     place-within-backdrop true
 }
 
+layer-rule {
+    match namespace="mantle-bar"
+    match at-startup=true
+
+    place-within-backdrop true
+}
+
 xwayland-satellite {
     path "xwayland-satellite"
 }
@@ -88,11 +95,11 @@ workspace "other2"
 workspace "other3"
 workspace "bitwarden"
 
-spawn-at-startup "waybar"
+spawn-at-startup "mantle"
 spawn-sh-at-startup "/usr/libexec/lxqt-policykit-agent &"
 spawn-sh-at-startup "waypaper --restore"
+// Keep Swayidle/Swaylock until Mantle PAM and recovery checks pass.
 spawn-sh-at-startup "swayidle -w timeout 601 'swaylock'"
-spawn-sh-at-startup "dunst -config ~/.config/dunst/dunstrc &"
 spawn-sh-at-startup "nm-applet --indicator &"
 spawn-sh-at-startup "blueman-applet &"
 spawn-sh-at-startup "udiskie -a -t -n &"
@@ -171,7 +178,9 @@ binds {
 
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty toolbox" { spawn-sh "alacritty --title Alacritty-toolbox -e toolbox run bash ~/.config/zellij/start.sh"; }
     Mod+Shift+T hotkey-overlay-title="Open a Terminal: alacritty system" { spawn-sh "alacritty --title Alacritty-system"; }
-    Mod+Return hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+Return repeat=false hotkey-overlay-title="Run an Application: Mantle" { spawn "mantle" "toggle" "launcher_open"; }
+    Mod+Ctrl+Return repeat=false hotkey-overlay-title="Run an Application: Fuzzel fallback" { spawn "fuzzel"; }
+    Mod+Space repeat=false hotkey-overlay-title="Open Clipboard History: Mantle" { spawn "mantle" "toggle" "clipboard_open"; }
     Mod+M hotkey-overlay-title="Run an Application: Mouseless" { spawn "stochos"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }

@@ -9,3 +9,4 @@ ssh_key.pub
 .config/quitebrowser/__pycache__
 .config/quitebrowser/autoconfig.yml
 .config/Wallpapers
+/.config/pulse

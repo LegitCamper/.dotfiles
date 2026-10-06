@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "runtime.version": "Lua 5.4",
+  "workspace.library": ["../../.local/share/mantle/lua-meta"],
+  "diagnostics.globals": ["mantle", "state", "computed", "hover", "hover_rect", "scroll", "panel", "popup", "lock", "rect", "row", "column", "list", "text", "textfield", "icon", "image", "shader", "fonts", "action", "timer", "interval", "process", "fuzzy"]
+}
