@@ -14,6 +14,8 @@ local function card(item)
     local actions = {}
     for i, act in ipairs(item.actions or {}) do actions[i] = rect { width = "fill", padding = 6, radius = 6, background = theme.surface0, cursor = "pointer", accessible_name = act.label, on_click = function() mantle.notifications:invoke_action(item.id, act.key) end, children = { text { content = act.label, align_h = "center", foreground = theme.text } } } end
     return column { width = "fill", padding = 12, spacing = 6, radius = 12, background = "#24273af2", border_width = 1, border_color = item.urgency == "critical" and theme.red or theme.surface2,
+        opacity = 1, translate = { x = 0 },
+        animate = { move = 180, opacity = { duration = 150, from = 0 }, translate = { duration = 200, easing = "out_cubic", from = { x = 40 } }, exit = { duration = 150, opacity = 0, translate = { x = 40 } } },
         children = { row { width = "fill", spacing = 8, children = { icon { name = item.app_icon or "dialog-information-symbolic", size = 28 }, column { width = "fill", children = { text { content = item.app_name, foreground = theme.subtext0, font_size = 11 }, text { content = { { text = item.summary, bold = true } }, foreground = theme.text, elide = "end" } } }, rect { padding = 4, cursor = "pointer", accessible_name = "Dismiss notification", on_click = function() mantle.notifications:dismiss(item.id) end, children = { text { content = "×", foreground = theme.subtext1 } } } } },
             text { content = runs(item.body), visible = #(item.body or {}) > 0, foreground = theme.subtext1, wrap = "word", max_lines = 4, on_link = function(url) mantle.applications:open_url(url) end },
             row { width = "fill", spacing = 6, visible = #actions > 0, children = actions } },

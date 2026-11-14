@@ -1,6 +1,9 @@
 create-toolbox:
   toolbox create
 
+clipboard-setup:
+  CGO_ENABLED=0 GOBIN="$HOME/.local/bin" go install go.senan.xyz/cliphist@v0.7.0
+
 setup: create-toolbox 
   toolbox run bash -ic "sudo pacman -S just && just --justfile ~/projects/.dotfiles/.justfile toolbox-setup"
 
