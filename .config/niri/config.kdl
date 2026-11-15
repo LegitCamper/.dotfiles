@@ -98,7 +98,8 @@ workspace "bitwarden"
 spawn-at-startup "mantle"
 spawn-sh-at-startup "/usr/libexec/lxqt-policykit-agent &"
 // Keep Swayidle/Swaylock until Mantle PAM and recovery checks pass.
-spawn-sh-at-startup "swayidle -w timeout 601 'swaylock'"
+// swayidle ignores logind idle inhibitors (Mantle caffeine, browser video); check before locking.
+spawn-sh-at-startup "swayidle -w timeout 601 'busctl get-property org.freedesktop.login1 /org/freedesktop/login1 org.freedesktop.login1.Manager BlockInhibited | grep -qw idle || swaylock'"
 spawn-sh-at-startup "nm-applet --indicator &"
 spawn-sh-at-startup "blueman-applet &"
 spawn-sh-at-startup "udiskie -a -t -n &"
