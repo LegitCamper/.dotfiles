@@ -6,3 +6,7 @@ set menu-complete-display-prefix on
 "\e[Z": menu-complete-backward
 "\e[A": history-search-backward
 "\e[B": history-search-forward
+
+# Ctrl+Backspace / Ctrl+Delete: kill word back / forward
+"\C-h": backward-kill-word
+"\e[3;5~": kill-word
