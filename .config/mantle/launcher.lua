@@ -25,15 +25,15 @@ local function launch(entry) if entry then mantle.applications:launch(entry.id) 
 local function move(step) local count = #matches:get(); if count > 0 then selected:set((selected:get() - 1 + step) % count + 1); results_scroll:reveal(selected:get()) end end
 return panel {
     id = "launcher", layer = "overlay", output = "active", anchor = { top = true, bottom = true, left = true, right = true }, width = "fill", height = "fill", exclusive_zone = "ignore", visible = open,
-    reset_on_close = { query, selected, results_scroll }, keyboard_interactivity = "exclusive",
-    child = rect { width = "fill", height = "fill", background = "#181926b8", children = {
+    reset_on_close = { query, selected, results_scroll }, keyboard_interactivity = "exclusive", on_escape = close,
+    child = rect { width = "fill", height = "fill", children = {
         rect { width = "fill", height = "fill", on_click = close, accessible_name = "Close launcher" },
         column { width = 600, align_h = "center", align_v = "center", padding = 14, spacing = 8, radius = 16, background = theme.base, border_width = 1, border_color = theme.surface2, children = {
             rect { width = "fill", height = 44, radius = 10, background = theme.surface0, children = {
                 textfield { width = "fill", height = "fill", padding = 10, font_size = 17, foreground = theme.text, placeholder_color = theme.overlay1, caret_color = theme.mauve, placeholder = "Search applications", accessible_name = "Search applications", autofocus = true,
                     on_change = function(value) query:set(value); selected:set(1); results_scroll:reveal(1) end,
                     on_navigate = function(key) if key == "down" or key == "tab" then move(1) elseif key == "up" or key == "backtab" then move(-1) end end,
-                    on_submit = function() launch(matches:get()[selected:get()]) end, on_cancel = function(cleared) if not cleared then close() end end },
+                    on_submit = function() launch(matches:get()[selected:get()]) end },
             } },
             list { width = "fill", max_height = 450, spacing = 2, scroll = results_scroll, animate = { scroll = { duration = 160, easing = "out_cubic" } }, source = matches, key = function(entry) return entry.id end, itemfn = function(entry)
                 local over = hover("app_" .. entry.id)
