@@ -31,3 +31,12 @@ bindings = [
   { mods = "Control|Shift", key = "V", mode = "AppCursor|AppKeypad|Search|Alt|Vi", action = "Paste" },
   { mods = "Control", key = "V", mode = "AppCursor|AppKeypad|Search|Alt|Vi", action = "ToggleViMode" },
 ]
+
+# no copy-on-select: keep clipboard untouched, disable middle-click paste of PRIMARY
+[selection]
+save_to_clipboard = false
+
+[mouse]
+bindings = [
+  { mouse = "Middle", action = "None" },
+]
