@@ -38,8 +38,9 @@ column = function(options)
     return native_column(options)
 end
 state = function(name, initial)
-    if name == "clipboard_open" or name == "launcher_open" or name == "tray_menu_open" then initial = true end
+    if name == "clipboard_open" or name == "launcher_open" or name == "tray_menu_open" or name == "wallpaper_open" then initial = true end
     if name == "tray_menu_item" then initial = "fixture" end
+    if name == "bar_details" then initial = "battery" end
     return native_state(name, initial)
 end
 pulse = function() return native_state("check_pulse", true) end
@@ -71,8 +72,20 @@ capability("system", { time = os.time() })
 capability("network", { connected = true, ssid = string.rep("W", 32), strength = 100 })
 capability("audio", { volume = 145, muted = false, source_volume = 100, source_muted = false })
 capability("brightness", { percent = 100 })
-capability("battery", { present = true, state = "discharging", percent = 100 })
+capability("battery", { present = true, state = "discharging", percent = 100, time_to_empty = 7200,
+    peripherals = { { name = "Fixture mouse", percent = 75 }, { name = "Fixture headset", level = "low" } } })
+capability("power", { on_battery = true, energy_rate = 8.5, active_profile = "balanced" })
+capability("idle", { inhibited = true, inhibitors = { { who = "Fixture player", why = "Playing video" } } })
 capability("bluetooth", { available = true, enabled = true, connected_devices = { {} } })
+local wallpaper_folder = (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/Wallpapers"
+local wallpaper_path = wallpaper_folder .. "/rust.png"
+local files = native_state("check_files", { folders = { [wallpaper_folder] = { ready = true, entries = {
+    { name = "rust.png", path = wallpaper_path },
+} } } })
+mantle.files = { watch = function() end, map = function(_, transform) return files:map(transform) end }
+persistent_table = function()
+    return { wallpaper = native_state("check_wallpaper", wallpaper_path), set = function() error("fixture must not save wallpaper") end }
+end
 local workspaces = {}
 for index = 1, 20 do workspaces[index] = { id = index, idx = index, name = "Workspace " .. index, populated = true } end
 capability("workspaces", { outputs = { { name = test_output, active_workspace = 11, workspaces = workspaces } } })
@@ -121,4 +134,4 @@ for width in 1280 1920 3440; do
         done
     done
 done
-printf 'native layout, open clipboard, launcher, tray menu, and OSD checks passed\n'
+printf 'native layout, battery, wallpaper, open clipboard, launcher, tray menu, and OSD checks passed\n'

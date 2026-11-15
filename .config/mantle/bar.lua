@@ -8,10 +8,26 @@ local menu_open = state("tray_menu_open", false)
 local menu_item = state("tray_menu_item", "")
 local menu_anchor = state("tray_menu_anchor", { x = 0, y = 0, width = 1, height = 1 })
 local menu_expanded = state("tray_menu_expanded", {})
+local details_kind = state("bar_details", "")
+local details_anchor = state("bar_details_anchor", { x = 0, y = 0, width = 1, height = 1 })
+local caffeine = state("caffeine", false)
+local wallpaper_open = state("wallpaper_open", false)
+
+caffeine:on_change(function(held, previous)
+    if held == previous then return end
+    if held then mantle.idle:inhibit("Manual keep awake") else mantle.idle:release_inhibit() end
+end)
+
+local function open_details(kind, box)
+    menu_open:set(false)
+    details_anchor:set(box)
+    details_kind:set(kind)
+end
 
 local function close_menu() menu_open:set(false) end
 
 local function open_menu(item, box)
+    details_kind:set("")
     menu_item:set(item.id)
     menu_anchor:set(box)
     menu_expanded:set({})
@@ -79,8 +95,52 @@ end
 
 local brightness = mantle.brightness:map(function(b) return b and string.format("☀ %d%%", b.percent) or "" end)
 local battery = mantle.battery:map(function(b)
-    if not b or not b.present then return "" end
+    if not b then return "" end
+    if not b.present then
+        local count = #(b.peripherals or {})
+        return count > 0 and (" " .. count .. " devices") or ""
+    end
     return string.format("%s %d%%", b.state == "charging" and "󰂄" or "", b.percent)
+end)
+local awake_label = computed({ caffeine, mantle.idle }, function(held, idle)
+    if held then return idle and idle.inhibited and "Awake" or "Awake requested" end
+    if idle and idle.inhibited then return "Awake (app)" end
+    return idle and "Idle allowed" or "Idle --"
+end)
+local function estimate(seconds)
+    if not seconds or seconds <= 0 then return nil end
+    local minutes = math.floor(seconds / 60)
+    if minutes == 0 then return "<1m" end
+    return string.format("%dh %02dm", math.floor(minutes / 60), minutes % 60)
+end
+local details_text = computed({ details_kind, mantle.battery, mantle.power, mantle.idle, caffeine }, function(kind, charge, power, idle, held)
+    local lines = {}
+    if kind == "idle" then
+        lines[#lines + 1] = held and "Manual keep-awake requested" or "Manual keep-awake off"
+        lines[#lines + 1] = idle and (idle.inhibited and "Idle inhibition reported" or "Idle allowed") or "Idle status unavailable"
+        for _, holder in ipairs(idle and idle.inhibitors or {}) do
+            local who = holder.who ~= "" and holder.who or "Compositor"
+            lines[#lines + 1] = who .. (holder.why ~= "" and (": " .. holder.why) or "")
+        end
+        lines[#lines + 1] = "Left-click toggles your hold only. Manual locking stays available."
+    else
+        if charge and charge.present then
+            lines[#lines + 1] = string.format("Battery: %d%% (%s)", charge.percent, charge.state)
+            local remaining = estimate(charge.state == "charging" and charge.time_to_full or charge.state == "discharging" and charge.time_to_empty or nil)
+            lines[#lines + 1] = remaining and (remaining .. (charge.state == "charging" and " until full" or " remaining")) or "Time estimate unavailable"
+        else
+            lines[#lines + 1] = "No system battery"
+        end
+        if power and power.on_battery ~= nil then lines[#lines + 1] = power.on_battery and "Power: battery" or "Power: AC" end
+        if charge and charge.present and power and power.energy_rate then lines[#lines + 1] = string.format("Battery power: %.1f W", power.energy_rate) end
+        if power and power.active_profile then lines[#lines + 1] = "Profile: " .. power.active_profile end
+        for _, device in ipairs(charge and charge.peripherals or {}) do
+            local label = device.name and device.name ~= "" and device.name or device.kind or "Device"
+            local level = device.percent ~= nil and (device.percent .. "%") or device.level or "unknown"
+            lines[#lines + 1] = label .. ": " .. level
+        end
+    end
+    return table.concat(lines, "\n\n")
 end)
 local battery_color = mantle.battery:map(function(b)
     if b and b.present and b.state == "discharging" and b.percent <= 15 then return theme.red end
@@ -221,6 +281,10 @@ local bar = panel {
                     children = {
                         workspaces(output),
                         pill(podman, theme.green, function() process.detach(mantle.config_dir .. "/scripts/podman.sh", { "-c", "arch-toolbox-latest", "toggle" }); timer(1000, poll_podman) end, nil, "Toggle arch-toolbox-latest container"),
+                        pill(wallpaper_open:map(function() return "Wallpaper" end), theme.lavender, function() wallpaper_open:set(not wallpaper_open:get()) end, nil, "Choose wallpaper"),
+                        pill(awake_label, caffeine:map(function(held) return held and theme.yellow or theme.subtext1 end), function(box, button)
+                            if button == "right" then open_details("idle", box) else caffeine:set(not caffeine:get()) end
+                        end, nil, "Toggle keep awake; right-click for inhibitors"),
                     },
                 },
                 clock(),
@@ -229,7 +293,7 @@ local bar = panel {
                     children = {
                         rect { width = "fill" },
                         pill(brightness, theme.yellow, nil, function(_, steps) local b = mantle.brightness:get(); if b then mantle.brightness:set(math.max(1, math.min(100, b.percent + steps * 5))) end end, "Adjust brightness"),
-                        pill(battery, battery_color, nil, nil, "Battery status"),
+                        pill(battery, battery_color, function(box) open_details("battery", box) end, nil, "Battery status"),
                         pill(output_audio, theme.blue, function() mantle.audio:toggle_mute() end, function(_, steps) local a = mantle.audio:get(); if a and a.volume then mantle.audio:set_volume(math.max(0, math.min(100, a.volume + steps * 5))) end end, "Toggle output mute"),
                         pill(input_audio, theme.teal, function() mantle.audio:toggle_source_mute() end, function(_, steps) local a = mantle.audio:get(); if a and a.source_volume then mantle.audio:set_source_volume(math.max(0, math.min(100, a.source_volume + steps * 5))) end end, "Toggle microphone mute"),
                         pill(bluetooth, theme.maroon, function() process.detach("blueman-manager", {}) end, nil, "Bluetooth settings"),
@@ -249,4 +313,16 @@ local tray_menu = popup {
         key = function(item) return tostring(item.entry.id) end, itemfn = menu_row },
 }
 
-return { bar, tray_menu }
+local details = popup {
+    id = "bar_details_popup", parent = "mantle-bar", anchor_rect = details_anchor, anchor = "bottom", gravity = "bottom_left",
+    offset = { y = 6 }, visible = details_kind:map(function(kind) return kind ~= "" end),
+    on_dismiss = function() details_kind:set("") end, width = 340, padding = 14, radius = theme.radius,
+    constraint_adjustment = { "slide_x", "flip_y", "slide_y" }, background = theme.mantle, border_width = 1, border_color = theme.surface2,
+    child = column { width = "fill", max_height = 400, spacing = 12, scroll = scroll("bar_details"), children = {
+        text { content = details_kind:map(function(kind) return kind == "idle" and "Idle inhibitors" or "Battery & power" end),
+            font_size = 18, font_weight = 600, foreground = theme.text },
+        text { content = details_text, width = "fill", wrap = "word", foreground = theme.subtext1 },
+    } },
+}
+
+return { bar, tray_menu, details }
