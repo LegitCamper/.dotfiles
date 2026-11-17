@@ -104,7 +104,11 @@ local battery = mantle.battery:map(function(b)
 end)
 local awake_label = computed({ caffeine, mantle.idle }, function(held, idle)
     if held then return idle and idle.inhibited and "Awake" or "Awake requested" end
-    if idle and idle.inhibited then return "Awake (app)" end
+    if idle and idle.inhibited then
+        local first = (idle.inhibitors or {})[1]
+        local name = first and (first.who ~= "" and first.who or first.why) or ""
+        return name ~= "" and ("Awake: " .. name) or "Awake (app)"
+    end
     return idle and "Idle allowed" or "Idle --"
 end)
 local function estimate(seconds)
@@ -282,7 +286,9 @@ local bar = panel {
                         workspaces(output),
                         pill(podman, theme.green, function() process.detach(mantle.config_dir .. "/scripts/podman.sh", { "-c", "arch-toolbox-latest", "toggle" }); timer(1000, poll_podman) end, nil, "Toggle arch-toolbox-latest container"),
                         pill(wallpaper_open:map(function() return "Wallpaper" end), theme.lavender, function() wallpaper_open:set(not wallpaper_open:get()) end, nil, "Choose wallpaper"),
-                        pill(awake_label, caffeine:map(function(held) return held and theme.yellow or theme.subtext1 end), function(box, button)
+                        pill(awake_label, computed({ caffeine, mantle.idle }, function(held, idle)
+                            return held and theme.yellow or (idle and idle.inhibited and theme.peach or theme.subtext1)
+                        end), function(box, button)
                             if button == "right" then open_details("idle", box) else caffeine:set(not caffeine:get()) end
                         end, nil, "Toggle keep awake; right-click for inhibitors"),
                     },
